@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE attributes PUBLIC "-//NetBeans//DTD DefaultAttributes 1.0//EN" "http://www.netbeans.org/dtds/attributes-1_0.dtd">
+<attributes version="1.0">
+    <fileobject name="HydrogenBondsCreator.java">
+        <attr name="class_dependency_meshi.energy.EnergyCreator" stringvalue="HydrogenBondsCreator"/>
+        <attr name="class_dependency_meshi.parameters.AtomTypes" stringvalue="HydrogenBondsCreator.IsN"/>
+        <attr name="class_dependency_meshi.util.KeyWords" stringvalue="HydrogenBondsCreator"/>
+        <attr name="class_dependency_meshi.util.filters.Filter" stringvalue="HydrogenBondsCreator.IsN"/>
+    </fileobject>
+    <fileobject name="HydrogenBondsEnergy.java">
+        <attr name="class_dependency_meshi.energy.AbstractEnergy" stringvalue="HydrogenBondsEnergy"/>
+        <attr name="class_dependency_meshi.parameters.AtomTypes" stringvalue="HydrogenBondsEnergy"/>
+    </fileobject>
+    <fileobject name="HydrogenBondsEnergyElement.java">
+        <attr name="class_dependency_meshi.energy.EnergyElement" stringvalue="HydrogenBondsEnergyElement"/>
+    </fileobject>
+    <fileobject name="HydrogenOxygenPair.java">
+        <attr name="class_dependency_java.lang.Comparable" stringvalue="HydrogenOxygenPair"/>
+    </fileobject>
+    <fileobject name="IsHO.java">
+        <attr name="class_dependency_meshi.parameters.AtomTypes" stringvalue="IsHO"/>
+        <attr name="class_dependency_meshi.util.filters.Filter" stringvalue="IsHO"/>
+    </fileobject>
+    <fileobject name="UnderZeroLJEnergyElement.java">
+        <attr name="class_dependency_meshi.energy.EnergyElement" stringvalue="UnderZeroLJEnergyElement"/>
+    </fileobject>
+</attributes>

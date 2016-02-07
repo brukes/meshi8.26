@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ProteinInfoList name="Optimization history of T0388">
+<ProteinInfo  value="BEGINNING" fileName="D:\meshi.7.31\tests\optimize\T0388.3D-JIGSAW_AEP_TS4.pdb" length="174" >
+	<gdt_ts  value="1.0"/>                                                          <delta_gdt_ts  value="0.0"/>                                                    
+	<gdt_ha  value="1.0"/>                                                          <delta_gdt_ha  value="0.0"/>                                                    
+	<rms  value="3.4273366552100304E-14"/>                                          <delta_rms  value="0.0"/>                                                       
+	<rms_heavy  value="3.5270408231553187E-14"/>                                    <delta_rms_heavy  value="0.0"/>                                                 
+	<change  value="3.4273366552100304E-14"/>                                       <energy  value="3.0040191185136562E26"/>                                        
+	<bondEnergy  value="2.580086055898408E7"/>                                      <angleEnergy  value="134715.11506245457"/>                                      
+	<planeEnergy  value="1.0403431732300611E7"/>                                    <outOfPlaneEnergy  value="122947.95673489448"/>                                 
+	<ramachandranSidechain  value="3239.473703909882"/>                             <cooperativeZRamachandranSidechain  value="7.488388013794987E-6"/>              
+	<cooperativeZstdRamachandranSidechain  value="9.956243515481211E-7"/>           <compositePropensity  value="-0.20563269879148788"/>                            
+	<cooperativeZPropensity  value="2.465279712579926E-4"/>                         <cooperativeZstdPropensity  value="0.0015191151806229453"/>                     
+	<atomicPairwisePMFSumma  value="8994.753443266958"/>                            <cooperativeZSumma  value="3.0040191185136562E26"/>                             
+	<cooperativeSummaPolar  value="6.1759163468012913E18"/>                         <cooperativeSummaNonPolar  value="3.004015340017242E26"/>                       
+	<cooperativeSummaNeutral  value="3.69105926981129E20"/>                         <cooperativeSummaPolarNN_OO  value="1.68407081053664282E18"/>                   
+	<cooperativeSummaPolarBb  value="8.8372731084884826E17"/>                       <cooperativeZstdSumma  value="82.28528842924494"/>                              
+	<cooperativeStdSummaPolar  value="23.72318162387206"/>                          <cooperativeStdSummaNonPolar  value="21.610569531683943"/>                      
+	<cooperativeStdSummaNeutral  value="22.523888890766617"/>                       <cooperativeStdSummaPolarNN_OO  value="14.22031972498381"/>                     
+	<cooperativeStdSummaPolarBb  value="0.20732865793852007"/>                      <solvateEnergy  value="2014.3582321273122"/>                                    
+	<solvationSCpolar  value="972.2219913594155"/>                                  <solvationSCcarbon  value="1042.1362407679003"/>                                
+	<solvationBBpolar  value="0.0"/>                                                <hydrogenBonds  value="2723.988548717027"/>                                     
+	<hydrogenBondsPairs  value="-1411.4687940348933"/>                              <hydrogenBondsAnglesHOC  value="121.87243478912643"/>                           
+	<hydrogenBondsAnglesOHN  value="12.89088215987811"/>                            <rg  value="0.0025867190096356017"/>                                            
+	<N_RGhSS  value="0.0"/>                                                         <EhSShCoil  value="0.0"/>                                                       
+	<EhSSbSS  value="7.279630549608011E-14"/>                                       <EhSSbCoil  value="0.0"/>                                                       
+	<EhSScSS  value="9.875710833781358E-12"/>                                       <EhSScCoil  value="0.0"/>                                                       
+	<hSS  value="0.0011823903042439815"/>                                           <bSS  value="0.0014236460992271324"/>                                           
+	<cSS  value="-1.9317403784019257E-5"/>                                          <hSShCoil  value="0.9057233211235924"/>                                         
+	<hSSbSS  value="1.037602923242652"/>                                            <hSSbCoil  value="0.9509937231600292"/>                                         
+	<hSScSS  value="1.089964056068391"/>                                            <hSScCoil  value="1.0043970733300203"/>                                         
+	<conservationContacts  value="0.0"/>                                            <contacts  value="3.8275862068965516"/>                                         
+	<conservationRgRatio  value="1.7976931348623157E308"/>                          <conservationContactsHr  value="0.0"/>                                          
+	<contactsHr  value="10.101141924959217"/>                                       <conservationRgRatioHr  value="1.7976931348623157E308"/>                        
+	<constant1  value="1.0"/>                                                       <tetherEnergy  value="0.0"/>                                                    
+	<flatRamachEnergy  value="0.29234886492554624"/>                                <tetherAll  value="0.0"/>                                                       
+	<samudralaEnergy  value="-2149.5443740101705"/>                                 <samudralaEnergy1  value="-2149.5443740101705"/>                                
+</ProteinInfo>
+</ProteinInfoList>

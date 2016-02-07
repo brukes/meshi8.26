@@ -1,0 +1,437 @@
+template-> ResidueCell [number=5, obj=ARG, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=15, obj=TYR, comment=UNKNOWN, gap()=false]
+ATOM     20  N   ARG A   5      40.857  52.413  14.914  1.00 23.86                 ATOM      1  N   TYR    15      40.857  52.413  14.914  1.00  0.00              
+ATOM     19  CA  ARG A   5      39.636  52.905  14.295  1.00 22.38                 ATOM      0  CA  TYR    15      39.636  52.905  14.295  1.00  0.00              
+ATOM     22  CB  ARG A   5      39.933  53.384  12.874  1.00 23.29                 ATOM      3  CB  TYR    15      39.933  53.384  12.874  1.00  0.00              
+ATOM     23  C   ARG A   5      38.626  51.762  14.271  1.00 22.14                 ATOM      4  C   TYR    15      38.626  51.762  14.271  1.00  0.00              
+ATOM     24  O   ARG A   5      38.968  50.622  13.943  1.00 21.24                 ATOM      5  O   TYR    15      38.968  50.622  13.943  1.00  0.00              
+ATOM     25  CG  ARG A   5      38.714  53.815  12.073  1.00 24.44                 ATOM      6  CG  TYR    15      38.714  53.815  12.073  1.00  0.00              
+ATOM     26  CD  ARG A   5      39.127  54.153  10.649  1.00 22.72                 ATOM      7  CD1 TYR    15    -999.999-999.999-999.999  1.00  0.00              
+ATOM     27  NE  ARG A   5      39.566  52.970   9.918  1.00 23.38                 ATOM      8  CE1 TYR    15    -999.999-999.999-999.999  1.00  0.00              
+ATOM     29  CZ  ARG A   5      38.749  52.149   9.261  1.00 23.97                 ATOM     10  CD2 TYR    15    -999.999-999.999-999.999  1.00  0.00              
+ATOM     30  NH1 ARG A   5      37.443  52.386   9.238  1.00 23.31                 ATOM     11  CE2 TYR    15    -999.999-999.999-999.999  1.00  0.00              
+ATOM     31  NH2 ARG A   5      39.235  51.090   8.626  1.00 21.62                 ATOM     12  OH  TYR    15    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=6, obj=PHE, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=16, obj=LEU, comment=UNKNOWN, gap()=false]
+ATOM     33  N   PHE A   6      37.387  52.068  14.637  1.00 20.75                 ATOM     14  N   LEU    16      37.387  52.068  14.637  1.00  0.00              
+ATOM     32  CA  PHE A   6      36.325  51.069  14.661  1.00 21.81                 ATOM     13  CA  LEU    16      36.325  51.069  14.661  1.00  0.00              
+ATOM     35  CB  PHE A   6      35.138  51.589  15.490  1.00 20.48                 ATOM     16  CB  LEU    16      35.138  51.589  15.490  1.00  0.00              
+ATOM     36  C   PHE A   6      35.863  50.717  13.247  1.00 22.56                 ATOM     17  C   LEU    16      35.863  50.717  13.247  1.00  0.00              
+ATOM     37  O   PHE A   6      35.704  51.596  12.399  1.00 20.57                 ATOM     18  O   LEU    16      35.704  51.596  12.399  1.00  0.00              
+ATOM     38  CG  PHE A   6      35.485  51.885  16.928  1.00 17.93                 ATOM     19  CG  LEU    16      35.485  51.885  16.928  1.00  0.00              
+ATOM     39  CD1 PHE A   6      35.917  50.871  17.777  1.00 17.98                 ATOM     20  CD1 LEU    16      35.917  50.871  17.777  1.00  0.00              
+ATOM     40  CE1 PHE A   6      36.267  51.146  19.104  1.00 19.31                 ATOM     21  CD2 LEU    16      35.406  53.184  17.427  1.00  0.00              
+ATOM     41  CZ  PHE A   6      36.186  52.453  19.592  1.00 17.58              
+ATOM     42  CD2 PHE A   6      35.406  53.184  17.427  1.00 18.77              
+ATOM     43  CE2 PHE A   6      35.755  53.470  18.755  1.00 17.43              
+template-> ResidueCell [number=7, obj=THR, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=17, obj=LEU, comment=UNKNOWN, gap()=false]
+ATOM     45  N   THR A   7      35.672  49.428  12.983  1.00 24.15                 ATOM     23  N   LEU    17      35.672  49.428  12.983  1.00  0.00              
+ATOM     44  CA  THR A   7      35.198  49.007  11.667  1.00 25.50                 ATOM     22  CA  LEU    17      35.198  49.007  11.667  1.00  0.00              
+ATOM     47  CB  THR A   7      36.042  47.848  11.098  1.00 24.99                 ATOM     25  CB  LEU    17      36.042  47.848  11.098  1.00  0.00              
+ATOM     48  C   THR A   7      33.732  48.592  11.778  1.00 26.03                 ATOM     26  C   LEU    17      33.732  48.592  11.778  1.00  0.00              
+ATOM     49  O   THR A   7      33.130  48.735  12.842  1.00 24.26                 ATOM     27  O   LEU    17      33.130  48.735  12.842  1.00  0.00              
+ATOM     50  CG2 THR A   7      37.446  48.336  10.747  1.00 20.97                 ATOM     28  CG  LEU    17    -999.999-999.999-999.999  1.00  0.00              
+ATOM     51  OG1 THR A   7      36.123  46.794  12.064  1.00 29.09                 ATOM     29  CD1 LEU    17    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM     30  CD2 LEU    17    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=8, obj=GLU, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=18, obj=PRO, comment=UNKNOWN, gap()=false]
+ATOM     53  N   GLU A   8      33.155  48.085  10.690  1.00 27.76                 ATOM     31  CA  PRO    18      31.743  47.699  10.710  1.00  0.00              
+ATOM     52  CA  GLU A   8      31.743  47.699  10.710  1.00 28.18                 ATOM     33  CB  PRO    18      31.289  47.193   9.332  1.00  0.00              
+ATOM     55  CB  GLU A   8      31.289  47.193   9.332  1.00 29.28                 ATOM     34  C   PRO    18      31.385  46.659  11.777  1.00  0.00              
+ATOM     56  C   GLU A   8      31.385  46.659  11.777  1.00 26.15                 ATOM     35  O   PRO    18      30.339  46.768  12.416  1.00  0.00              
+ATOM     57  O   GLU A   8      30.339  46.768  12.416  1.00 24.94                 ATOM     36  CG  PRO    18    -999.999-999.999-999.999  1.00  0.00              
+ATOM     58  CG  GLU A   8      29.825  47.556   9.034  1.00 34.39                 ATOM     37  CD  PRO    18    -999.999-999.999-999.999  1.00  0.00              
+ATOM     59  CD  GLU A   8      29.222  46.786   7.861  1.00 36.02              
+ATOM     60  OE1 GLU A   8      29.930  46.563   6.857  1.00 36.94              
+ATOM     61  OE2 GLU A   8      28.029  46.420   7.944  1.00 34.35              
+template-> ResidueCell [number=9, obj=GLU, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=19, obj=GLU, comment=UNKNOWN, gap()=false]
+ATOM     63  N   GLU A   9      32.245  45.662  11.974  1.00 24.93                 ATOM     39  N   GLU    19      32.245  45.662  11.974  1.00  0.00              
+ATOM     62  CA  GLU A   9      31.981  44.621  12.963  1.00 25.98                 ATOM     38  CA  GLU    19      31.981  44.621  12.963  1.00  0.00              
+ATOM     65  CB  GLU A   9      33.050  43.528  12.887  1.00 28.50                 ATOM     41  CB  GLU    19      33.050  43.528  12.887  1.00  0.00              
+ATOM     66  C   GLU A   9      31.921  45.180  14.388  1.00 25.60                 ATOM     42  C   GLU    19      31.921  45.180  14.388  1.00  0.00              
+ATOM     67  O   GLU A   9      31.343  44.556  15.277  1.00 25.06                 ATOM     43  O   GLU    19      31.343  44.556  15.277  1.00  0.00              
+ATOM     68  CG  GLU A   9      34.348  43.880  13.600  1.00 34.96                 ATOM     44  CG  GLU    19      34.348  43.880  13.600  1.00  0.00              
+ATOM     69  CD  GLU A   9      35.384  42.773  13.508  1.00 37.62                 ATOM     45  CD  GLU    19      35.384  42.773  13.508  1.00  0.00              
+ATOM     70  OE1 GLU A   9      35.025  41.597  13.737  1.00 38.92                 ATOM     46  OE1 GLU    19      35.025  41.597  13.737  1.00  0.00              
+ATOM     71  OE2 GLU A   9      36.557  43.083  13.215  1.00 41.02                 ATOM     47  OE2 GLU    19      36.557  43.083  13.215  1.00  0.00              
+template-> ResidueCell [number=10, obj=ASP, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=20, obj=TRP, comment=UNKNOWN, gap()=false]
+ATOM     73  N   ASP A  10      32.524  46.350  14.602  1.00 25.28                 ATOM     49  N   TRP    20      32.524  46.350  14.602  1.00  0.00              
+ATOM     72  CA  ASP A  10      32.523  46.980  15.919  1.00 21.70                 ATOM     48  CA  TRP    20      32.523  46.980  15.919  1.00  0.00              
+ATOM     75  CB  ASP A  10      33.650  48.006  16.026  1.00 23.00                 ATOM     51  CB  TRP    20      33.650  48.006  16.026  1.00  0.00              
+ATOM     76  C   ASP A  10      31.188  47.657  16.203  1.00 20.32                 ATOM     52  C   TRP    20      31.188  47.657  16.203  1.00  0.00              
+ATOM     77  O   ASP A  10      30.624  47.512  17.287  1.00 19.10                 ATOM     53  O   TRP    20      30.624  47.512  17.287  1.00  0.00              
+ATOM     78  CG  ASP A  10      35.028  47.374  15.937  1.00 27.20                 ATOM     54  CG  TRP    20      35.028  47.374  15.937  1.00  0.00              
+ATOM     79  OD1 ASP A  10      35.251  46.361  16.628  1.00 30.07                 ATOM     55  CD1 TRP    20    -999.999-999.999-999.999  1.00  0.00              
+ATOM     80  OD2 ASP A  10      35.894  47.890  15.190  1.00 27.89                 ATOM     56  NE1 TRP    20    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM     57  HE1 TRP    20    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM     58  CD2 TRP    20    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM     59  CE2 TRP    20    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM     60  CE3 TRP    20    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM     61  CZ3 TRP    20    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM     62  CH2 TRP    20    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM     63  CZ2 TRP    20    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=11, obj=PHE, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=21, obj=VAL, comment=UNKNOWN, gap()=false]
+ATOM     82  N   PHE A  11      30.677  48.410  15.238  1.00 19.19                 ATOM     65  N   VAL    21      30.677  48.410  15.238  1.00  0.00              
+ATOM     81  CA  PHE A  11      29.401  49.070  15.452  1.00 18.00                 ATOM     64  CA  VAL    21      29.401  49.070  15.452  1.00  0.00              
+ATOM     84  CB  PHE A  11      29.076  50.036  14.317  1.00 16.08                 ATOM     67  CB  VAL    21      29.076  50.036  14.317  1.00  0.00              
+ATOM     85  C   PHE A  11      28.305  48.009  15.522  1.00 18.80                 ATOM     68  C   VAL    21      28.305  48.009  15.522  1.00  0.00              
+ATOM     86  O   PHE A  11      27.400  48.098  16.352  1.00 17.27                 ATOM     69  O   VAL    21      27.400  48.098  16.352  1.00  0.00              
+ATOM     87  CG  PHE A  11      30.034  51.176  14.186  1.00 15.30                 ATOM     70  CG1 VAL    21    -999.999-999.999-999.999  1.00  0.00              
+ATOM     88  CD1 PHE A  11      31.251  51.013  13.527  1.00 15.65                 ATOM     71  CG2 VAL    21    -999.999-999.999-999.999  1.00  0.00              
+ATOM     89  CE1 PHE A  11      32.127  52.091  13.375  1.00 15.19              
+ATOM     90  CZ  PHE A  11      31.787  53.339  13.887  1.00 13.76              
+ATOM     91  CD2 PHE A  11      29.710  52.433  14.697  1.00 15.23              
+ATOM     92  CE2 PHE A  11      30.578  53.511  14.550  1.00 12.78              
+template-> ResidueCell [number=12, obj=ASN, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=22, obj=SER, comment=UNKNOWN, gap()=false]
+ATOM     94  N   ASN A  12      28.399  47.003  14.651  1.00 18.83                 ATOM     73  N   SER    22      28.399  47.003  14.651  1.00  0.00              
+ATOM     93  CA  ASN A  12      27.399  45.939  14.598  1.00 19.39                 ATOM     72  CA  SER    22      27.399  45.939  14.598  1.00  0.00              
+ATOM     96  CB  ASN A  12      27.608  45.086  13.347  1.00 18.08                 ATOM     75  CB  SER    22      27.608  45.086  13.347  1.00  0.00              
+ATOM     97  C   ASN A  12      27.317  45.052  15.827  1.00 19.08                 ATOM     76  C   SER    22      27.317  45.052  15.827  1.00  0.00              
+ATOM     98  O   ASN A  12      26.333  44.332  16.013  1.00 18.54                 ATOM     77  O   SER    22      26.333  44.332  16.013  1.00  0.00              
+ATOM     99  CG  ASN A  12      27.267  45.841  12.093  1.00 19.15                 ATOM     78  OG  SER    22    -999.999-999.999-999.999  1.00  0.00              
+ATOM    100  ND2 ASN A  12      27.879  45.466  10.975  1.00 20.19              
+ATOM    101 HD21 ASN A  12    -999.999-999.999-999.999  1.00  0.00              
+ATOM    102 HD22 ASN A  12    -999.999-999.999-999.999  1.00  0.00              
+ATOM    103  OD1 ASN A  12      26.452  46.762  12.130  1.00 18.31              
+template-> ResidueCell [number=13, obj=THR, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=23, obj=ILE, comment=UNKNOWN, gap()=false]
+ATOM    105  N   THR A  13      28.342  45.118  16.670  1.00 19.00                 ATOM     80  N   ILE    23      28.342  45.118  16.670  1.00  0.00              
+ATOM    104  CA  THR A  13      28.393  44.328  17.892  1.00 17.51                 ATOM     79  CA  ILE    23      28.393  44.328  17.892  1.00  0.00              
+ATOM    107  CB  THR A  13      29.709  44.601  18.656  1.00 18.01                 ATOM     82  CB  ILE    23      29.709  44.601  18.656  1.00  0.00              
+ATOM    108  C   THR A  13      27.215  44.655  18.804  1.00 18.66                 ATOM     83  C   ILE    23      27.215  44.655  18.804  1.00  0.00              
+ATOM    109  O   THR A  13      26.729  43.799  19.542  1.00 19.35                 ATOM     84  O   ILE    23      26.729  43.799  19.542  1.00  0.00              
+ATOM    110  CG2 THR A  13      29.720  43.885  20.013  1.00 15.55                 ATOM     85  CG1 ILE    23    -999.999-999.999-999.999  1.00  0.00              
+ATOM    111  OG1 THR A  13      30.816  44.148  17.865  1.00 16.52                 ATOM     86  CD1 ILE    23    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM     87  CG2 ILE    23      29.720  43.885  20.013  1.00  0.00              
+template-> ResidueCell [number=14, obj=PHE, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=24, obj=PHE, comment=UNKNOWN, gap()=false]
+ATOM    113  N   PHE A  14      26.746  45.893  18.741  1.00 17.99                 ATOM     89  N   PHE    24      26.746  45.893  18.741  1.00  0.00              
+ATOM    112  CA  PHE A  14      25.649  46.319  19.590  1.00 19.35                 ATOM     88  CA  PHE    24      25.649  46.319  19.590  1.00  0.00              
+ATOM    115  CB  PHE A  14      25.757  47.826  19.802  1.00 17.74                 ATOM     91  CB  PHE    24      25.757  47.826  19.802  1.00  0.00              
+ATOM    116  C   PHE A  14      24.254  45.917  19.119  1.00 20.66                 ATOM     92  C   PHE    24      24.254  45.917  19.119  1.00  0.00              
+ATOM    117  O   PHE A  14      23.253  46.335  19.700  1.00 19.86                 ATOM     93  O   PHE    24      23.253  46.335  19.700  1.00  0.00              
+ATOM    118  CG  PHE A  14      27.025  48.224  20.498  1.00 18.10                 ATOM     94  CG  PHE    24      27.025  48.224  20.498  1.00  0.00              
+ATOM    119  CD1 PHE A  14      27.116  48.168  21.890  1.00 16.30                 ATOM     95  CD1 PHE    24      27.116  48.168  21.890  1.00  0.00              
+ATOM    120  CE1 PHE A  14      28.329  48.429  22.543  1.00 15.32                 ATOM     96  CE1 PHE    24      28.329  48.429  22.543  1.00  0.00              
+ATOM    121  CZ  PHE A  14      29.466  48.751  21.796  1.00 14.53                 ATOM     97  CZ  PHE    24      29.466  48.751  21.796  1.00  0.00              
+ATOM    122  CD2 PHE A  14      28.169  48.554  19.762  1.00 14.99                 ATOM     98  CD2 PHE    24      28.169  48.554  19.762  1.00  0.00              
+ATOM    123  CE2 PHE A  14      29.389  48.816  20.406  1.00 13.63                 ATOM     99  CE2 PHE    24      29.389  48.816  20.406  1.00  0.00              
+template-> ResidueCell [number=15, obj=THR, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=25, obj=ASP, comment=UNKNOWN, gap()=false]
+ATOM    125  N   THR A  15      24.192  45.095  18.075  1.00 22.22                 ATOM    101  N   ASP    25      24.192  45.095  18.075  1.00  0.00              
+ATOM    124  CA  THR A  15      22.918  44.613  17.552  1.00 22.27                 ATOM    100  CA  ASP    25      22.918  44.613  17.552  1.00  0.00              
+ATOM    127  CB  THR A  15      22.872  44.700  16.002  1.00 23.53                 ATOM    103  CB  ASP    25      22.872  44.700  16.002  1.00  0.00              
+ATOM    128  C   THR A  15      22.720  43.157  17.995  1.00 22.08                 ATOM    104  C   ASP    25      22.720  43.157  17.995  1.00  0.00              
+ATOM    129  O   THR A  15      21.617  42.620  17.910  1.00 22.40                 ATOM    105  O   ASP    25      21.617  42.620  17.910  1.00  0.00              
+ATOM    130  CG2 THR A  15      21.517  44.245  15.475  1.00 23.00                 ATOM    106  CG  ASP    25    -999.999-999.999-999.999  1.00  0.00              
+ATOM    131  OG1 THR A  15      23.071  46.059  15.596  1.00 27.50                 ATOM    107  OD1 ASP    25    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    108  OD2 ASP    25    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=16, obj=ILE, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=26, obj=ILE, comment=UNKNOWN, gap()=false]
+ATOM    133  N   ILE A  16      23.792  42.527  18.472  1.00 20.26                 ATOM    110  N   ILE    26      23.792  42.527  18.472  1.00  0.00              
+ATOM    132  CA  ILE A  16      23.716  41.146  18.941  1.00 21.60                 ATOM    109  CA  ILE    26      23.716  41.146  18.941  1.00  0.00              
+ATOM    135  CB  ILE A  16      25.101  40.625  19.386  1.00 21.24                 ATOM    112  CB  ILE    26      25.101  40.625  19.386  1.00  0.00              
+ATOM    136  C   ILE A  16      22.769  41.073  20.144  1.00 23.01                 ATOM    113  C   ILE    26      22.769  41.073  20.144  1.00  0.00              
+ATOM    137  O   ILE A  16      22.892  41.868  21.077  1.00 22.59                 ATOM    114  O   ILE    26      22.892  41.868  21.077  1.00  0.00              
+ATOM    138  CG1 ILE A  16      26.123  40.816  18.267  1.00 19.94                 ATOM    115  CG1 ILE    26      26.123  40.816  18.267  1.00  0.00              
+ATOM    139  CD1 ILE A  16      25.781  40.078  17.005  1.00 18.45                 ATOM    116  CD1 ILE    26      25.781  40.078  17.005  1.00  0.00              
+ATOM    140  CG2 ILE A  16      25.012  39.146  19.731  1.00 20.94                 ATOM    117  CG2 ILE    26      25.012  39.146  19.731  1.00  0.00              
+template-> ResidueCell [number=17, obj=GLU, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=27, obj=ALA, comment=UNKNOWN, gap()=false]
+ATOM    142  N   GLU A  17      21.830  40.127  20.126  1.00 24.11                 ATOM    119  N   ALA    27      21.830  40.127  20.126  1.00  0.00              
+ATOM    141  CA  GLU A  17      20.879  39.994  21.231  1.00 25.29                 ATOM    118  CA  ALA    27      20.879  39.994  21.231  1.00  0.00              
+ATOM    144  CB  GLU A  17      19.561  39.363  20.765  1.00 28.79                 ATOM    121  CB  ALA    27      19.561  39.363  20.765  1.00  0.00              
+ATOM    145  C   GLU A  17      21.405  39.156  22.391  1.00 23.82                 ATOM    122  C   ALA    27      21.405  39.156  22.391  1.00  0.00              
+ATOM    146  O   GLU A  17      22.031  38.111  22.189  1.00 23.42                 ATOM    123  O   ALA    27      22.031  38.111  22.189  1.00  0.00              
+ATOM    147  CG  GLU A  17      18.742  40.150  19.754  1.00 34.89              
+ATOM    148  CD  GLU A  17      17.355  39.535  19.549  1.00 38.99              
+ATOM    149  OE1 GLU A  17      17.243  38.288  19.633  1.00 40.17              
+ATOM    150  OE2 GLU A  17      16.384  40.288  19.296  1.00 38.75              
+template-> ResidueCell [number=18, obj=GLY, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=28, obj=ASP, comment=UNKNOWN, gap()=false]
+ATOM    152  N   GLY A  18      21.124  39.615  23.607  1.00 22.66                 ATOM    125  N   ASP    28      21.124  39.615  23.607  1.00  0.00              
+ATOM    151  CA  GLY A  18      21.551  38.892  24.789  1.00 22.34                 ATOM    124  CA  ASP    28      21.551  38.892  24.789  1.00  0.00              
+ATOM    154  C   GLY A  18      22.849  39.415  25.355  1.00 22.52                 ATOM    127  CB  ASP    28    -999.999-999.999-999.999  1.00  0.00              
+ATOM    155  O   GLY A  18      23.757  39.761  24.608  1.00 24.79                 ATOM    128  C   ASP    28      22.849  39.415  25.355  1.00  0.00              
+                                                                                   ATOM    129  O   ASP    28      23.757  39.761  24.608  1.00  0.00              
+                                                                                   ATOM    130  CG  ASP    28    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    131  OD1 ASP    28    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    132  OD2 ASP    28    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=19, obj=LEU, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=29, obj=PHE, comment=UNKNOWN, gap()=false]
+ATOM    157  N   LEU A  19      22.936  39.476  26.678  1.00 22.52                 ATOM    134  N   PHE    29      22.936  39.476  26.678  1.00  0.00              
+ATOM    156  CA  LEU A  19      24.139  39.958  27.344  1.00 22.49                 ATOM    133  CA  PHE    29      24.139  39.958  27.344  1.00  0.00              
+ATOM    159  CB  LEU A  19      23.916  40.043  28.856  1.00 22.51                 ATOM    136  CB  PHE    29      23.916  40.043  28.856  1.00  0.00              
+ATOM    160  C   LEU A  19      25.339  39.060  27.064  1.00 22.11                 ATOM    137  C   PHE    29      25.339  39.060  27.064  1.00  0.00              
+ATOM    161  O   LEU A  19      26.396  39.536  26.664  1.00 24.24                 ATOM    138  O   PHE    29      26.396  39.536  26.664  1.00  0.00              
+ATOM    162  CG  LEU A  19      25.121  40.503  29.689  1.00 23.23                 ATOM    139  CG  PHE    29      25.121  40.503  29.689  1.00  0.00              
+ATOM    163  CD1 LEU A  19      25.468  41.946  29.342  1.00 21.39                 ATOM    140  CD1 PHE    29      25.468  41.946  29.342  1.00  0.00              
+ATOM    164  CD2 LEU A  19      24.804  40.370  31.177  1.00 21.47                 ATOM    141  CE1 PHE    29    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    142  CZ  PHE    29    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    143  CD2 PHE    29      24.804  40.370  31.177  1.00  0.00              
+                                                                                   ATOM    144  CE2 PHE    29    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=20, obj=ASP, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=30, obj=SER, comment=UNKNOWN, gap()=false]
+ATOM    166  N   ASP A  20      25.167  37.762  27.267  1.00 21.96                 ATOM    146  N   SER    30      25.167  37.762  27.267  1.00  0.00              
+ATOM    165  CA  ASP A  20      26.240  36.797  27.061  1.00 23.31                 ATOM    145  CA  SER    30      26.240  36.797  27.061  1.00  0.00              
+ATOM    168  CB  ASP A  20      25.733  35.390  27.379  1.00 27.69                 ATOM    148  CB  SER    30      25.733  35.390  27.379  1.00  0.00              
+ATOM    169  C   ASP A  20      26.822  36.821  25.655  1.00 22.26                 ATOM    149  C   SER    30      26.822  36.821  25.655  1.00  0.00              
+ATOM    170  O   ASP A  20      28.048  36.892  25.476  1.00 20.21                 ATOM    150  O   SER    30      28.048  36.892  25.476  1.00  0.00              
+ATOM    171  CG  ASP A  20      25.782  35.069  28.870  1.00 32.60                 ATOM    151  OG  SER    30    -999.999-999.999-999.999  1.00  0.00              
+ATOM    172  OD1 ASP A  20      25.490  35.956  29.707  1.00 33.05              
+ATOM    173  OD2 ASP A  20      26.106  33.910  29.203  1.00 37.13              
+template-> ResidueCell [number=21, obj=ALA, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=31, obj=GLY, comment=UNKNOWN, gap()=false]
+ATOM    175  N   ALA A  21      25.934  36.759  24.668  1.00 19.10                 ATOM    153  N   GLY    31      25.934  36.759  24.668  1.00  0.00              
+ATOM    174  CA  ALA A  21      26.316  36.751  23.264  1.00 17.76                 ATOM    152  CA  GLY    31      26.316  36.751  23.264  1.00  0.00              
+ATOM    177  CB  ALA A  21      25.085  36.507  22.397  1.00 15.88                 ATOM    155  C   GLY    31      27.002  38.049  22.850  1.00  0.00              
+ATOM    178  C   ALA A  21      27.002  38.049  22.850  1.00 18.41                 ATOM    156  O   GLY    31      28.063  38.023  22.221  1.00  0.00              
+ATOM    179  O   ALA A  21      28.063  38.023  22.221  1.00 17.31              
+template-> ResidueCell [number=22, obj=ARG, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=32, obj=ARG, comment=UNKNOWN, gap()=false]
+ATOM    181  N   ARG A  22      26.403  39.182  23.205  1.00 16.32                 ATOM    158  N   ARG    32      26.403  39.182  23.205  1.00  0.00              
+ATOM    180  CA  ARG A  22      26.980  40.461  22.845  1.00 17.13                 ATOM    157  CA  ARG    32      26.980  40.461  22.845  1.00  0.00              
+ATOM    183  CB  ARG A  22      26.041  41.605  23.226  1.00 16.00                 ATOM    160  CB  ARG    32      26.041  41.605  23.226  1.00  0.00              
+ATOM    184  C   ARG A  22      28.335  40.647  23.513  1.00 19.67                 ATOM    161  C   ARG    32      28.335  40.647  23.513  1.00  0.00              
+ATOM    185  O   ARG A  22      29.282  41.111  22.875  1.00 19.52                 ATOM    162  O   ARG    32      29.282  41.111  22.875  1.00  0.00              
+ATOM    186  CG  ARG A  22      26.573  42.970  22.806  1.00 15.68                 ATOM    163  CG  ARG    32      26.573  42.970  22.806  1.00  0.00              
+ATOM    187  CD  ARG A  22      25.589  44.078  23.105  1.00 15.77                 ATOM    164  CD  ARG    32      25.589  44.078  23.105  1.00  0.00              
+ATOM    188  NE  ARG A  22      24.315  43.852  22.436  1.00 16.58                 ATOM    165  NE  ARG    32      24.315  43.852  22.436  1.00  0.00              
+ATOM    190  CZ  ARG A  22      23.246  44.620  22.604  1.00 18.05                 ATOM    167  CZ  ARG    32      23.246  44.620  22.604  1.00  0.00              
+ATOM    191  NH1 ARG A  22      23.311  45.669  23.419  1.00 13.72                 ATOM    168  NH1 ARG    32      23.311  45.669  23.419  1.00  0.00              
+ATOM    192  NH2 ARG A  22      22.111  44.327  21.975  1.00 14.18                 ATOM    169  NH2 ARG    32      22.111  44.327  21.975  1.00  0.00              
+template-> ResidueCell [number=23, obj=MET, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=33, obj=MET, comment=UNKNOWN, gap()=false]
+template-> ResidueCell [number=24, obj=GLU, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=34, obj=LEU, comment=UNKNOWN, gap()=false]
+ATOM    194  N   GLU A  24      30.451  38.402  24.356  1.00 26.71                 ATOM    171  N   LEU    34      30.451  38.402  24.356  1.00  0.00              
+ATOM    193  CA  GLU A  24      31.475  37.547  23.782  1.00 27.25                 ATOM    170  CA  LEU    34      31.475  37.547  23.782  1.00  0.00              
+ATOM    196  CB  GLU A  24      30.891  36.197  23.383  1.00 31.13                 ATOM    173  CB  LEU    34      30.891  36.197  23.383  1.00  0.00              
+ATOM    197  C   GLU A  24      32.101  38.218  22.570  1.00 25.62                 ATOM    174  C   LEU    34      32.101  38.218  22.570  1.00  0.00              
+ATOM    198  O   GLU A  24      33.304  38.118  22.345  1.00 24.86                 ATOM    175  O   LEU    34      33.304  38.118  22.345  1.00  0.00              
+ATOM    199  CG  GLU A  24      31.939  35.104  23.359  1.00 39.57                 ATOM    176  CG  LEU    34      31.939  35.104  23.359  1.00  0.00              
+ATOM    200  CD  GLU A  24      31.406  33.799  22.819  1.00 44.39                 ATOM    177  CD1 LEU    34    -999.999-999.999-999.999  1.00  0.00              
+ATOM    201  OE1 GLU A  24      30.333  33.357  23.294  1.00 47.55                 ATOM    178  CD2 LEU    34    -999.999-999.999-999.999  1.00  0.00              
+ATOM    202  OE2 GLU A  24      32.067  33.214  21.927  1.00 45.94              
+template-> ResidueCell [number=25, obj=VAL, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=35, obj=ARG, comment=UNKNOWN, gap()=false]
+ATOM    204  N   VAL A  25      31.279  38.913  21.796  1.00 23.52                 ATOM    180  N   ARG    35      31.279  38.913  21.796  1.00  0.00              
+ATOM    203  CA  VAL A  25      31.769  39.600  20.617  1.00 23.43                 ATOM    179  CA  ARG    35      31.769  39.600  20.617  1.00  0.00              
+ATOM    206  CB  VAL A  25      30.613  39.921  19.652  1.00 23.99                 ATOM    182  CB  ARG    35      30.613  39.921  19.652  1.00  0.00              
+ATOM    207  C   VAL A  25      32.487  40.899  21.002  1.00 23.80                 ATOM    183  C   ARG    35      32.487  40.899  21.002  1.00  0.00              
+ATOM    208  O   VAL A  25      33.557  41.211  20.469  1.00 22.90                 ATOM    184  O   ARG    35      33.557  41.211  20.469  1.00  0.00              
+ATOM    209  CG1 VAL A  25      31.136  40.665  18.430  1.00 22.67                 ATOM    185  CG  ARG    35    -999.999-999.999-999.999  1.00  0.00              
+ATOM    210  CG2 VAL A  25      29.923  38.637  19.241  1.00 21.97                 ATOM    186  CD  ARG    35    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    187  NE  ARG    35    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    188  HE  ARG    35    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    189  CZ  ARG    35    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    190  NH1 ARG    35    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    191  NH2 ARG    35    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=26, obj=LEU, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=36, obj=ILE, comment=UNKNOWN, gap()=false]
+ATOM    212  N   LEU A  26      31.903  41.641  21.941  1.00 21.96                 ATOM    193  N   ILE    36      31.903  41.641  21.941  1.00  0.00              
+ATOM    211  CA  LEU A  26      32.482  42.900  22.384  1.00 21.64                 ATOM    192  CA  ILE    36      32.482  42.900  22.384  1.00  0.00              
+ATOM    214  CB  LEU A  26      31.580  43.549  23.435  1.00 22.38                 ATOM    195  CB  ILE    36      31.580  43.549  23.435  1.00  0.00              
+ATOM    215  C   LEU A  26      33.903  42.733  22.926  1.00 20.84                 ATOM    196  C   ILE    36      33.903  42.733  22.926  1.00  0.00              
+ATOM    216  O   LEU A  26      34.761  43.567  22.667  1.00 19.97                 ATOM    197  O   ILE    36      34.761  43.567  22.667  1.00  0.00              
+ATOM    217  CG  LEU A  26      31.666  45.071  23.620  1.00 23.91                 ATOM    198  CG1 ILE    36    -999.999-999.999-999.999  1.00  0.00              
+ATOM    218  CD1 LEU A  26      30.457  45.556  24.403  1.00 23.81                 ATOM    199  CD1 ILE    36      30.457  45.556  24.403  1.00  0.00              
+ATOM    219  CD2 LEU A  26      32.946  45.436  24.342  1.00 24.53                 ATOM    200  CG2 ILE    36    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=27, obj=LYS, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=37, obj=ARG, comment=UNKNOWN, gap()=false]
+ATOM    221  N   LYS A  27      34.162  41.655  23.659  1.00 22.19                 ATOM    202  N   ARG    37      34.162  41.655  23.659  1.00  0.00              
+ATOM    220  CA  LYS A  27      35.498  41.426  24.215  1.00 24.29                 ATOM    201  CA  ARG    37      35.498  41.426  24.215  1.00  0.00              
+ATOM    223  CB  LYS A  27      35.479  40.267  25.208  1.00 23.60                 ATOM    204  CB  ARG    37      35.479  40.267  25.208  1.00  0.00              
+ATOM    224  C   LYS A  27      36.484  41.094  23.115  1.00 25.15                 ATOM    205  C   ARG    37      36.484  41.094  23.115  1.00  0.00              
+ATOM    225  O   LYS A  27      37.697  41.074  23.323  1.00 25.43                 ATOM    206  O   ARG    37      37.697  41.074  23.323  1.00  0.00              
+ATOM    226  CG  LYS A  27      34.727  40.554  26.482  1.00 28.70                 ATOM    207  CG  ARG    37      34.727  40.554  26.482  1.00  0.00              
+ATOM    227  CD  LYS A  27      34.565  39.292  27.303  1.00 28.81                 ATOM    208  CD  ARG    37      34.565  39.292  27.303  1.00  0.00              
+ATOM    228  CE  LYS A  27      33.783  39.568  28.571  1.00 32.74                 ATOM    209  NE  ARG    37    -999.999-999.999-999.999  1.00  0.00              
+ATOM    229  NZ  LYS A  27      33.313  38.305  29.213  1.00 35.35                 ATOM    210  HE  ARG    37    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    211  CZ  ARG    37    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    212  NH1 ARG    37    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    213  NH2 ARG    37    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=28, obj=GLU, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=38, obj=GLY, comment=UNKNOWN, gap()=false]
+ATOM    231  N   GLU A  28      35.944  40.856  21.932  1.00 27.26                 ATOM    215  N   GLY    38      35.944  40.856  21.932  1.00  0.00              
+ATOM    230  CA  GLU A  28      36.738  40.466  20.787  1.00 28.60                 ATOM    214  CA  GLY    38      36.738  40.466  20.787  1.00  0.00              
+ATOM    233  CB  GLU A  28      36.037  39.288  20.132  1.00 32.68                 ATOM    217  C   GLY    38      36.949  41.583  19.771  1.00  0.00              
+ATOM    234  C   GLU A  28      36.949  41.583  19.771  1.00 26.49                 ATOM    218  O   GLY    38      37.998  41.663  19.145  1.00  0.00              
+ATOM    235  O   GLU A  28      37.998  41.663  19.145  1.00 26.46              
+ATOM    236  CG  GLU A  28      36.865  38.455  19.219  1.00 39.86              
+ATOM    237  CD  GLU A  28      36.047  37.321  18.638  1.00 45.27              
+ATOM    238  OE1 GLU A  28      35.063  37.609  17.914  1.00 46.34              
+ATOM    239  OE2 GLU A  28      36.377  36.147  18.915  1.00 47.68              
+template-> ResidueCell [number=29, obj=THR, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=39, obj=ASP, comment=UNKNOWN, gap()=false]
+ATOM    241  N   THR A  29      35.955  42.444  19.613  1.00 24.65                 ATOM    220  N   ASP    39      35.955  42.444  19.613  1.00  0.00              
+ATOM    240  CA  THR A  29      36.044  43.531  18.648  1.00 25.35                 ATOM    219  CA  ASP    39      36.044  43.531  18.648  1.00  0.00              
+ATOM    243  CB  THR A  29      34.736  43.655  17.836  1.00 25.90                 ATOM    222  CB  ASP    39      34.736  43.655  17.836  1.00  0.00              
+ATOM    244  C   THR A  29      36.327  44.895  19.267  1.00 25.23                 ATOM    223  C   ASP    39      36.327  44.895  19.267  1.00  0.00              
+ATOM    245  O   THR A  29      37.419  45.450  19.125  1.00 26.69                 ATOM    224  O   ASP    39      37.419  45.450  19.125  1.00  0.00              
+ATOM    246  CG2 THR A  29      34.484  42.395  17.032  1.00 24.09                 ATOM    225  CG  ASP    39    -999.999-999.999-999.999  1.00  0.00              
+ATOM    247  OG1 THR A  29      33.634  43.875  18.730  1.00 25.91                 ATOM    226  OD1 ASP    39    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    227  OD2 ASP    39    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=30, obj=VAL, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=40, obj=ILE, comment=UNKNOWN, gap()=false]
+ATOM    249  N   VAL A  30      35.323  45.420  19.955  1.00 23.68                 ATOM    229  N   ILE    40      35.323  45.420  19.955  1.00  0.00              
+ATOM    248  CA  VAL A  30      35.395  46.726  20.582  1.00 20.94                 ATOM    228  CA  ILE    40      35.395  46.726  20.582  1.00  0.00              
+ATOM    251  CB  VAL A  30      34.010  47.157  21.073  1.00 18.46                 ATOM    231  CB  ILE    40      34.010  47.157  21.073  1.00  0.00              
+ATOM    252  C   VAL A  30      36.376  46.914  21.732  1.00 21.71                 ATOM    232  C   ILE    40      36.376  46.914  21.732  1.00  0.00              
+ATOM    253  O   VAL A  30      37.237  47.790  21.670  1.00 23.30                 ATOM    233  O   ILE    40      37.237  47.790  21.670  1.00  0.00              
+ATOM    254  CG1 VAL A  30      34.125  48.426  21.909  1.00 18.33                 ATOM    234  CG1 ILE    40      34.125  48.426  21.909  1.00  0.00              
+ATOM    255  CG2 VAL A  30      33.085  47.369  19.875  1.00 14.09                 ATOM    235  CD1 ILE    40    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    236  CG2 ILE    40      33.085  47.369  19.875  1.00  0.00              
+template-> ResidueCell [number=31, obj=ARG, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=41, obj=ARG, comment=UNKNOWN, gap()=false]
+ATOM    257  N   ARG A  31      36.248  46.109  22.782  1.00 20.95                 ATOM    238  N   ARG    41      36.248  46.109  22.782  1.00  0.00              
+ATOM    256  CA  ARG A  31      37.115  46.266  23.940  1.00 19.20                 ATOM    237  CA  ARG    41      37.115  46.266  23.940  1.00  0.00              
+ATOM    259  CB  ARG A  31      36.849  45.155  24.962  1.00 18.73                 ATOM    240  CB  ARG    41      36.849  45.155  24.962  1.00  0.00              
+ATOM    260  C   ARG A  31      38.610  46.370  23.627  1.00 18.69                 ATOM    241  C   ARG    41      38.610  46.370  23.627  1.00  0.00              
+ATOM    261  O   ARG A  31      39.273  47.287  24.093  1.00 19.08                 ATOM    242  O   ARG    41      39.273  47.287  24.093  1.00  0.00              
+ATOM    262  CG  ARG A  31      37.522  45.406  26.318  1.00 18.07                 ATOM    243  CG  ARG    41      37.522  45.406  26.318  1.00  0.00              
+ATOM    263  CD  ARG A  31      36.878  44.604  27.428  1.00 15.71                 ATOM    244  CD  ARG    41      36.878  44.604  27.428  1.00  0.00              
+ATOM    264  NE  ARG A  31      35.581  45.146  27.831  1.00 14.78                 ATOM    245  NE  ARG    41      35.581  45.146  27.831  1.00  0.00              
+ATOM    266  CZ  ARG A  31      34.799  44.584  28.750  1.00 12.75                 ATOM    247  CZ  ARG    41      34.799  44.584  28.750  1.00  0.00              
+ATOM    267  NH1 ARG A  31      35.182  43.465  29.347  1.00 13.19                 ATOM    248  NH1 ARG    41      35.182  43.465  29.347  1.00  0.00              
+ATOM    268  NH2 ARG A  31      33.648  45.143  29.088  1.00  9.45                 ATOM    249  NH2 ARG    41      33.648  45.143  29.088  1.00  0.00              
+template-> ResidueCell [number=32, obj=PRO, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=42, obj=PRO, comment=UNKNOWN, gap()=false]
+ATOM    270  N   PRO A  32      39.159  45.439  22.833  1.00 18.82                 ATOM    251  N   PRO    42      39.159  45.439  22.833  1.00  0.00              
+ATOM    269  CA  PRO A  32      40.591  45.516  22.514  1.00 18.68                 ATOM    250  CA  PRO    42      40.591  45.516  22.514  1.00  0.00              
+ATOM    271  CB  PRO A  32      40.777  44.403  21.481  1.00 18.16                 ATOM    252  CB  PRO    42      40.777  44.403  21.481  1.00  0.00              
+ATOM    272  C   PRO A  32      40.982  46.898  21.964  1.00 18.83                 ATOM    253  C   PRO    42      40.982  46.898  21.964  1.00  0.00              
+ATOM    273  O   PRO A  32      42.074  47.406  22.248  1.00 18.36                 ATOM    254  O   PRO    42      42.074  47.406  22.248  1.00  0.00              
+ATOM    274  CG  PRO A  32      39.763  43.380  21.928  1.00 19.16                 ATOM    255  CG  PRO    42      39.763  43.380  21.928  1.00  0.00              
+ATOM    275  CD  PRO A  32      38.547  44.247  22.222  1.00 19.30                 ATOM    256  CD  PRO    42      38.547  44.247  22.222  1.00  0.00              
+template-> ResidueCell [number=33, obj=LYS, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=43, obj=ALA, comment=UNKNOWN, gap()=false]
+ATOM    277  N   LYS A  33      40.089  47.502  21.181  1.00 15.47                 ATOM    258  N   ALA    43      40.089  47.502  21.181  1.00  0.00              
+ATOM    276  CA  LYS A  33      40.359  48.819  20.624  1.00 15.10                 ATOM    257  CA  ALA    43      40.359  48.819  20.624  1.00  0.00              
+ATOM    279  CB  LYS A  33      39.448  49.096  19.430  1.00 14.95                 ATOM    260  CB  ALA    43      39.448  49.096  19.430  1.00  0.00              
+ATOM    280  C   LYS A  33      40.203  49.913  21.670  1.00 14.25                 ATOM    261  C   ALA    43      40.203  49.913  21.670  1.00  0.00              
+ATOM    281  O   LYS A  33      40.901  50.928  21.621  1.00 14.96                 ATOM    262  O   ALA    43      40.901  50.928  21.621  1.00  0.00              
+ATOM    282  CG  LYS A  33      39.786  48.242  18.245  1.00 17.93              
+ATOM    283  CD  LYS A  33      38.904  48.525  17.060  1.00 22.04              
+ATOM    284  CE  LYS A  33      39.353  47.677  15.878  1.00 23.25              
+ATOM    285  NZ  LYS A  33      38.505  47.874  14.677  1.00 28.30              
+template-> ResidueCell [number=34, obj=LEU, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=44, obj=LEU, comment=UNKNOWN, gap()=false]
+ATOM    287  N   LEU A  34      39.290  49.716  22.616  1.00 11.94                 ATOM    264  N   LEU    44      39.290  49.716  22.616  1.00  0.00              
+ATOM    286  CA  LEU A  34      39.097  50.699  23.667  1.00 11.77                 ATOM    263  CA  LEU    44      39.097  50.699  23.667  1.00  0.00              
+ATOM    289  CB  LEU A  34      37.856  50.360  24.501  1.00 11.26                 ATOM    266  CB  LEU    44      37.856  50.360  24.501  1.00  0.00              
+ATOM    290  C   LEU A  34      40.344  50.709  24.554  1.00 12.28                 ATOM    267  C   LEU    44      40.344  50.709  24.554  1.00  0.00              
+ATOM    291  O   LEU A  34      40.839  51.769  24.938  1.00 12.65                 ATOM    268  O   LEU    44      40.839  51.769  24.938  1.00  0.00              
+ATOM    292  CG  LEU A  34      36.506  50.484  23.777  1.00 11.72                 ATOM    269  CG  LEU    44      36.506  50.484  23.777  1.00  0.00              
+ATOM    293  CD1 LEU A  34      35.361  50.124  24.713  1.00 10.43                 ATOM    270  CD1 LEU    44      35.361  50.124  24.713  1.00  0.00              
+ATOM    294  CD2 LEU A  34      36.341  51.903  23.260  1.00 11.03                 ATOM    271  CD2 LEU    44      36.341  51.903  23.260  1.00  0.00              
+template-> ResidueCell [number=35, obj=THR, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=45, obj=LEU, comment=UNKNOWN, gap()=false]
+ATOM    296  N   THR A  35      40.859  49.524  24.871  1.00 12.30                 ATOM    273  N   LEU    45      40.859  49.524  24.871  1.00  0.00              
+ATOM    295  CA  THR A  35      42.048  49.429  25.703  1.00 12.61                 ATOM    272  CA  LEU    45      42.048  49.429  25.703  1.00  0.00              
+ATOM    298  CB  THR A  35      42.363  47.955  26.067  1.00 13.44                 ATOM    275  CB  LEU    45      42.363  47.955  26.067  1.00  0.00              
+ATOM    299  C   THR A  35      43.248  50.056  24.988  1.00 11.89                 ATOM    276  C   LEU    45      43.248  50.056  24.988  1.00  0.00              
+ATOM    300  O   THR A  35      44.083  50.707  25.620  1.00 11.99                 ATOM    277  O   LEU    45      44.083  50.707  25.620  1.00  0.00              
+ATOM    301  CG2 THR A  35      43.610  47.868  26.959  1.00 10.02                 ATOM    278  CG  LEU    45    -999.999-999.999-999.999  1.00  0.00              
+ATOM    302  OG1 THR A  35      41.249  47.394  26.773  1.00 13.70                 ATOM    279  CD1 LEU    45    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    280  CD2 LEU    45    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=36, obj=ALA, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=46, obj=ARG, comment=UNKNOWN, gap()=false]
+ATOM    304  N   ALA A  36      43.334  49.861  23.675  1.00  9.77                 ATOM    282  N   ARG    46      43.334  49.861  23.675  1.00  0.00              
+ATOM    303  CA  ALA A  36      44.437  50.426  22.901  1.00 10.20                 ATOM    281  CA  ARG    46      44.437  50.426  22.901  1.00  0.00              
+ATOM    306  CB  ALA A  36      44.433  49.867  21.488  1.00  6.48                 ATOM    284  CB  ARG    46      44.433  49.867  21.488  1.00  0.00              
+ATOM    307  C   ALA A  36      44.315  51.956  22.882  1.00 10.96                 ATOM    285  C   ARG    46      44.315  51.956  22.882  1.00  0.00              
+ATOM    308  O   ALA A  36      45.309  52.671  23.019  1.00 10.29                 ATOM    286  O   ARG    46      45.309  52.671  23.019  1.00  0.00              
+                                                                                   ATOM    287  CG  ARG    46    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    288  CD  ARG    46    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    289  NE  ARG    46    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    290  HE  ARG    46    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    291  CZ  ARG    46    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    292  NH1 ARG    46    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    293  NH2 ARG    46    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=37, obj=LEU, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=47, obj=LEU, comment=UNKNOWN, gap()=false]
+ATOM    310  N   LEU A  37      43.089  52.445  22.716  1.00 11.83                 ATOM    295  N   LEU    47      43.089  52.445  22.716  1.00  0.00              
+ATOM    309  CA  LEU A  37      42.828  53.877  22.714  1.00 13.44                 ATOM    294  CA  LEU    47      42.828  53.877  22.714  1.00  0.00              
+ATOM    312  CB  LEU A  37      41.353  54.140  22.392  1.00 14.02                 ATOM    297  CB  LEU    47      41.353  54.140  22.392  1.00  0.00              
+ATOM    313  C   LEU A  37      43.183  54.464  24.088  1.00 14.48                 ATOM    298  C   LEU    47      43.183  54.464  24.088  1.00  0.00              
+ATOM    314  O   LEU A  37      43.642  55.605  24.197  1.00 14.56                 ATOM    299  O   LEU    47      43.642  55.605  24.197  1.00  0.00              
+ATOM    315  CG  LEU A  37      40.950  54.033  20.921  1.00 17.02                 ATOM    300  CG  LEU    47      40.950  54.033  20.921  1.00  0.00              
+ATOM    316  CD1 LEU A  37      39.435  54.020  20.790  1.00 15.87                 ATOM    301  CD1 LEU    47      39.435  54.020  20.790  1.00  0.00              
+ATOM    317  CD2 LEU A  37      41.545  55.206  20.146  1.00 16.65                 ATOM    302  CD2 LEU    47      41.545  55.206  20.146  1.00  0.00              
+template-> ResidueCell [number=38, obj=GLY, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=48, obj=ALA, comment=UNKNOWN, gap()=false]
+ATOM    319  N   GLY A  38      42.973  53.672  25.134  1.00 15.66                 ATOM    304  N   ALA    48      42.973  53.672  25.134  1.00  0.00              
+ATOM    318  CA  GLY A  38      43.286  54.122  26.478  1.00 16.99                 ATOM    303  CA  ALA    48      43.286  54.122  26.478  1.00  0.00              
+ATOM    321  C   GLY A  38      44.778  54.300  26.698  1.00 18.45                 ATOM    306  CB  ALA    48    -999.999-999.999-999.999  1.00  0.00              
+ATOM    322  O   GLY A  38      45.206  55.274  27.317  1.00 19.69                 ATOM    307  C   ALA    48      44.778  54.300  26.698  1.00  0.00              
+                                                                                   ATOM    308  O   ALA    48      45.206  55.274  27.317  1.00  0.00              
+template-> ResidueCell [number=39, obj=GLU, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=49, obj=SER, comment=UNKNOWN, gap()=false]
+ATOM    324  N   GLU A  39      45.577  53.367  26.189  1.00 18.85                 ATOM    310  N   SER    49      45.577  53.367  26.189  1.00  0.00              
+ATOM    323  CA  GLU A  39      47.020  53.452  26.350  1.00 21.41                 ATOM    309  CA  SER    49      47.020  53.452  26.350  1.00  0.00              
+ATOM    326  CB  GLU A  39      47.689  52.113  26.010  1.00 25.08                 ATOM    312  CB  SER    49      47.689  52.113  26.010  1.00  0.00              
+ATOM    327  C   GLU A  39      47.594  54.546  25.471  1.00 20.26                 ATOM    313  C   SER    49      47.594  54.546  25.471  1.00  0.00              
+ATOM    328  O   GLU A  39      48.566  55.197  25.836  1.00 21.55                 ATOM    314  O   SER    49      48.566  55.197  25.836  1.00  0.00              
+ATOM    329  CG  GLU A  39      47.371  50.970  26.991  1.00 30.57                 ATOM    315  OG  SER    49    -999.999-999.999-999.999  1.00  0.00              
+ATOM    330  CD  GLU A  39      47.527  51.376  28.464  1.00 34.81              
+ATOM    331  OE1 GLU A  39      48.597  51.923  28.832  1.00 36.65              
+ATOM    332  OE2 GLU A  39      46.578  51.140  29.251  1.00 32.94              
+template-> ResidueCell [number=40, obj=HIS, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=50, obj=ARG, comment=UNKNOWN, gap()=false]
+ATOM    334  N   HIS A  40      46.970  54.750  24.321  1.00 18.75                 ATOM    317  N   ARG    50      46.970  54.750  24.321  1.00  0.00              
+ATOM    333  CA  HIS A  40      47.409  55.753  23.367  1.00 18.24                 ATOM    316  CA  ARG    50      47.409  55.753  23.367  1.00  0.00              
+ATOM    336  CB  HIS A  40      46.716  55.523  22.023  1.00 18.93                 ATOM    319  CB  ARG    50      46.716  55.523  22.023  1.00  0.00              
+ATOM    337  C   HIS A  40      47.143  57.185  23.819  1.00 17.73                 ATOM    320  C   ARG    50      47.143  57.185  23.819  1.00  0.00              
+ATOM    338  O   HIS A  40      48.043  58.021  23.829  1.00 20.45                 ATOM    321  O   ARG    50      48.043  58.021  23.829  1.00  0.00              
+ATOM    339  CG  HIS A  40      47.195  56.434  20.940  1.00 19.88                 ATOM    322  CG  ARG    50      47.195  56.434  20.940  1.00  0.00              
+ATOM    340  ND1 HIS A  40      48.255  56.118  20.119  1.00 20.31                 ATOM    323  CD  ARG    50    -999.999-999.999-999.999  1.00  0.00              
+ATOM    342  CE1 HIS A  40      48.473  57.120  19.286  1.00 20.64                 ATOM    325  HE  ARG    50    -999.999-999.999-999.999  1.00  0.00              
+ATOM    343  NE2 HIS A  40      47.591  58.071  19.537  1.00 20.61                 ATOM    326  CZ  ARG    50    -999.999-999.999-999.999  1.00  0.00              
+ATOM    345  CD2 HIS A  40      46.779  57.667  20.567  1.00 20.04                 ATOM    328  NH2 ARG    50    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=41, obj=PHE, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=51, obj=LEU, comment=UNKNOWN, gap()=false]
+ATOM    347  N   PHE A  41      45.906  57.466  24.204  1.00 16.47                 ATOM    330  N   LEU    51      45.906  57.466  24.204  1.00  0.00              
+ATOM    346  CA  PHE A  41      45.537  58.814  24.617  1.00 15.48                 ATOM    329  CA  LEU    51      45.537  58.814  24.617  1.00  0.00              
+ATOM    349  CB  PHE A  41      44.078  59.080  24.227  1.00 14.38                 ATOM    332  CB  LEU    51      44.078  59.080  24.227  1.00  0.00              
+ATOM    350  C   PHE A  41      45.765  59.240  26.070  1.00 14.12                 ATOM    333  C   LEU    51      45.765  59.240  26.070  1.00  0.00              
+ATOM    351  O   PHE A  41      45.579  60.412  26.384  1.00 13.69                 ATOM    334  O   LEU    51      45.579  60.412  26.384  1.00  0.00              
+ATOM    352  CG  PHE A  41      43.891  59.385  22.766  1.00 12.96                 ATOM    335  CG  LEU    51      43.891  59.385  22.766  1.00  0.00              
+ATOM    353  CD1 PHE A  41      44.301  60.612  22.237  1.00 11.93                 ATOM    336  CD1 LEU    51      44.301  60.612  22.237  1.00  0.00              
+ATOM    354  CE1 PHE A  41      44.123  60.904  20.881  1.00 13.15                 ATOM    337  CD2 LEU    51      43.301  58.450  21.916  1.00  0.00              
+ATOM    355  CZ  PHE A  41      43.528  59.958  20.034  1.00 12.20              
+ATOM    356  CD2 PHE A  41      43.301  58.450  21.916  1.00 12.23              
+ATOM    357  CE2 PHE A  41      43.117  58.729  20.555  1.00 14.00              
+template-> ResidueCell [number=42, obj=ALA, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=52, obj=ALA, comment=UNKNOWN, gap()=false]
+ATOM    359  N   ALA A  42      46.151  58.328  26.959  1.00 13.69                 ATOM    339  N   ALA    52      46.151  58.328  26.959  1.00  0.00              
+ATOM    358  CA  ALA A  42      46.399  58.731  28.350  1.00 14.67                 ATOM    338  CA  ALA    52      46.399  58.731  28.350  1.00  0.00              
+ATOM    361  CB  ALA A  42      46.664  57.507  29.236  1.00 10.48                 ATOM    341  CB  ALA    52      46.664  57.507  29.236  1.00  0.00              
+ATOM    362  C   ALA A  42      47.570  59.730  28.451  1.00 14.16                 ATOM    342  C   ALA    52      47.570  59.730  28.451  1.00  0.00              
+ATOM    363  O   ALA A  42      47.448  60.777  29.090  1.00 14.62                 ATOM    343  O   ALA    52      47.448  60.777  29.090  1.00  0.00              
+template-> ResidueCell [number=43, obj=PRO, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=53, obj=GLU, comment=UNKNOWN, gap()=false]
+ATOM    365  N   PRO A  43      48.721  59.419  27.830  1.00 14.96                 ATOM    346  H   GLU    53    -999.999-999.999-999.999  1.00  0.00              
+ATOM    364  CA  PRO A  43      49.849  60.358  27.907  1.00 15.54                 ATOM    345  N   GLU    53      48.721  59.419  27.830  1.00  0.00              
+ATOM    366  CB  PRO A  43      50.932  59.671  27.067  1.00 14.10                 ATOM    344  CA  GLU    53      49.849  60.358  27.907  1.00  0.00              
+ATOM    367  C   PRO A  43      49.453  61.732  27.347  1.00 15.41                 ATOM    347  CB  GLU    53      50.932  59.671  27.067  1.00  0.00              
+ATOM    368  O   PRO A  43      49.763  62.772  27.937  1.00 13.72                 ATOM    348  C   GLU    53      49.453  61.732  27.347  1.00  0.00              
+ATOM    369  CG  PRO A  43      50.651  58.217  27.297  1.00 14.98                 ATOM    349  O   GLU    53      49.763  62.772  27.937  1.00  0.00              
+ATOM    370  CD  PRO A  43      49.128  58.162  27.179  1.00 14.31                 ATOM    350  CG  GLU    53      50.651  58.217  27.297  1.00  0.00              
+                                                                                   ATOM    351  CD  GLU    53      49.128  58.162  27.179  1.00  0.00              
+                                                                                   ATOM    352  OE1 GLU    53    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    353  OE2 GLU    53    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=44, obj=DMY, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=54, obj=DMY, comment=UNKNOWN, gap()=false]
+template-> ResidueCell [number=45, obj=THR, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=55, obj=LEU, comment=UNKNOWN, gap()=false]
+ATOM    380  N   LEU A  45      46.453  63.277  27.121  1.00 14.00                 ATOM    355  N   LEU    55      46.453  63.277  27.121  1.00  0.00              
+ATOM    379  CA  LEU A  45      45.606  64.050  28.018  1.00 14.29                 ATOM    354  CA  LEU    55      45.606  64.050  28.018  1.00  0.00              
+ATOM    382  CB  LEU A  45      44.402  63.216  28.459  1.00 15.65                 ATOM    357  CB  LEU    55      44.402  63.216  28.459  1.00  0.00              
+ATOM    383  C   LEU A  45      46.370  64.564  29.216  1.00 16.69                 ATOM    358  C   LEU    55      46.370  64.564  29.216  1.00  0.00              
+ATOM    384  O   LEU A  45      46.063  65.649  29.727  1.00 18.04                 ATOM    359  O   LEU    55      46.063  65.649  29.727  1.00  0.00              
+ATOM    385  CG  LEU A  45      43.436  62.966  27.285  1.00 18.24                 ATOM    360  CG  LEU    55      43.436  62.966  27.285  1.00  0.00              
+ATOM    386  CD1 LEU A  45      42.398  61.915  27.641  1.00 17.19                 ATOM    361  CD1 LEU    55      42.398  61.915  27.641  1.00  0.00              
+ATOM    387  CD2 LEU A  45      42.775  64.289  26.906  1.00 18.98                 ATOM    362  CD2 LEU    55      42.775  64.289  26.906  1.00  0.00              
+template-> ResidueCell [number=46, obj=LEU, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=56, obj=LEU, comment=UNKNOWN, gap()=false]
+ATOM    389  N   SER A  46      47.363  63.795  29.667  1.00 15.71                 ATOM    364  N   LEU    56      47.363  63.795  29.667  1.00  0.00              
+ATOM    388  CA  SER A  46      48.193  64.216  30.791  1.00 14.22                 ATOM    363  CA  LEU    56      48.193  64.216  30.791  1.00  0.00              
+ATOM    391  CB  SER A  46      49.209  63.133  31.173  1.00 13.43                 ATOM    366  CB  LEU    56      49.209  63.133  31.173  1.00  0.00              
+ATOM    392  C   SER A  46      48.949  65.469  30.369  1.00 14.58                 ATOM    367  C   LEU    56      48.949  65.469  30.369  1.00  0.00              
+ATOM    393  O   SER A  46      49.008  66.458  31.108  1.00 14.92                 ATOM    368  O   LEU    56      49.008  66.458  31.108  1.00  0.00              
+ATOM    394  OG  SER A  46      48.578  62.001  31.742  1.00 17.35                 ATOM    369  CG  LEU    56    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    370  CD1 LEU    56    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    371  CD2 LEU    56    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=47, obj=SER, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=57, obj=ASN, comment=UNKNOWN, gap()=false]
+ATOM    396  N   ALA A  47      49.524  65.419  29.172  1.00 13.15                 ATOM    373  N   ASN    57      49.524  65.419  29.172  1.00  0.00              
+ATOM    395  CA  ALA A  47      50.288  66.545  28.653  1.00 15.77                 ATOM    372  CA  ASN    57      50.288  66.545  28.653  1.00  0.00              
+ATOM    398  CB  ALA A  47      50.984  66.151  27.349  1.00 10.32                 ATOM    375  CB  ASN    57      50.984  66.151  27.349  1.00  0.00              
+ATOM    399  C   ALA A  47      49.388  67.750  28.415  1.00 17.19                 ATOM    376  C   ASN    57      49.388  67.750  28.415  1.00  0.00              
+ATOM    400  O   ALA A  47      49.761  68.888  28.682  1.00 19.24                 ATOM    377  O   ASN    57      49.761  68.888  28.682  1.00  0.00              
+                                                                                   ATOM    378  CG  ASN    57    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    379  ND2 ASN    57    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    380 HD21 ASN    57    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    381 HD22 ASN    57    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    382  OD1 ASN    57    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=48, obj=ALA, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=58, obj=GLU, comment=UNKNOWN, gap()=false]
+ATOM    402  N   LEU A  48      48.191  67.478  27.923  1.00 18.51                 ATOM    384  N   GLU    58      48.191  67.478  27.923  1.00  0.00              
+ATOM    401  CA  LEU A  48      47.224  68.512  27.597  1.00 18.64                 ATOM    383  CA  GLU    58      47.224  68.512  27.597  1.00  0.00              
+ATOM    404  CB  LEU A  48      46.091  67.881  26.793  1.00 21.15                 ATOM    386  CB  GLU    58      46.091  67.881  26.793  1.00  0.00              
+ATOM    405  C   LEU A  48      46.632  69.242  28.796  1.00 17.57                 ATOM    387  C   GLU    58      46.632  69.242  28.796  1.00  0.00              
+ATOM    406  O   LEU A  48      46.510  70.461  28.789  1.00 16.27                 ATOM    388  O   GLU    58      46.510  70.461  28.789  1.00  0.00              
+ATOM    407  CG  LEU A  48      45.420  68.674  25.687  1.00 25.26                 ATOM    389  CG  GLU    58      45.420  68.674  25.687  1.00  0.00              
+ATOM    408  CD1 LEU A  48      46.403  68.866  24.532  1.00 25.44                 ATOM    390  CD  GLU    58    -999.999-999.999-999.999  1.00  0.00              
+ATOM    409  CD2 LEU A  48      44.189  67.913  25.219  1.00 25.06                 ATOM    391  OE1 GLU    58    -999.999-999.999-999.999  1.00  0.00              
+                                                                                   ATOM    392  OE2 GLU    58    -999.999-999.999-999.999  1.00  0.00              
+template-> ResidueCell [number=49, obj=LEU, comment=UNKNOWN, gap()=false]  query-> ResidueCell [number=59, obj=SER, comment=UNKNOWN, gap()=false]
+ATOM    411  N   THR A  49      46.261  68.484  29.819  1.00 18.10                 ATOM    394  N   SER    59      46.261  68.484  29.819  1.00  0.00              
+ATOM    410  CA  THR A  49      45.626  69.032  31.011  1.00 16.75                 ATOM    393  CA  SER    59      45.626  69.032  31.011  1.00  0.00              
+ATOM    413  CB  THR A  49      44.623  68.022  31.588  1.00 18.75                 ATOM    396  CB  SER    59      44.623  68.022  31.588  1.00  0.00              
+ATOM    414  C   THR A  49      46.552  69.433  32.151  1.00 18.43                 ATOM    397  C   SER    59      46.552  69.433  32.151  1.00  0.00              
+ATOM    415  O   THR A  49      46.186  70.273  32.973  1.00 19.52                 ATOM    398  O   SER    59      46.186  70.273  32.973  1.00  0.00              
+ATOM    416  CG2 THR A  49      43.597  67.614  30.532  1.00 15.59                 ATOM    399  OG  SER    59    -999.999-999.999-999.999  1.00  0.00              
+ATOM    417  OG1 THR A  49      45.335  66.858  32.031  1.00 17.80              

@@ -1,0 +1,1226 @@
+JAVA PROFILE 1.0.1, created Wed Dec 31 22:24:06 2014
+
+Copyright (c) 2003, 2005, Oracle and/or its affiliates. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+
+  - Neither the name of Oracle nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+Header for -agentlib:hprof (or -Xrunhprof) ASCII Output (JDK 5.0 JVMTI based)
+
+WARNING!  This file format is under development, and is subject to
+change without notice.
+
+This file contains the following types of records:
+
+THREAD START
+THREAD END      mark the lifetime of Java threads
+
+TRACE           represents a Java stack trace.  Each trace consists
+                of a series of stack frames.  Other records refer to
+                TRACEs to identify (1) where object allocations have
+                taken place, (2) the frames in which GC roots were
+                found, and (3) frequently executed methods.
+
+HEAP DUMP       is a complete snapshot of all live objects in the Java
+                heap.  Following distinctions are made:
+
+                ROOT    root set as determined by GC
+                CLS     classes 
+                OBJ     instances
+                ARR     arrays
+
+SITES           is a sorted list of allocation sites.  This identifies
+                the most heavily allocated object types, and the TRACE
+                at which those allocations occurred.
+
+CPU SAMPLES     is a statistical profile of program execution.  The VM
+                periodically samples all running threads, and assigns
+                a quantum to active TRACEs in those threads.  Entries
+                in this record are TRACEs ranked by the percentage of
+                total quanta they consumed; top-ranked TRACEs are
+                typically hot spots in the program.
+
+CPU TIME        is a profile of program execution obtained by measuring
+                the time spent in individual methods (excluding the time
+                spent in callees), as well as by counting the number of
+                times each method is called. Entries in this record are
+                TRACEs ranked by the percentage of total CPU time. The
+                "count" field indicates the number of times each TRACE 
+                is invoked.
+
+MONITOR TIME    is a profile of monitor contention obtained by measuring
+                the time spent by a thread waiting to enter a monitor.
+                Entries in this record are TRACEs ranked by the percentage
+                of total monitor contention time and a brief description
+                of the monitor.  The "count" field indicates the number of 
+                times the monitor was contended at that TRACE.
+
+MONITOR DUMP    is a complete snapshot of all the monitors and threads in 
+                the System.
+
+HEAP DUMP, SITES, CPU SAMPLES|TIME and MONITOR DUMP|TIME records are generated 
+at program exit.  They can also be obtained during program execution by typing 
+Ctrl-\ (on Solaris) or by typing Ctrl-Break (on Win32).
+
+--------
+
+THREAD START (obj=5000017e, id = 200001, name="main", group="main")
+THREAD START (obj=5000017e, id = 200004, name="Monitor Ctrl-Break", group="main")
+THREAD END (id = 200001)
+THREAD START (obj=5000017e, id = 200006, name="DestroyJavaVM", group="main")
+THREAD END (id = 200006)
+TRACE 300094:
+	java.net.DualStackPlainSocketImpl.accept0(DualStackPlainSocketImpl.java:Unknown line)
+	java.net.DualStackPlainSocketImpl.socketAccept(DualStackPlainSocketImpl.java:131)
+	java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:398)
+	java.net.PlainSocketImpl.accept(PlainSocketImpl.java:198)
+	java.net.ServerSocket.implAccept(ServerSocket.java:530)
+TRACE 300717:
+	meshi.energy.pairwiseNonBondedTerms.atomicPairwisePMFSumma.AtomicPairwisePMFSumma.evaluate(AtomicPairwisePMFSumma.java:127)
+	meshi.energy.pairwiseNonBondedTerms.atomicPairwisePMFSumma.AtomicPairwisePMFSumma.evaluate(AtomicPairwisePMFSumma.java:94)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300728:
+	meshi.geometry.MatrixRow.update(MatrixRow.java:76)
+	meshi.geometry.DistanceMatrix.update(DistanceMatrix.java:319)
+	meshi.geometry.DistanceMatrix.update(DistanceMatrix.java:305)
+	meshi.energy.AbstractEnergy$UpdateableList.update(AbstractEnergy.java:214)
+	meshi.energy.AbstractEnergy.update(AbstractEnergy.java:101)
+TRACE 300337:
+	java.lang.StrictMath.acos(StrictMath.java:Unknown line)
+	java.lang.Math.acos(Math.java:187)
+	meshi.geometry.Angle.acos(Angle.java:304)
+	meshi.geometry.Angle.update(Angle.java:279)
+	meshi.geometry.Torsion.updateAngles(Torsion.java:932)
+TRACE 300697:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSummaProcesser.setCooperativeStatistic(CooperativeSummaProcesser.java:161)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:95)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 301347:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:178)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300730:
+	meshi.energy.solvate.SolvateEnergy.secondPassOverTheNonBondedList(SolvateEnergy.java:441)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:270)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300731:
+	meshi.energy.solvate.SolvateEnergy.firstPassOverTheNonBondedList(SolvateEnergy.java:313)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:268)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 301190:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:180)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300907:
+	meshi.energy.pairwiseNonBondedTerms.ExcludedVol.ExcludedVol.evaluate(ExcludedVol.java:121)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+	meshi.optimizers.WolfConditionLineSearch.findStepLength(WolfConditionLineSearch.java:132)
+TRACE 300713:
+	java.lang.StrictMath.acos(StrictMath.java:Unknown line)
+	java.lang.Math.acos(Math.java:187)
+	meshi.geometry.Angle.acos(Angle.java:304)
+	meshi.geometry.Angle.update(Angle.java:279)
+	meshi.geometry.Angle.update(Angle.java:253)
+TRACE 300719:
+	meshi.geometry.MatrixRow.update(MatrixRow.java:67)
+	meshi.geometry.DistanceMatrix.update(DistanceMatrix.java:319)
+	meshi.geometry.DistanceMatrix.update(DistanceMatrix.java:305)
+	meshi.energy.AbstractEnergy$UpdateableList.update(AbstractEnergy.java:214)
+	meshi.energy.AbstractEnergy.update(AbstractEnergy.java:101)
+TRACE 300705:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:176)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301351:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:110)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300694:
+	java.lang.StrictMath.acos(StrictMath.java:Unknown line)
+	meshi.geometry.ArcCos.acos(ArcCos.java:65)
+	meshi.geometry.QuickAndDirtyTorsion.acos(QuickAndDirtyTorsion.java:25)
+	meshi.geometry.Torsion.update(Torsion.java:546)
+	meshi.geometry.Torsion.update(Torsion.java:512)
+TRACE 300738:
+	java.lang.StrictMath.acos(StrictMath.java:Unknown line)
+	meshi.geometry.ArcCos.acos(ArcCos.java:65)
+	meshi.geometry.QuickAndDirtyAngle.acos(QuickAndDirtyAngle.java:33)
+	meshi.geometry.Angle.update(Angle.java:279)
+	meshi.geometry.Angle.update(Angle.java:253)
+TRACE 301273:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:111)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301269:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSummaProcesser.setCooperativeStatistic(CooperativeSummaProcesser.java:228)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:95)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 301352:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:112)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300362:
+	java.lang.StrictMath.acos(StrictMath.java:Unknown line)
+	java.lang.Math.acos(Math.java:187)
+	meshi.geometry.Angle.acos(Angle.java:304)
+	meshi.geometry.Angle.update(Angle.java:279)
+	meshi.geometry.Torsion.updateAngles(Torsion.java:933)
+TRACE 300321:
+	java.lang.StrictMath.acos(StrictMath.java:Unknown line)
+	meshi.geometry.ArcCos.acos(ArcCos.java:65)
+	meshi.geometry.QuickAndDirtyAngle.acos(QuickAndDirtyAngle.java:33)
+	meshi.geometry.Angle.update(Angle.java:279)
+	meshi.geometry.Angle.<init>(Angle.java:148)
+TRACE 301354:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:157)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300928:
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+	meshi.optimizers.WolfConditionLineSearch.findStepLength(WolfConditionLineSearch.java:132)
+TRACE 300732:
+	meshi.energy.simpleEnergyTerms.tether.TetherEnergyElement.evaluate(TetherEnergyElement.java:94)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301355:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:185)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300770:
+	meshi.energy.solvate.SolvateDistanceAttributeWithNonPolar.update(SolvateDistanceAttributeWithNonPolar.java:51)
+	meshi.energy.solvate.SolvateEnergy.firstPassOverTheNonBondedList(SolvateEnergy.java:329)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:268)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 301353:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:187)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301356:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:189)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301357:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:114)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300773:
+	meshi.energy.solvate.SolvateEnergy.firstPassOverTheNonBondedList(SolvateEnergy.java:312)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:268)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300771:
+	meshi.energy.solvate.SolvateEnergy.secondPassOverTheNonBondedList(SolvateEnergy.java:440)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:270)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300763:
+	meshi.energy.solvate.SolvateDistanceAttributeWithNonPolar.update(SolvateDistanceAttributeWithNonPolar.java:63)
+	meshi.energy.solvate.SolvateEnergy.firstPassOverTheNonBondedList(SolvateEnergy.java:329)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:268)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300765:
+	meshi.energy.solvate.SolvateDistanceAttributeBetweenPolars.update(SolvateDistanceAttributeBetweenPolars.java:30)
+	meshi.energy.solvate.SolvateEnergy.firstPassOverTheNonBondedList(SolvateEnergy.java:335)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:268)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300775:
+	meshi.energy.solvate.SolvateEnergy.secondPassOverTheNonBondedList(SolvateEnergy.java:541)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:270)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300774:
+	meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateAng123(HydrogenBondDahiyat.java:385)
+	meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateAngProduct1234(HydrogenBondDahiyat.java:346)
+	meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateHBvalueAndDerivatives(HydrogenBondDahiyat.java:235)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:102)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:88)
+TRACE 301360:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:115)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300727:
+	meshi.energy.pairwiseNonBondedTerms.ExcludedVol.ExcludedVol.evaluate(ExcludedVol.java:121)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+	meshi.optimizers.SimpleStepLength.findStepLength(SimpleStepLength.java:92)
+TRACE 300749:
+	meshi.energy.simpleEnergyTerms.plane.PlaneEnergyElement.evaluate(PlaneEnergyElement.java:118)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300737:
+	meshi.geometry.DistanceMatrix.update(DistanceMatrix.java:342)
+	meshi.geometry.DistanceMatrix.update(DistanceMatrix.java:305)
+	meshi.energy.AbstractEnergy$UpdateableList.update(AbstractEnergy.java:214)
+	meshi.energy.AbstractEnergy.update(AbstractEnergy.java:101)
+	meshi.energy.TotalEnergy.update(TotalEnergy.java:556)
+TRACE 301363:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:166)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301512:
+	meshi.sequences.AtomAlignment.<init>(AtomAlignment.java:28)
+	meshi.molecularElements.atoms.AtomList.rms(AtomList.java:228)
+	meshi.molecularElements.atoms.AtomList.getRms(AtomList.java:233)
+	meshi.energy.simpleEnergyTerms.inflate.inflate.Inflate.evaluate(Inflate.java:52)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300750:
+	meshi.energy.solvate.SolvateEnergy.calculatingTheSolvationEnergiesOfEachAtom(SolvateEnergy.java:415)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:269)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 301361:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSummaProcesser.setCooperativeStatistic(CooperativeSummaProcesser.java:210)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:95)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 301552:
+	meshi.optimizers.LBFGS.minimizationStep(LBFGS.java:297)
+	meshi.optimizers.Minimizer.run(Minimizer.java:46)
+	meshi.optimizers.PerturbationByMinimization.perturb(PerturbationByMinimization.java:74)
+	meshi.optimizers.CombinedPerturbation.perturb(CombinedPerturbation.java:47)
+	meshi.optimizers.MCM.perturb(MCM.java:245)
+TRACE 301358:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:171)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301556:
+	meshi.optimizers.LBFGS.minimizationStep(LBFGS.java:311)
+	meshi.optimizers.Minimizer.run(Minimizer.java:46)
+	meshi.optimizers.PerturbationByMinimization.perturb(PerturbationByMinimization.java:74)
+	meshi.optimizers.CombinedPerturbation.perturb(CombinedPerturbation.java:47)
+	meshi.optimizers.MCM.perturb(MCM.java:245)
+TRACE 300811:
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.findBondByPolars(AbstractHydrogenBondList.java:173)
+	meshi.energy.solvate.SolvateEnergy.secondPassOverTheNonBondedList(SolvateEnergy.java:534)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:270)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300786:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityParameters.evaluate(CompositePropensityParameters.java:71)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergyElement.evaluate(CompositePropensityEnergyElement.java:47)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergy.evaluate(CompositePropensityEnergy.java:67)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 301520:
+	meshi.geometry.Coordinates.setXYZ(Coordinates.java:115)
+	meshi.util.Rms.<init>(Rms.java:82)
+	meshi.molecularElements.atoms.AtomList.rms(AtomList.java:228)
+	meshi.molecularElements.atoms.AtomList.getRms(AtomList.java:233)
+	meshi.energy.simpleEnergyTerms.inflate.inflate.Inflate.evaluate(Inflate.java:52)
+TRACE 300759:
+	meshi.energy.solvate.SolvateEnergy.firstPassOverTheNonBondedList(SolvateEnergy.java:340)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:268)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300754:
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+	meshi.optimizers.SimpleStepLength.findStepLength(SimpleStepLength.java:92)
+TRACE 300790:
+	meshi.energy.solvate.SolvateDistanceAttributePolarNonPolar.update(SolvateDistanceAttributePolarNonPolar.java:43)
+	meshi.energy.solvate.SolvateEnergy.firstPassOverTheNonBondedList(SolvateEnergy.java:324)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:268)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300925:
+	meshi.energy.TotalEnergy.resetForces(TotalEnergy.java:592)
+	meshi.energy.TotalEnergy.update(TotalEnergy.java:547)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:510)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+	meshi.optimizers.WolfConditionLineSearch.findStepLength(WolfConditionLineSearch.java:132)
+TRACE 300768:
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:271)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300784:
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:102)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:88)
+	meshi.energy.AbstractEnergy$UpdateableList.update(AbstractEnergy.java:214)
+	meshi.energy.AbstractEnergy.update(AbstractEnergy.java:101)
+	meshi.energy.TotalEnergy.update(TotalEnergy.java:556)
+TRACE 301362:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:167)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300846:
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBond.applyForcesToAtoms(AbstractHydrogenBond.java:71)
+	meshi.energy.solvate.SolvateEnergy.secondPassOverTheNonBondedList(SolvateEnergy.java:534)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:270)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300776:
+	meshi.geometry.Grid.updateMinMaxAndMovingAtoms(Grid.java:213)
+	meshi.geometry.Grid.build(Grid.java:85)
+	meshi.geometry.DistanceMatrix.update(DistanceMatrix.java:322)
+	meshi.geometry.DistanceMatrix.update(DistanceMatrix.java:305)
+	meshi.energy.AbstractEnergy$UpdateableList.update(AbstractEnergy.java:214)
+TRACE 301601:
+	meshi.optimizers.LBFGS.minimizationStep(LBFGS.java:311)
+	meshi.optimizers.Minimizer.run(Minimizer.java:46)
+	meshi.optimizers.Minimizer.run(Minimizer.java:30)
+	meshi.optimizers.MCM.run(MCM.java:120)
+	meshi.optimizers.MCM.run(MCM.java:74)
+TRACE 301602:
+	meshi.optimizers.LBFGS.minimizationStep(LBFGS.java:297)
+	meshi.optimizers.Minimizer.run(Minimizer.java:46)
+	meshi.optimizers.Minimizer.run(Minimizer.java:30)
+	meshi.optimizers.MCM.run(MCM.java:120)
+	meshi.optimizers.MCM.run(MCM.java:74)
+TRACE 300798:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi2.evaluate(RamachandranSidechainParametersChi2.java:65)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi2.evaluate(RamachandranSidechainEnergyElementChi2.java:52)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergy.evaluate(RamachandranSidechainEnergy.java:111)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 301517:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandran.RamachandranParameters.evaluate(RamachandranParameters.java:54)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandran.RamachandranEnergyElement.evaluate(RamachandranEnergyElement.java:58)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300831:
+	meshi.energy.simpleEnergyTerms.outOfPlane.OutOfPlaneEnergyElement.evaluate(OutOfPlaneEnergyElement.java:118)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300917:
+	meshi.energy.hydrogenBond.HydrogenBondsEnergy.evaluate(HydrogenBondsEnergy.java:109)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+	meshi.optimizers.WolfConditionLineSearch.findStepLength(WolfConditionLineSearch.java:132)
+TRACE 300762:
+	meshi.energy.solvate.SolvateEnergy.calculatingTheSolvationEnergiesOfEachAtom(SolvateEnergy.java:381)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:269)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 301368:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:170)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300753:
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.addNewBondsToList(AbstractHydrogenBondList.java:134)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:100)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:88)
+	meshi.energy.AbstractEnergy$UpdateableList.update(AbstractEnergy.java:214)
+	meshi.energy.AbstractEnergy.update(AbstractEnergy.java:101)
+TRACE 300783:
+	meshi.energy.pairwiseNonBondedTerms.atomicPairwisePMFSumma.AtomicPairwisePMFSumma.evaluate(AtomicPairwisePMFSumma.java:134)
+	meshi.energy.pairwiseNonBondedTerms.atomicPairwisePMFSumma.AtomicPairwisePMFSumma.evaluate(AtomicPairwisePMFSumma.java:94)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301530:
+	meshi.energy.beta.BetaEnergyElement$Diff.update(BetaEnergyElement.java:256)
+	meshi.energy.beta.BetaEnergyElement.evaluate(BetaEnergyElement.java:204)
+	meshi.energy.beta.BetaEnergyElement.evaluate(BetaEnergyElement.java:192)
+	meshi.energy.beta.BetaEnergy.evaluate(BetaEnergy.java:67)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300807:
+	meshi.energy.twoTorsions.TwoTorsionsEnergyElement.evaluate(TwoTorsionsEnergyElement.java:76)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301386:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:172)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300843:
+	meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateDis(HydrogenBondDahiyat.java:277)
+	meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateHBvalueAndDerivatives(HydrogenBondDahiyat.java:236)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:102)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:88)
+	meshi.energy.AbstractEnergy$UpdateableList.update(AbstractEnergy.java:214)
+TRACE 300861:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.SplinedPolynomial.value(SplinedPolynomial.java:186)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi2.evaluate(RamachandranSidechainParametersChi2.java:65)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi2.evaluate(RamachandranSidechainEnergyElementChi2.java:52)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergy.evaluate(RamachandranSidechainEnergy.java:111)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300839:
+	meshi.energy.solvate.SolvateDistanceAttributePolarNonPolar.update(SolvateDistanceAttributePolarNonPolar.java:43)
+	meshi.energy.solvate.SolvateEnergy.firstPassOverTheNonBondedList(SolvateEnergy.java:324)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:268)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 301098:
+	java.lang.Object.getClass(Object.java:Unknown line)
+	java.util.Arrays.copyOf(Arrays.java:2219)
+	java.util.ArrayList.grow(ArrayList.java:242)
+	java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:216)
+	java.util.ArrayList.ensureCapacityInternal(ArrayList.java:208)
+TRACE 300806:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranCore.RamachandranCoreEnergy.makeEnergy(RamachandranCoreEnergy.java:154)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranCore.RamachandranCoreEnergy.evaluate(RamachandranCoreEnergy.java:111)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranCore.RamachandranCoreEnergy.evaluate(RamachandranCoreEnergy.java:85)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300959:
+	meshi.energy.pairwiseNonBondedTerms.ExcludedVol.ExcludedVol.evaluate(ExcludedVol.java:171)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+	meshi.optimizers.WolfConditionLineSearch.findStepLength(WolfConditionLineSearch.java:132)
+TRACE 300830:
+	meshi.util.mathTools.Spline2D.calc(Spline2D.java:98)
+	meshi.energy.solvate.SolvateEnergy.calculatingTheSolvationEnergiesOfEachAtom(SolvateEnergy.java:381)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:269)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300845:
+	meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateHBvalueAndDerivatives(HydrogenBondDahiyat.java:236)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:102)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:88)
+	meshi.energy.AbstractEnergy$UpdateableList.update(AbstractEnergy.java:214)
+	meshi.energy.AbstractEnergy.update(AbstractEnergy.java:101)
+TRACE 301525:
+	meshi.sequences.AlignmentColumn.hasGap(AlignmentColumn.java:48)
+	meshi.sequences.AtomAlignment.hasGaps(AtomAlignment.java:90)
+	meshi.util.Rms.<init>(Rms.java:49)
+	meshi.molecularElements.atoms.AtomList.rms(AtomList.java:228)
+	meshi.molecularElements.atoms.AtomList.getRms(AtomList.java:233)
+TRACE 301524:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CooperativeZPropensityEnergy.evaluate(CooperativeZPropensityEnergy.java:100)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CooperativeZPropensityEnergy.evaluate(CooperativeZPropensityEnergy.java:51)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300788:
+	java.lang.StrictMath.acos(StrictMath.java:Unknown line)
+	meshi.geometry.ArcCos.acos(ArcCos.java:64)
+	meshi.geometry.QuickAndDirtyTorsion.acos(QuickAndDirtyTorsion.java:25)
+	meshi.geometry.Torsion.update(Torsion.java:546)
+	meshi.geometry.Torsion.update(Torsion.java:512)
+TRACE 300860:
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBond.applyForcesToAtoms(AbstractHydrogenBond.java:65)
+	meshi.energy.solvate.SolvateEnergy.secondPassOverTheNonBondedList(SolvateEnergy.java:534)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:270)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 301275:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZRamachandran.evaluate(CooperativeZRamachandran.java:111)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZRamachandran.evaluate(CooperativeZRamachandran.java:60)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300935:
+	meshi.energy.pairwiseNonBondedTerms.ExcludedVol.ExcludedVol.evaluate(ExcludedVol.java:168)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+	meshi.optimizers.WolfConditionLineSearch.findStepLength(WolfConditionLineSearch.java:132)
+TRACE 300927:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi1.evaluate(RamachandranSidechainParametersChi1.java:51)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi1.evaluate(RamachandranSidechainEnergyElementChi1.java:45)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergy.evaluate(RamachandranSidechainEnergy.java:111)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300701:
+	meshi.energy.rapdf.RapdfScore.totalScore(RapdfScore.java:83)
+	meshi.energy.rapdf.RapdfEnergy.evaluate(RapdfEnergy.java:79)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluateAll(TotalEnergy.java:491)
+TRACE 300874:
+	meshi.energy.solvate.SolvateEnergy.calculatingTheSolvationEnergiesOfEachAtom(SolvateEnergy.java:392)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:269)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300822:
+	meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateAng234(HydrogenBondDahiyat.java:420)
+	meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateAngProduct1234(HydrogenBondDahiyat.java:350)
+	meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateHBvalueAndDerivatives(HydrogenBondDahiyat.java:235)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:102)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:88)
+TRACE 300795:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergyElement.evaluate(CompositePropensityEnergyElement.java:59)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergy.evaluate(CompositePropensityEnergy.java:67)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 301299:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZStdRamachandran.evaluate(CooperativeZStdRamachandran.java:111)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZStdRamachandran.evaluate(CooperativeZStdRamachandran.java:54)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300918:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi2.evaluate(RamachandranSidechainParametersChi2.java:65)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi2.evaluate(RamachandranSidechainEnergyElementChi2.java:52)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergy.evaluate(RamachandranSidechainEnergy.java:111)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300953:
+	meshi.energy.rg.RadiusOfGyration.update(RadiusOfGyration.java:94)
+	meshi.energy.rg.LogRadiusOfGyration.update(LogRadiusOfGyration.java:77)
+	meshi.energy.AbstractEnergy$UpdateableList.update(AbstractEnergy.java:214)
+	meshi.energy.AbstractEnergy.update(AbstractEnergy.java:101)
+	meshi.energy.TotalEnergy.update(TotalEnergy.java:556)
+TRACE 300766:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityParameters.evaluate(CompositePropensityParameters.java:71)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergyElement.evaluate(CompositePropensityEnergyElement.java:47)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergy.evaluate(CompositePropensityEnergy.java:67)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300914:
+	meshi.energy.hydrogenBond.HydrogenBondsEnergy.evaluate(HydrogenBondsEnergy.java:110)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+	meshi.optimizers.WolfConditionLineSearch.findStepLength(WolfConditionLineSearch.java:132)
+TRACE 301533:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CooperativeZStdPropensityEnergy.evaluate(CooperativeZStdPropensityEnergy.java:119)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CooperativeZStdPropensityEnergy.evaluate(CooperativeZStdPropensityEnergy.java:57)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300837:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi4.evaluate(RamachandranSidechainParametersChi4.java:76)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi4.evaluate(RamachandranSidechainEnergyElementChi4.java:43)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergy.evaluate(RamachandranSidechainEnergy.java:111)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300780:
+	meshi.energy.hydrogenBondsPairs.HydrogenBondsPairsEnergyElement.updateEnergy(HydrogenBondsPairsEnergyElement.java:375)
+	meshi.energy.hydrogenBondsPairs.HydrogenBondsPairsEnergyElement.evaluate(HydrogenBondsPairsEnergyElement.java:366)
+	meshi.energy.hydrogenBondsPairs.HydrogenBondsPairsEnergy.evaluate(HydrogenBondsPairsEnergy.java:146)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 301550:
+	java.util.LinkedList.linkFirst(LinkedList.java:124)
+	java.util.LinkedList.addFirst(LinkedList.java:291)
+	meshi.optimizers.LBFGS.minimizationStep(LBFGS.java:367)
+	meshi.optimizers.Minimizer.run(Minimizer.java:46)
+	meshi.optimizers.PerturbationByMinimization.perturb(PerturbationByMinimization.java:74)
+TRACE 301074:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSummaProcesser.setCooperativeStatistic(CooperativeSummaProcesser.java:146)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:95)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300778:
+	meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateHBvalueAndDerivatives(HydrogenBondDahiyat.java:235)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:102)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:88)
+	meshi.energy.AbstractEnergy$UpdateableList.update(AbstractEnergy.java:214)
+	meshi.energy.AbstractEnergy.update(AbstractEnergy.java:101)
+TRACE 301527:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandran.RamachandranEnergyElement.evaluate(RamachandranEnergyElement.java:79)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301280:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZRamachandran.evaluate(CooperativeZRamachandran.java:113)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZRamachandran.evaluate(CooperativeZRamachandran.java:60)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300991:
+	meshi.geometry.Grid.build(Grid.java:118)
+	meshi.geometry.DistanceMatrix.update(DistanceMatrix.java:322)
+	meshi.geometry.DistanceMatrix.update(DistanceMatrix.java:305)
+	meshi.energy.AbstractEnergy$UpdateableList.update(AbstractEnergy.java:214)
+	meshi.energy.AbstractEnergy.update(AbstractEnergy.java:101)
+TRACE 301591:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CooperativeZPropensityEnergy.evaluate(CooperativeZPropensityEnergy.java:101)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CooperativeZPropensityEnergy.evaluate(CooperativeZPropensityEnergy.java:51)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301553:
+	meshi.optimizers.WolfConditionLineSearch.findStepLength(WolfConditionLineSearch.java:151)
+	meshi.optimizers.LBFGS.minimizationStep(LBFGS.java:328)
+	meshi.optimizers.Minimizer.run(Minimizer.java:46)
+	meshi.optimizers.PerturbationByMinimization.perturb(PerturbationByMinimization.java:74)
+	meshi.optimizers.CombinedPerturbation.perturb(CombinedPerturbation.java:47)
+TRACE 300975:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranCore.RamachandranCoreEnergy.evaluate(RamachandranCoreEnergy.java:102)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranCore.RamachandranCoreEnergy.evaluate(RamachandranCoreEnergy.java:85)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300876:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.SplinedPolynomial.value(SplinedPolynomial.java:186)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi1.evaluate(RamachandranSidechainParametersChi1.java:51)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi1.evaluate(RamachandranSidechainEnergyElementChi1.java:45)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergy.evaluate(RamachandranSidechainEnergy.java:111)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300785:
+	meshi.geometry.MatrixRow.update(MatrixRow.java:72)
+	meshi.geometry.DistanceMatrix.update(DistanceMatrix.java:319)
+	meshi.geometry.DistanceMatrix.update(DistanceMatrix.java:305)
+	meshi.energy.AbstractEnergy$UpdateableList.update(AbstractEnergy.java:214)
+	meshi.energy.AbstractEnergy.update(AbstractEnergy.java:101)
+TRACE 300878:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.SplinedPolynomial.value(SplinedPolynomial.java:186)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi4.evaluate(RamachandranSidechainParametersChi4.java:76)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi4.evaluate(RamachandranSidechainEnergyElementChi4.java:43)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergy.evaluate(RamachandranSidechainEnergy.java:111)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300887:
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.removeBrokenHB(AbstractHydrogenBondList.java:155)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:104)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:86)
+	meshi.energy.AbstractEnergy$UpdateableList.update(AbstractEnergy.java:214)
+	meshi.energy.AbstractEnergy.update(AbstractEnergy.java:101)
+TRACE 300920:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi3.evaluate(RamachandranSidechainParametersChi3.java:70)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi3.evaluate(RamachandranSidechainEnergyElementChi3.java:44)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergy.evaluate(RamachandranSidechainEnergy.java:111)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300842:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityParameters.evaluate(CompositePropensityParameters.java:71)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergyElement.evaluate(CompositePropensityEnergyElement.java:48)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergy.evaluate(CompositePropensityEnergy.java:67)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 301088:
+	java.util.Arrays.copyOf(Arrays.java:2245)
+	java.util.Arrays.copyOf(Arrays.java:2219)
+	java.util.ArrayList.grow(ArrayList.java:242)
+	java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:216)
+	java.util.ArrayList.ensureCapacityInternal(ArrayList.java:208)
+TRACE 300886:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityParameters.evaluate(CompositePropensityParameters.java:71)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergyElement.evaluate(CompositePropensityEnergyElement.java:49)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergy.evaluate(CompositePropensityEnergy.java:67)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300875:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergyElement.evaluate(CompositePropensityEnergyElement.java:60)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergy.evaluate(CompositePropensityEnergy.java:67)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300910:
+	java.util.LinkedList.linkFirst(LinkedList.java:124)
+	java.util.LinkedList.addFirst(LinkedList.java:291)
+	meshi.optimizers.LBFGS.minimizationStep(LBFGS.java:367)
+	meshi.optimizers.Minimizer.run(Minimizer.java:46)
+	meshi.optimizers.Minimizer.run(Minimizer.java:30)
+TRACE 301087:
+	java.lang.System.arraycopy(System.java:Unknown line)
+	java.util.Arrays.copyOf(Arrays.java:2248)
+	java.util.Arrays.copyOf(Arrays.java:2219)
+	java.util.ArrayList.grow(ArrayList.java:242)
+	java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:216)
+TRACE 300872:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi0.evaluate(RamachandranSidechainParametersChi0.java:49)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi0.evaluate(RamachandranSidechainEnergyElementChi0.java:45)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergy.evaluate(RamachandranSidechainEnergy.java:111)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 301296:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZRamachandran.evaluate(CooperativeZRamachandran.java:112)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZRamachandran.evaluate(CooperativeZRamachandran.java:60)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301388:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:194)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301298:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZStdRamachandran.evaluate(CooperativeZStdRamachandran.java:113)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZStdRamachandran.evaluate(CooperativeZStdRamachandran.java:54)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300800:
+	meshi.energy.TotalEnergy.resetForces(TotalEnergy.java:592)
+	meshi.energy.TotalEnergy.update(TotalEnergy.java:547)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:510)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+	meshi.optimizers.SimpleStepLength.findStepLength(SimpleStepLength.java:92)
+TRACE 300820:
+	meshi.util.mathTools.Spline2D.calc(Spline2D.java:98)
+	meshi.energy.solvate.SolvateEnergy.calculatingTheSolvationEnergiesOfEachAtom(SolvateEnergy.java:392)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:269)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 301367:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSummaProcesser.setCooperativeStatistic(CooperativeSummaProcesser.java:142)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:95)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300885:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranCore.RamachandranCoreEnergy.makeEnergy(RamachandranCoreEnergy.java:155)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranCore.RamachandranCoreEnergy.evaluate(RamachandranCoreEnergy.java:111)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranCore.RamachandranCoreEnergy.evaluate(RamachandranCoreEnergy.java:85)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300884:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi2.evaluate(RamachandranSidechainEnergyElementChi2.java:70)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergy.evaluate(RamachandranSidechainEnergy.java:111)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300963:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityParameters.evaluate(CompositePropensityParameters.java:71)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergyElement.evaluate(CompositePropensityEnergyElement.java:48)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergy.evaluate(CompositePropensityEnergy.java:67)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300808:
+	meshi.energy.simpleEnergyTerms.tether.TetherEnergyElement.evaluate(TetherEnergyElement.java:97)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300873:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.SplinedPolynomial.value(SplinedPolynomial.java:186)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi3.evaluate(RamachandranSidechainParametersChi3.java:70)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi3.evaluate(RamachandranSidechainEnergyElementChi3.java:44)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergy.evaluate(RamachandranSidechainEnergy.java:111)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 301278:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZStdRamachandran.evaluate(CooperativeZStdRamachandran.java:112)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZStdRamachandran.evaluate(CooperativeZStdRamachandran.java:54)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300805:
+	meshi.energy.hydrogenBondsPairs.HydrogenBondsPairsEnergyElement.updateEnergy(HydrogenBondsPairsEnergyElement.java:382)
+	meshi.energy.hydrogenBondsPairs.HydrogenBondsPairsEnergyElement.evaluate(HydrogenBondsPairsEnergyElement.java:366)
+	meshi.energy.hydrogenBondsPairs.HydrogenBondsPairsEnergy.evaluate(HydrogenBondsPairsEnergy.java:146)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300826:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityParameters.evaluate(CompositePropensityParameters.java:71)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergyElement.evaluate(CompositePropensityEnergyElement.java:49)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergy.evaluate(CompositePropensityEnergy.java:67)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 301385:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:106)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301545:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CooperativeZStdPropensityEnergy.evaluate(CooperativeZStdPropensityEnergy.java:120)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CooperativeZStdPropensityEnergy.evaluate(CooperativeZStdPropensityEnergy.java:57)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301279:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZRamachandran.evaluate(CooperativeZRamachandran.java:114)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZRamachandran.evaluate(CooperativeZRamachandran.java:60)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301151:
+	java.util.Arrays.copyOf(Arrays.java:2245)
+	java.util.Arrays.copyOf(Arrays.java:2219)
+	java.util.ArrayList.grow(ArrayList.java:242)
+	java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:216)
+	java.util.ArrayList.ensureCapacityInternal(ArrayList.java:208)
+TRACE 301536:
+	meshi.util.overlap.Overlap.createP(Overlap.java:149)
+	meshi.util.overlap.Overlap.<init>(Overlap.java:42)
+	meshi.util.Rms.<init>(Rms.java:85)
+	meshi.molecularElements.atoms.AtomList.rms(AtomList.java:228)
+	meshi.molecularElements.atoms.AtomList.getRms(AtomList.java:233)
+TRACE 301019:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi2.evaluate(RamachandranSidechainParametersChi2.java:70)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi2.evaluate(RamachandranSidechainEnergyElementChi2.java:53)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergy.evaluate(RamachandranSidechainEnergy.java:111)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300979:
+	meshi.energy.rg.RgEnergy.evaluate(RgEnergy.java:86)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+	meshi.optimizers.WolfConditionLineSearch.findStepLength(WolfConditionLineSearch.java:132)
+TRACE 301609:
+	meshi.optimizers.WolfConditionLineSearch.findStepLength(WolfConditionLineSearch.java:151)
+	meshi.optimizers.LBFGS.minimizationStep(LBFGS.java:328)
+	meshi.optimizers.Minimizer.run(Minimizer.java:46)
+	meshi.optimizers.Minimizer.run(Minimizer.java:30)
+	meshi.optimizers.MCM.run(MCM.java:120)
+TRACE 300813:
+	meshi.energy.hydrogenBond.HydrogenBondsEnergy.evaluate(HydrogenBondsEnergy.java:109)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+	meshi.optimizers.SimpleStepLength.findStepLength(SimpleStepLength.java:92)
+TRACE 301043:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi2.evaluate(RamachandranSidechainParametersChi2.java:76)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi2.evaluate(RamachandranSidechainEnergyElementChi2.java:55)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergy.evaluate(RamachandranSidechainEnergy.java:111)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300769:
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.addNewBondsToList(AbstractHydrogenBondList.java:117)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:100)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:88)
+	meshi.energy.AbstractEnergy$UpdateableList.update(AbstractEnergy.java:214)
+	meshi.energy.AbstractEnergy.update(AbstractEnergy.java:101)
+TRACE 300814:
+	meshi.energy.solvate.SolvateDistanceAttributePolarNonPolar.update(SolvateDistanceAttributePolarNonPolar.java:51)
+	meshi.energy.solvate.SolvateEnergy.firstPassOverTheNonBondedList(SolvateEnergy.java:324)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:268)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300956:
+	java.util.LinkedList.listIterator(LinkedList.java:865)
+	java.util.AbstractList.listIterator(AbstractList.java:299)
+	java.util.AbstractSequentialList.iterator(AbstractSequentialList.java:239)
+	meshi.optimizers.LBFGS.minimizationStep(LBFGS.java:297)
+	meshi.optimizers.Minimizer.run(Minimizer.java:46)
+TRACE 300797:
+	meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateAng123(HydrogenBondDahiyat.java:385)
+	meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateAngProduct1234(HydrogenBondDahiyat.java:346)
+	meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateHBvalueAndDerivatives(HydrogenBondDahiyat.java:235)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:102)
+	meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update(AbstractHydrogenBondList.java:86)
+TRACE 301560:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandran.RamachandranParameters.evaluate(RamachandranParameters.java:54)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandran.RamachandranEnergyElement.evaluate(RamachandranEnergyElement.java:59)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 301526:
+	java.lang.StrictMath.acos(StrictMath.java:Unknown line)
+	java.lang.Math.acos(Math.java:187)
+	meshi.util.overlap.Overlap.findEigenval(Overlap.java:217)
+	meshi.util.overlap.Overlap.<init>(Overlap.java:43)
+	meshi.util.Rms.<init>(Rms.java:85)
+TRACE 301528:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandran.RamachandranEnergyElement.evaluate(RamachandranEnergyElement.java:80)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301276:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZStdRamachandran.evaluate(CooperativeZStdRamachandran.java:114)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZStdRamachandran.evaluate(CooperativeZStdRamachandran.java:54)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300812:
+	meshi.energy.solvate.SolvateDistanceAttributePolarNonPolar.update(SolvateDistanceAttributePolarNonPolar.java:50)
+	meshi.energy.solvate.SolvateEnergy.firstPassOverTheNonBondedList(SolvateEnergy.java:324)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:268)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+TRACE 300815:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi4.evaluate(RamachandranSidechainParametersChi4.java:76)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi4.evaluate(RamachandranSidechainEnergyElementChi4.java:43)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergy.evaluate(RamachandranSidechainEnergy.java:111)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 301523:
+	meshi.util.overlap.Overlap.<init>(Overlap.java:47)
+	meshi.util.Rms.<init>(Rms.java:85)
+	meshi.molecularElements.atoms.AtomList.rms(AtomList.java:228)
+	meshi.molecularElements.atoms.AtomList.getRms(AtomList.java:233)
+	meshi.energy.simpleEnergyTerms.inflate.inflate.Inflate.evaluate(Inflate.java:52)
+TRACE 301519:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandran.RamachandranParameters.evaluate(RamachandranParameters.java:54)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandran.RamachandranEnergyElement.evaluate(RamachandranEnergyElement.java:60)
+	meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate(SimpleEnergyTerm.java:103)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300834:
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi2.evaluate(RamachandranSidechainParametersChi2.java:81)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi2.evaluate(RamachandranSidechainEnergyElementChi2.java:56)
+	meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergy.evaluate(RamachandranSidechainEnergy.java:111)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 301011:
+	meshi.energy.solvate.SolvateEnergy.secondPassOverTheNonBondedList(SolvateEnergy.java:542)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:270)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 300848:
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:267)
+	meshi.energy.solvate.SolvateEnergy.evaluate(SolvateEnergy.java:257)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 300782:
+	meshi.energy.hydrogenBondsPairs.HydrogenBondsPairsEnergyElement.updateEnergy(HydrogenBondsPairsEnergyElement.java:380)
+	meshi.energy.hydrogenBondsPairs.HydrogenBondsPairsEnergyElement.evaluate(HydrogenBondsPairsEnergyElement.java:366)
+	meshi.energy.hydrogenBondsPairs.HydrogenBondsPairsEnergy.evaluate(HydrogenBondsPairsEnergy.java:146)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+TRACE 301376:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:193)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+TRACE 301381:
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:99)
+	meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate(CooperativeSumma5PolarTypesEnergy.java:83)
+	meshi.energy.AbstractEnergy.genericEvaluate(AbstractEnergy.java:113)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:516)
+	meshi.energy.TotalEnergy.evaluate(TotalEnergy.java:495)
+CPU SAMPLES BEGIN (total = 1907329) Thu Jan 01 01:03:13 2015
+rank   self  accum   count trace method
+   1 50.00% 50.00%  953656 300094 java.net.DualStackPlainSocketImpl.accept0
+   2  5.80% 55.80%  110704 300717 meshi.energy.pairwiseNonBondedTerms.atomicPairwisePMFSumma.AtomicPairwisePMFSumma.evaluate
+   3  3.15% 58.95%   60101 300728 meshi.geometry.MatrixRow.update
+   4  2.53% 61.48%   48237 300337 java.lang.StrictMath.acos
+   5  2.36% 63.84%   45013 300697 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSummaProcesser.setCooperativeStatistic
+   6  2.03% 65.87%   38657 301347 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+   7  1.92% 67.79%   36665 300730 meshi.energy.solvate.SolvateEnergy.secondPassOverTheNonBondedList
+   8  1.81% 69.60%   34432 300731 meshi.energy.solvate.SolvateEnergy.firstPassOverTheNonBondedList
+   9  1.61% 71.20%   30627 301190 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  10  1.60% 72.80%   30501 300907 meshi.energy.pairwiseNonBondedTerms.ExcludedVol.ExcludedVol.evaluate
+  11  1.46% 74.26%   27824 300713 java.lang.StrictMath.acos
+  12  1.32% 75.58%   25237 300719 meshi.geometry.MatrixRow.update
+  13  1.30% 76.88%   24784 300705 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  14  1.25% 78.13%   23751 301351 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  15  1.24% 79.37%   23591 300694 java.lang.StrictMath.acos
+  16  1.19% 80.55%   22655 300738 java.lang.StrictMath.acos
+  17  1.18% 81.73%   22490 301273 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  18  1.16% 82.89%   22099 301269 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSummaProcesser.setCooperativeStatistic
+  19  1.12% 84.02%   21442 301352 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  20  1.06% 85.08%   20261 300362 java.lang.StrictMath.acos
+  21  0.94% 86.02%   17868 300321 java.lang.StrictMath.acos
+  22  0.82% 86.83%   15567 301354 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  23  0.62% 87.45%   11734 300928 meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate
+  24  0.56% 88.00%   10605 300732 meshi.energy.simpleEnergyTerms.tether.TetherEnergyElement.evaluate
+  25  0.53% 88.53%   10145 301355 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  26  0.51% 89.05%    9769 300770 meshi.energy.solvate.SolvateDistanceAttributeWithNonPolar.update
+  27  0.49% 89.54%    9418 301353 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  28  0.41% 89.95%    7875 301356 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  29  0.36% 90.32%    6926 301357 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  30  0.35% 90.67%    6741 300773 meshi.energy.solvate.SolvateEnergy.firstPassOverTheNonBondedList
+  31  0.35% 91.02%    6659 300771 meshi.energy.solvate.SolvateEnergy.secondPassOverTheNonBondedList
+  32  0.34% 91.36%    6525 300763 meshi.energy.solvate.SolvateDistanceAttributeWithNonPolar.update
+  33  0.33% 91.69%    6315 300765 meshi.energy.solvate.SolvateDistanceAttributeBetweenPolars.update
+  34  0.33% 92.02%    6249 300775 meshi.energy.solvate.SolvateEnergy.secondPassOverTheNonBondedList
+  35  0.32% 92.34%    6027 300774 meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateAng123
+  36  0.30% 92.63%    5632 301360 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  37  0.29% 92.92%    5462 300727 meshi.energy.pairwiseNonBondedTerms.ExcludedVol.ExcludedVol.evaluate
+  38  0.27% 93.19%    5170 300749 meshi.energy.simpleEnergyTerms.plane.PlaneEnergyElement.evaluate
+  39  0.26% 93.45%    4892 300737 meshi.geometry.DistanceMatrix.update
+  40  0.22% 93.66%    4157 301363 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  41  0.21% 93.87%    3968 301512 meshi.sequences.AtomAlignment.<init>
+  42  0.19% 94.06%    3564 300750 meshi.energy.solvate.SolvateEnergy.calculatingTheSolvationEnergiesOfEachAtom
+  43  0.16% 94.21%    2992 301361 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSummaProcesser.setCooperativeStatistic
+  44  0.14% 94.35%    2656 301552 meshi.optimizers.LBFGS.minimizationStep
+  45  0.13% 94.49%    2526 301358 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  46  0.13% 94.62%    2453 301556 meshi.optimizers.LBFGS.minimizationStep
+  47  0.13% 94.74%    2385 300811 meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.findBondByPolars
+  48  0.12% 94.86%    2274 300786 meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityParameters.evaluate
+  49  0.12% 94.98%    2215 301520 meshi.geometry.Coordinates.setXYZ
+  50  0.11% 95.09%    2114 300759 meshi.energy.solvate.SolvateEnergy.firstPassOverTheNonBondedList
+  51  0.11% 95.20%    2083 300754 meshi.energy.simpleEnergyTerms.SimpleEnergyTerm.evaluate
+  52  0.11% 95.30%    2048 300790 meshi.energy.solvate.SolvateDistanceAttributePolarNonPolar.update
+  53  0.11% 95.41%    2042 300925 meshi.energy.TotalEnergy.resetForces
+  54  0.10% 95.51%    1870 300768 meshi.energy.solvate.SolvateEnergy.evaluate
+  55  0.10% 95.61%    1868 300784 meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.update
+  56  0.10% 95.70%    1833 301362 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  57  0.08% 95.78%    1548 300846 meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBond.applyForcesToAtoms
+  58  0.08% 95.86%    1459 300776 meshi.geometry.Grid.updateMinMaxAndMovingAtoms
+  59  0.08% 95.94%    1452 301601 meshi.optimizers.LBFGS.minimizationStep
+  60  0.07% 96.01%    1417 301602 meshi.optimizers.LBFGS.minimizationStep
+  61  0.07% 96.08%    1376 300798 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi2.evaluate
+  62  0.07% 96.15%    1336 301517 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandran.RamachandranParameters.evaluate
+  63  0.07% 96.22%    1305 300831 meshi.energy.simpleEnergyTerms.outOfPlane.OutOfPlaneEnergyElement.evaluate
+  64  0.07% 96.29%    1246 300917 meshi.energy.hydrogenBond.HydrogenBondsEnergy.evaluate
+  65  0.06% 96.35%    1217 300762 meshi.energy.solvate.SolvateEnergy.calculatingTheSolvationEnergiesOfEachAtom
+  66  0.06% 96.41%    1211 301368 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  67  0.06% 96.47%    1132 300753 meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.addNewBondsToList
+  68  0.06% 96.53%    1129 300783 meshi.energy.pairwiseNonBondedTerms.atomicPairwisePMFSumma.AtomicPairwisePMFSumma.evaluate
+  69  0.05% 96.59%    1028 301530 meshi.energy.beta.BetaEnergyElement$Diff.update
+  70  0.05% 96.63%     937 300807 meshi.energy.twoTorsions.TwoTorsionsEnergyElement.evaluate
+  71  0.05% 96.68%     925 301386 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+  72  0.05% 96.73%     893 300843 meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateDis
+  73  0.05% 96.78%     879 300861 meshi.energy.simpleEnergyTerms.compositeTorsions.SplinedPolynomial.value
+  74  0.05% 96.82%     878 300839 meshi.energy.solvate.SolvateDistanceAttributePolarNonPolar.update
+  75  0.05% 96.87%     875 301098 java.lang.Object.getClass
+  76  0.04% 96.91%     824 300806 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranCore.RamachandranCoreEnergy.makeEnergy
+  77  0.04% 96.95%     815 300959 meshi.energy.pairwiseNonBondedTerms.ExcludedVol.ExcludedVol.evaluate
+  78  0.04% 97.00%     812 300830 meshi.util.mathTools.Spline2D.calc
+  79  0.04% 97.04%     804 300845 meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateHBvalueAndDerivatives
+  80  0.04% 97.08%     785 301525 meshi.sequences.AlignmentColumn.hasGap
+  81  0.04% 97.12%     763 301524 meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CooperativeZPropensityEnergy.evaluate
+  82  0.04% 97.16%     719 300788 java.lang.StrictMath.acos
+  83  0.04% 97.19%     695 300860 meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBond.applyForcesToAtoms
+  84  0.04% 97.23%     680 301275 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZRamachandran.evaluate
+  85  0.03% 97.26%     662 300935 meshi.energy.pairwiseNonBondedTerms.ExcludedVol.ExcludedVol.evaluate
+  86  0.03% 97.30%     654 300927 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi1.evaluate
+  87  0.03% 97.33%     650 300701 meshi.energy.rapdf.RapdfScore.totalScore
+  88  0.03% 97.37%     618 300874 meshi.energy.solvate.SolvateEnergy.calculatingTheSolvationEnergiesOfEachAtom
+  89  0.03% 97.40%     572 300822 meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateAng234
+  90  0.03% 97.42%     557 300795 meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergyElement.evaluate
+  91  0.03% 97.45%     541 301299 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZStdRamachandran.evaluate
+  92  0.03% 97.48%     539 300918 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi2.evaluate
+  93  0.03% 97.51%     538 300953 meshi.energy.rg.RadiusOfGyration.update
+  94  0.03% 97.54%     536 300766 meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityParameters.evaluate
+  95  0.03% 97.56%     521 300914 meshi.energy.hydrogenBond.HydrogenBondsEnergy.evaluate
+  96  0.03% 97.59%     520 301533 meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CooperativeZStdPropensityEnergy.evaluate
+  97  0.03% 97.62%     507 300837 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi4.evaluate
+  98  0.03% 97.64%     485 300780 meshi.energy.hydrogenBondsPairs.HydrogenBondsPairsEnergyElement.updateEnergy
+  99  0.02% 97.67%     457 301550 java.util.LinkedList.linkFirst
+ 100  0.02% 97.69%     445 301074 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSummaProcesser.setCooperativeStatistic
+ 101  0.02% 97.71%     443 300778 meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateHBvalueAndDerivatives
+ 102  0.02% 97.74%     438 301527 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandran.RamachandranEnergyElement.evaluate
+ 103  0.02% 97.76%     437 301280 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZRamachandran.evaluate
+ 104  0.02% 97.78%     422 300991 meshi.geometry.Grid.build
+ 105  0.02% 97.80%     409 301591 meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CooperativeZPropensityEnergy.evaluate
+ 106  0.02% 97.83%     407 301553 meshi.optimizers.WolfConditionLineSearch.findStepLength
+ 107  0.02% 97.85%     406 300975 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranCore.RamachandranCoreEnergy.evaluate
+ 108  0.02% 97.87%     401 300876 meshi.energy.simpleEnergyTerms.compositeTorsions.SplinedPolynomial.value
+ 109  0.02% 97.89%     398 300785 meshi.geometry.MatrixRow.update
+ 110  0.02% 97.91%     391 300878 meshi.energy.simpleEnergyTerms.compositeTorsions.SplinedPolynomial.value
+ 111  0.02% 97.93%     378 300887 meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.removeBrokenHB
+ 112  0.02% 97.95%     366 300920 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi3.evaluate
+ 113  0.02% 97.97%     352 300842 meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityParameters.evaluate
+ 114  0.02% 97.98%     349 301088 java.util.Arrays.copyOf
+ 115  0.02% 98.00%     348 300886 meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityParameters.evaluate
+ 116  0.02% 98.02%     347 300875 meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityEnergyElement.evaluate
+ 117  0.02% 98.04%     335 300910 java.util.LinkedList.linkFirst
+ 118  0.02% 98.06%     332 301087 java.lang.System.arraycopy
+ 119  0.02% 98.07%     324 300872 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi0.evaluate
+ 120  0.02% 98.09%     323 301296 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZRamachandran.evaluate
+ 121  0.02% 98.11%     319 301388 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+ 122  0.02% 98.12%     317 301298 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZStdRamachandran.evaluate
+ 123  0.02% 98.14%     306 300800 meshi.energy.TotalEnergy.resetForces
+ 124  0.02% 98.16%     302 300820 meshi.util.mathTools.Spline2D.calc
+ 125  0.02% 98.17%     292 301367 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSummaProcesser.setCooperativeStatistic
+ 126  0.02% 98.19%     290 300885 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranCore.RamachandranCoreEnergy.makeEnergy
+ 127  0.02% 98.20%     289 300884 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainEnergyElementChi2.evaluate
+ 128  0.02% 98.22%     287 300963 meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityParameters.evaluate
+ 129  0.01% 98.23%     283 300808 meshi.energy.simpleEnergyTerms.tether.TetherEnergyElement.evaluate
+ 130  0.01% 98.25%     281 300873 meshi.energy.simpleEnergyTerms.compositeTorsions.SplinedPolynomial.value
+ 131  0.01% 98.26%     280 301278 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZStdRamachandran.evaluate
+ 132  0.01% 98.27%     274 300805 meshi.energy.hydrogenBondsPairs.HydrogenBondsPairsEnergyElement.updateEnergy
+ 133  0.01% 98.29%     274 300826 meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CompositePropensityParameters.evaluate
+ 134  0.01% 98.30%     271 301385 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+ 135  0.01% 98.32%     265 301545 meshi.energy.simpleEnergyTerms.compositeTorsions.compositePropensity.CooperativeZStdPropensityEnergy.evaluate
+ 136  0.01% 98.33%     254 301279 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZRamachandran.evaluate
+ 137  0.01% 98.34%     252 301151 java.util.Arrays.copyOf
+ 138  0.01% 98.36%     245 301536 meshi.util.overlap.Overlap.createP
+ 139  0.01% 98.37%     235 301019 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi2.evaluate
+ 140  0.01% 98.38%     235 300979 meshi.energy.rg.RgEnergy.evaluate
+ 141  0.01% 98.39%     230 301609 meshi.optimizers.WolfConditionLineSearch.findStepLength
+ 142  0.01% 98.41%     230 300813 meshi.energy.hydrogenBond.HydrogenBondsEnergy.evaluate
+ 143  0.01% 98.42%     225 301043 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi2.evaluate
+ 144  0.01% 98.43%     225 300769 meshi.energy.solvate.hydrogenBonds.AbstractHydrogenBondList.addNewBondsToList
+ 145  0.01% 98.44%     225 300814 meshi.energy.solvate.SolvateDistanceAttributePolarNonPolar.update
+ 146  0.01% 98.45%     221 300956 java.util.LinkedList.listIterator
+ 147  0.01% 98.46%     221 300797 meshi.energy.solvate.hydrogenBonds.HydrogenBondDahiyat.updateAng123
+ 148  0.01% 98.48%     218 301560 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandran.RamachandranParameters.evaluate
+ 149  0.01% 98.49%     216 301526 java.lang.StrictMath.acos
+ 150  0.01% 98.50%     211 301528 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandran.RamachandranEnergyElement.evaluate
+ 151  0.01% 98.51%     209 301276 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.CooperativeZStdRamachandran.evaluate
+ 152  0.01% 98.52%     206 300812 meshi.energy.solvate.SolvateDistanceAttributePolarNonPolar.update
+ 153  0.01% 98.53%     202 300815 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi4.evaluate
+ 154  0.01% 98.54%     199 301523 meshi.util.overlap.Overlap.<init>
+ 155  0.01% 98.55%     199 301519 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandran.RamachandranParameters.evaluate
+ 156  0.01% 98.56%     198 300834 meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandranSidechain.RamachandranSidechainParametersChi2.evaluate
+ 157  0.01% 98.57%     197 301011 meshi.energy.solvate.SolvateEnergy.secondPassOverTheNonBondedList
+ 158  0.01% 98.58%     196 300848 meshi.energy.solvate.SolvateEnergy.evaluate
+ 159  0.01% 98.59%     193 300782 meshi.energy.hydrogenBondsPairs.HydrogenBondsPairsEnergyElement.updateEnergy
+ 160  0.01% 98.60%     192 301376 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+ 161  0.01% 98.61%     191 301381 meshi.energy.pairwiseNonBondedTerms.CooperativeSumma.CooperativeSumma5PolarTypesEnergy.evaluate
+CPU SAMPLES END

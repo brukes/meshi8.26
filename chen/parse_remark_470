@@ -1,0 +1,35 @@
+% http://www.wwpdb.org/documentation/format23/remarks2.html#REMARK470
+function missing_atoms = parse_remark_470(remark_str)
+
+missing_atoms = struct('model_no', {}, 'resName', {}, 'chain', {}, ...
+											 'seq_no', {}, 'insertion_code', {}, 'atoms', {});
+
+% skip remark's header 
+while ~isempty(remark_str), 
+	line       = remark_str(1,:);
+	remark_str = remark_str(2:end,:); 
+	if strfind(line, 'M RES CSSEQI'), break; end
+end
+
+% read missing residues 
+while ~isempty(remark_str), 
+	line       = remark_str(1,:);
+	remark_str = remark_str(2:end,:); 
+	
+	model      = str2num(line(1:3));
+	if isempty(model), model=1; end 
+	
+	resName    = line(5:7);
+	chain      = line(9); 
+	resseq     = sscanf(line(10:14), '%f%c');
+
+	icode      = char(resseq(2));
+	if isspace(icode),
+		icode      = [];
+	end
+	
+	atoms = textscan(line(15:end), '%s'); 
+	ma    = struct('model_no', model, 'resName', resName, 'chain', chain, ...
+								 'seq_no', resseq(1), 'insertion_code', icode, 'atoms', atoms);
+	missing_atoms(end+1) = ma; 
+end

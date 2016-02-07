@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="meshi">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/meshi/selenium-server-standalone-2.33.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/meshi/selenium-server-standalone-2.25.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,54 @@
+<html><head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  </head>
+  <body bgcolor="#FFFFFF" text="#000000">
+    <tt>Hi Chen, <br>
+      <br>
+      Attached are two matlab functions for parsing the missing residues
+      and missing atoms pdb remarks (465 and 470, resp.; links to their
+      format description can be found above each file's header). <br>
+      <br>
+      Following our discussion --<br>
+      <br>
+      Breaks found based on CA distances and those found based on pdb
+      remarks differ in the following cases: <br>
+      <br>
+      <u>1. CA distance break, no missing residue (much more common than
+        2 below):</u> <br>
+      a. For now, I skip non-standard amino acids (HETATM records). That
+      can be relatively easily fixed, but we'd have to go through the
+      (surprisingly long) list of such AAs (attached) and decide which
+      AAs should be included (and, for those excluded, there still be a
+      break in CA dist, but not in the sequence). <br>
+      <br>
+      b. CA-CA distance not in the specified range: ±10% of 3.8A (trans
+      peptide bond) or </tt><tt>±10% of 2.95A (cis); examples: 1bn6A,
+      165 -- 166 (4.612A), 1c8cA 62 -- 63 (3.288A; interestingly, the
+      following pair of CAs are 6.603 apart). We can, obviously, make
+      the acceptable range wider, but I suspect it might introduce
+      noise, as fraglet libs seem to be focused on "typical" peptide
+      bonds. <br>
+    </tt><tt><br>
+    </tt><u><tt>2. Missing residue, </tt></u><tt><u>typical CA distance
+        break:<br>
+      </u>a. </tt><tt>Residue(s) seem to be missing, but the distance
+      is somehow in the acceptable range; example: 1j96B, 132-136
+      missing (remark 465), but 131 -- 137 distance is 4.033 (and, note
+      that for a wider range as in 2b above, we'd have even more such
+      cases). <br>
+      <br>
+    </tt><tt>b. Seemingly, an error in the remark; example: 1o6v A465. <br>
+      <br>
+      c. I'm now considering residue's insertion code (if exists) but I
+      incorrectly assumed that the order of those codes is from A to Z
+      and, turns out, that it's not always the case. Again, that can be
+      easily fixed, but I prefer to move fwd and take care of this
+      later. <br>
+    </tt><tt><br>
+      Let me know if anything is unclear or incorrect. <br>
+      <br>
+      Chen</tt><br>
+  
+
+
+</body></html>

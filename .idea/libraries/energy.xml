@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="energy">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/meshi/energy/rg.zip!/" />
+      <root url="jar://$PROJECT_DIR$/meshi/energy/beta.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configurationArray>
+   <configuration>
+      <fields fields="energy  one"/>
+      <normalizers normalizers="one  "/>
+      <coefs coefs="-1 0"/>
+      <exponentIndices comment="flattened((i-1)*m+j) = elementList(i,j);" dim="2   1" exponentIndices="3 3"/>
+      <exponentValues comment="flattened((i-1)*m+j) = elementList(i,j);" dim="1  6" exponentValues="1         0.5           0        -0.5          -1          -2"/>
+      <objectiveFunction objectiveFunction="gdt_ts"/>
+      <sigmoid alpha="8.8821" beta="0.98174" delta="0.33574" gamma="-0.31751"/>
+   </configuration>
+</configurationArray>

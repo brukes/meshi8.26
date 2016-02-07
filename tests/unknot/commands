@@ -1,0 +1,142 @@
+
+
+stretch weight 20
+
+setSS 9999=E
+residueTether 9999
+
+conserved 9999
+
+parameters ..\..\parameters
+
+verbose
+refreshBeta
+beta weight 1000
+
+# Weights for the energy terms
+bondEnergy weight 10
+angleEnergy weight 40
+planeEnergy weight 1000.0
+flatRamachEnergy weight 0.01
+propensityTorsionEnergy weight 0.0
+outOfPlaneEnergy weight 1000.0
+hydrogenBonds weight 2
+hydrogenBondsPairs weight 10
+hydrogenBonds width 10
+hydrogenBondsPlane weight 2
+hydrogenBondsAnglesHOC weight 10
+hydrogenBondsAnglesOHN weight 10
+excludedVolume weight 0.01
+cAlphaHydrogenBonds weight 0.0
+cAlphaHOtorsins weight 0.0
+secondaryStructureFraction weight 1
+
+#dummy term returns the number one
+one weight 1
+
+#TETHER BB
+tetherEnergy weight 10
+#TETHER all atoms
+tetherAll weight 1.0
+#
+templateEnergy weight 10.0
+electrostatics weight 0.1
+electrostatics dielectricConstant 4
+
+rg weight 0.00001
+rg rgLogaritmicWeight 1
+rg rgRatioWeight 1
+rg rgPolarWeight -0.1
+rg rgNonPolarWeight 10
+rg rgBackboneWeight 10
+
+
+ramachandran weight 1
+#
+# RAMACHANDRAN
+ramachandranSidechain weight 3
+ramachandranSidechainCore weight 10
+#
+#
+#cooperativeZRamachandranSidechain weight 0
+cooperativeZRamachandranSidechain weight 0.00001
+cooperativeZRamachandranSidechainFile zScoresRamachOfResidueTypes.dat
+cooperativeZstdRamachandranSidechain weight 0.00001
+#cooperativeZstdRamachandranSidechain weight 0
+
+atomicPairwisePMFSumma weight 1
+cooperativeZSumma weight 2000
+cooperativeZSumma     cooperativeZSummaNonPolar 1
+cooperativeZSumma     cooperativeZSummaPolar 1
+cooperativeZSumma     cooperativeZSummaNeutral 1
+cooperativeZSumma     cooperativeZSummaBackboneNNOO 1
+cooperativeZSumma     cooperativeZSummaBackbone 0.01
+#cooperativeZSummaFile zScoresSummaMeanPerTypeNonPolarNewArrangedbefore.txt
+cooperativeZSummaFile zScoresMixModSummaMeanPerType_3picks_ResNum3before.txt
+cooperativeZstdSumma weight 200
+
+
+compositePropensity weight 0.01
+cooperativeZPropensity weight 0.01
+cooperativeZPropensityFile zScoresPropenOfResidueTypes.dat
+cooperativeZstdPropensity  weight 0.01
+
+solvateEnergy weight 20.0
+solvateEnergy solvationSCpolar   1
+solvateEnergy solvationSCcarbon   0.5
+solvateEnergy solvationBBpolar      0
+solvateEnergy solvationHB      0
+cooperativeZSolvate weight 0
+cooperativeZSolvateFile  zScoresSolvateOfAtomTypes.dat
+
+# scoring function weights
+#not found: CONSTANT	0.355778
+
+# Minimization parameters - full minimization
+minimize maxSteps 10000
+minimize tolerance 0.2
+minimize reportEvery 500
+
+# Minimization parameters - short relaxation
+relax tolerance 0.2
+relax maxSteps 400000
+relax reportEvery 500
+
+# MCM parameters
+mcmPerturbation tolerance 0.05
+mcmPerturbation maxSteps 20000
+mcmPerturbation reportEvery 500
+MCM initialTemperature 10.0001
+MCM finalTemperature 0.00001
+MCM maxSteps 1
+# Inflate parameters
+inflateEnergy weight 100
+inflateEnergy RmsTarget 1
+
+
+
+# This command tels the program to use our approximated arcCosinus which is ~4 times
+# faster than the one in the StrictMath library.
+#useFastArcCos
+dresserFragments fragments5.txt
+rotamerLibrary bbdep02.May.sortlib
+
+#Misc.
+seed 4
+corpusFileName parameters\finalCorpus.txt
+maxRunTime 10000
+
+samudralaEnergy weight 1
+rapdfoutputfile  ..\..\parameters\meshiPotential\SamudralaParametersAstralNotWeighted.dat
+samudralaEnergy1  weight 1
+rapdfoutputfile2 ..\..\parameters\meshiPotential\SamudralaParametersAstralNotWeighted.dat
+contacts8 weight 1
+conservationContacts8 weight 1
+conservationContactsHr weight 1
+conservationContacts11 weight 1
+conservationContacts15 weight 1
+
+selectionScore energy_configurationArray.xml      energy
+selectionScore energy_configurationArray.xml      optimizationScore
+selectionScore FM_configurationArray.xml          FM
+#CombinedEnergyScore  selectionScoreParameters.dat

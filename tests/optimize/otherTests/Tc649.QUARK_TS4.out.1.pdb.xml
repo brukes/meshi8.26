@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ProteinInfoList name="Optimization history of Tc649">
+<ProteinInfo  value="BEGINNING" fileName="D:\meshi.7.42\tests\optimize\Tc649.QUARK_TS4.pdb" length="210" >
+	<change  value="1.1314759282814636E-13"/>                                       <energy  value="18981.489928321716"/>                                           
+	<distanceConstraints  value="1446.8397861285175"/>                              <bondEnergy  value="62.99789938586064"/>                                        
+	<angleEnergy  value="262.5350682865812"/>                                       <planeEnergy  value="12937.81632754807"/>                                       
+	<outOfPlaneEnergy  value="0.0"/>                                                <ramachandranSidechain  value="5043.2385858764155"/>                            
+	<ramachSTD  value="9.156278822553126"/>                                         <cooperativeZRamachandranSidechain  value="7.323993391729736E-6"/>              
+	<cooperativeZstdRamachandranSidechain  value="1.1281118247791455E-6"/>          <compositePropensity  value="-0.14204748905482378"/>                            
+	<cooperativeZPropensity  value="2.3163555341324083E-4"/>                        <cooperativeZstdPropensity  value="0.00154450100454252"/>                       
+	<atomicPairwisePMFSumma  value="-1570.9777023500255"/>                          <summaStd  value="0.3726322404772734"/>                                         
+	<excludedVolume  value="21.32417896923578"/>                                    <cooperativeZSumma  value="29.627581346771848"/>                                
+	<cooperativeSummaPolar  value="15.91125949057437"/>                             <cooperativeSummaNonPolar  value="5.1047013766609695"/>                         
+	<cooperativeSummaNeutral  value="5.27978206527413"/>                            <cooperativeSummaPolarNN_OO  value="3.0747226161240704"/>                       
+	<cooperativeSummaPolarBb  value="0.2571157981383095"/>                          <cooperativeZstdSumma  value="74.50576936292626"/>                              
+	<cooperativeStdSummaPolar  value="20.383431555564123"/>                         <cooperativeStdSummaNonPolar  value="19.84555775807615"/>                       
+	<cooperativeStdSummaNeutral  value="22.230804736979557"/>                       <cooperativeStdSummaPolarNN_OO  value="11.808048075142707"/>                    
+	<cooperativeStdSummaPolarBb  value="0.23792723716372954"/>                      <solvateEnergy  value="1795.9704155540094"/>                                    
+	<solvationSCpolar  value="483.2605019963826"/>                                  <solvationSCcarbon  value="1312.7099135576252"/>                                
+	<solvationBBpolar  value="0.0"/>                                                <solvationSTD  value="3.150280001293427"/>                                      
+	<hydrogenBonds  value="-58.08970455033192"/>                                    <hydrogenBondsPairs  value="-1073.8444121086713"/>                              
+	<hydrogenBondsAnglesHOC  value="7.0103700479048605"/>                           <hydrogenBondsAnglesOHN  value="0.5673896008437105"/>                           
+	<rg  value="0.003078685720699776"/>                                             <N_RGhSS  value="0.0"/>                                                         
+	<EhSShCoil  value="1.2363573889602982E-12"/>                                    <EhSSbSS  value="1.9635306108091706E-15"/>                                      
+	<EhSSbCoil  value="5.97646476160055E-15"/>                                      <EhSScSS  value="0.0"/>                                                         
+	<EhSScCoil  value="0.0"/>                                                       <hSS  value="0.0015516438861974643"/>                                           
+	<bSS  value="0.0015451461332897922"/>                                           <cSS  value="-1.810430003177778E-5"/>                                           
+	<hSShCoil  value="0.8725363003047685"/>                                         <hSSbSS  value="0.9681208587584041"/>                                           
+	<hSSbCoil  value="0.9091995285414411"/>                                         <hSScSS  value="0.94793846818157"/>                                             
+	<hSScCoil  value="0.9374749716493316"/>                                         <conservationContacts  value="0.0"/>                                            
+	<contacts  value="3.6"/>                                                        <conservationRgRatio  value="0.0"/>                                             
+	<conservation_H_RgRatio  value="0.0"/>                                          <conservationContactsHr  value="0.0"/>                                          
+	<contactsHr  value="10.094017094017094"/>                                       <conservationRgRatioHr  value="0.0"/>                                           
+	<constant1  value="1.0"/>                                                       <tetherEnergy  value="0.0"/>                                                    
+	<flatRamachEnergy  value="2.1055594382806304"/>                                 <tetherAll  value="0.0"/>                                                       
+	<samudralaEnergy  value="6446.85364727354"/>                                    <samudralaEnergy1  value="6446.85364727354"/>                                   
+	<secondaryStructureFraction  value="0.44285714285714284"/>                      </ProteinInfo>
+</ProteinInfoList>

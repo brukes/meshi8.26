@@ -1,0 +1,4 @@
+Simulation failed due to:
+java.util.NoSuchElementException
+
+No model was created.

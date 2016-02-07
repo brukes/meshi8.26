@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="plane">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/meshi/energy/simpleEnergyTerms/plane.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

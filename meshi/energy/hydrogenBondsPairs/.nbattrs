@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE attributes PUBLIC "-//NetBeans//DTD DefaultAttributes 1.0//EN" "http://www.netbeans.org/dtds/attributes-1_0.dtd">
+<attributes version="1.0">
+    <fileobject name="HydrogenBondsPairsEnergy.java">
+        <attr name="class_dependency_meshi.energy.AbstractEnergy" stringvalue="HydrogenBondsPairsEnergy"/>
+        <attr name="class_dependency_meshi.parameters.AtomTypes" stringvalue="HydrogenBondsPairsEnergy"/>
+    </fileobject>
+    <fileobject name="HydrogenBondsPairsEnergyElement.java">
+        <attr name="class_dependency_meshi.energy.EnergyElement" stringvalue="HydrogenBondsPairsEnergyElement"/>
+    </fileobject>
+    <fileobject name="HydrogenBondsPairsParametersList.java">
+        <attr name="class_dependency_meshi.energy.ParametersList" stringvalue="HydrogenBondsPairsParametersList"/>
+    </fileobject>
+    <fileobject name="PairsOfHBEElementsList.java">
+        <attr name="class_dependency_meshi.util.MeshiList" stringvalue="PairsOfHBEElementsList"/>
+        <attr name="class_dependency_meshi.util.MeshiList.ListIterator" stringvalue="PairsOfHBEElementsList.PairsOfHBIterator"/>
+        <attr name="class_dependency_meshi.util.Updateable" stringvalue="PairsOfHBEElementsList"/>
+        <attr name="class_dependency_meshi.util.filters.Filter" stringvalue="PairsOfHBEElementsList.IsPairOfHydrogenBondsElements"/>
+    </fileobject>
+</attributes>

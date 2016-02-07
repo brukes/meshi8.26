@@ -1,0 +1,162 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x65a61634, pid=4664, tid=6076
+#
+# JRE version: 7.0_01-b08
+# Java VM: Java HotSpot(TM) Client VM (21.1-b02 mixed mode windows-x86 )
+# Problematic frame:
+# V  [jvm.dll+0x161634]
+#
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x53ac4c00):  JavaThread "JDWP Transport Listener: dt_socket" daemon [_thread_in_vm, id=6076, stack(0x541d0000,0x54220000)]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x0000000c
+
+Registers:
+EAX=0x00000000, EBX=0x04a215e0, ECX=0x0000000c, EDX=0x00000000
+ESP=0x5421f774, EBP=0x5421f780, ESI=0x0000000c, EDI=0x00000003
+EIP=0x65a61634, EFLAGS=0x00010206
+
+Top of Stack: (sp=0x5421f774)
+0x5421f774:   53ac4d28 04a215e0 53ac4c00 5421f790
+0x5421f784:   65920090 0000000c 00000003 5421f7b8
+0x5421f794:   6599f053 04a215e0 53ac4d28 66cae174
+0x5421f7a4:   66cae15c 53ac4c00 00000000 53ac4d28
+0x5421f7b4:   5421f87c 66cae99c 66c963b2 53ac4d28
+0x5421f7c4:   53a5d1bc 00000000 5421f7f0 5421f87c
+0x5421f7d4:   54641958 5421f82c 53a5d1bc 5421f7fc
+0x5421f7e4:   66c9bd12 5421f7fc 5421f830 66cae890 
+
+Instructions: (pc=0x65a61634)
+0x65a61614:   cc cc cc cc cc cc cc cc cc cc cc cc 55 8b ec 57
+0x65a61624:   8b 7d 0c 33 c0 33 d2 85 ff 7e 2e 53 56 8b 75 08
+0x65a61634:   0f b7 0c 56 8d 59 ff 66 83 fb 7e 77 03 40 eb 12
+0x65a61644:   bb ff 07 00 00 66 3b cb 77 05 83 c0 02 eb 03 83 
+
+
+Register to memory mapping:
+
+EAX=0x00000000 is an unknown value
+EBX=0x04a215e0 is an oop
+java.lang.String 
+ - klass: 'java/lang/String'
+ECX=0x0000000c is an unknown value
+EDX=0x00000000 is an unknown value
+ESP=0x5421f774 is pointing into the stack for thread: 0x53ac4c00
+EBP=0x5421f780 is pointing into the stack for thread: 0x53ac4c00
+ESI=0x0000000c is an unknown value
+EDI=0x00000003 is an unknown value
+
+
+Stack: [0x541d0000,0x54220000],  sp=0x5421f774,  free space=317k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x161634]
+V  [jvm.dll+0x20090]
+V  [jvm.dll+0x9f053]
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x53ad8400 JavaThread "Service Thread" daemon [_thread_blocked, id=4552, stack(0x54430000,0x54480000)]
+  0x53ad5800 JavaThread "C1 CompilerThread0" daemon [_thread_blocked, id=4036, stack(0x54320000,0x54370000)]
+  0x53ac7800 JavaThread "JDWP Command Reader" daemon [_thread_in_native, id=3464, stack(0x54070000,0x540c0000)]
+  0x53ac6400 JavaThread "JDWP Event Helper Thread" daemon [_thread_blocked, id=4732, stack(0x539b0000,0x53a00000)]
+=>0x53ac4c00 JavaThread "JDWP Transport Listener: dt_socket" daemon [_thread_in_vm, id=6076, stack(0x541d0000,0x54220000)]
+  0x53ab8800 JavaThread "Attach Listener" daemon [_thread_blocked, id=3260, stack(0x53ce0000,0x53d30000)]
+  0x53ab5800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=3176, stack(0x538f0000,0x53940000)]
+  0x0051ac00 JavaThread "Finalizer" daemon [_thread_blocked, id=5000, stack(0x53a00000,0x53a50000)]
+  0x00519400 JavaThread "Reference Handler" daemon [_thread_blocked, id=5116, stack(0x00700000,0x00750000)]
+  0x0032a800 JavaThread "main" [_thread_in_Java, id=4528, stack(0x00150000,0x001a0000)]
+
+Other Threads:
+  0x00514c00 VMThread [stack: 0x00750000,0x007a0000] [id=6068]
+  0x53aeb000 WatcherThread [stack: 0x544a0000,0x544f0000] [id=4128]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ def new generation   total 128448K, used 10592K [0x04640000, 0x0d190000, 0x1d640000)
+  eden space 114240K,   4% used [0x04640000, 0x04ae1c00, 0x0b5d0000)
+  from space 14208K,  41% used [0x0b5d0000, 0x0bb86730, 0x0c3b0000)
+  to   space 14208K,   0% used [0x0c3b0000, 0x0c3b0000, 0x0d190000)
+ tenured generation   total 285268K, used 207030K [0x1d640000, 0x2ecd5000, 0x4f640000)
+   the space 285268K,  72% used [0x1d640000, 0x2a06d9c0, 0x2a06da00, 0x2ecd5000)
+ compacting perm gen  total 12288K, used 3868K [0x4f640000, 0x50240000, 0x53640000)
+   the space 12288K,  31% used [0x4f640000, 0x4fa07190, 0x4fa07200, 0x50240000)
+No shared spaces configured.
+
+Code Cache  [0x02640000, 0x02948000, 0x04640000)
+ total_blobs=1190 nmethods=1015 adapters=116 free_code_cache=29680Kb largest_free_block=30392320
+
+Dynamic libraries:
+0x01000000 - 0x0102e000 	C:\Program Files (x86)\Java\jdk1.7.0_01\bin\java.exe
+0x772e0000 - 0x77460000 	C:\Windows\SysWOW64\ntdll.dll
+0x76820000 - 0x76930000 	C:\Windows\syswow64\kernel32.dll
+0x75550000 - 0x75596000 	C:\Windows\syswow64\KERNELBASE.dll
+0x74c70000 - 0x74d10000 	C:\Windows\syswow64\ADVAPI32.dll
+0x74e40000 - 0x74eec000 	C:\Windows\syswow64\msvcrt.dll
+0x74c50000 - 0x74c69000 	C:\Windows\SysWOW64\sechost.dll
+0x74d40000 - 0x74e30000 	C:\Windows\syswow64\RPCRT4.dll
+0x749c0000 - 0x74a20000 	C:\Windows\syswow64\SspiCli.dll
+0x749b0000 - 0x749bc000 	C:\Windows\syswow64\CRYPTBASE.dll
+0x76720000 - 0x76820000 	C:\Windows\syswow64\USER32.dll
+0x750c0000 - 0x75150000 	C:\Windows\syswow64\GDI32.dll
+0x74e30000 - 0x74e3a000 	C:\Windows\syswow64\LPK.dll
+0x74f00000 - 0x74f9d000 	C:\Windows\syswow64\USP10.dll
+0x706c0000 - 0x7085e000 	C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_41e6975e2bd6f2b2\COMCTL32.dll
+0x75a00000 - 0x75a57000 	C:\Windows\syswow64\SHLWAPI.dll
+0x769c0000 - 0x76a20000 	C:\Windows\system32\IMM32.DLL
+0x75480000 - 0x7554c000 	C:\Windows\syswow64\MSCTF.dll
+0x66ab0000 - 0x66b6e000 	C:\Program Files (x86)\Java\jdk1.7.0_01\jre\bin\msvcr100.dll
+0x65900000 - 0x65c21000 	C:\Program Files (x86)\Java\jdk1.7.0_01\jre\bin\client\jvm.dll
+0x74800000 - 0x74807000 	C:\Windows\system32\WSOCK32.dll
+0x75a60000 - 0x75a95000 	C:\Windows\syswow64\WS2_32.dll
+0x756c0000 - 0x756c6000 	C:\Windows\syswow64\NSI.dll
+0x74610000 - 0x74642000 	C:\Windows\system32\WINMM.dll
+0x74c40000 - 0x74c45000 	C:\Windows\syswow64\PSAPI.DLL
+0x6efb0000 - 0x6efbc000 	C:\Program Files (x86)\Java\jdk1.7.0_01\jre\bin\verify.dll
+0x66cc0000 - 0x66ce0000 	C:\Program Files (x86)\Java\jdk1.7.0_01\jre\bin\java.dll
+0x66c90000 - 0x66cba000 	C:\Program Files (x86)\Java\jdk1.7.0_01\jre\bin\jdwp.dll
+0x66c80000 - 0x66c87000 	C:\Program Files (x86)\Java\jdk1.7.0_01\jre\bin\npt.dll
+0x66c60000 - 0x66c73000 	C:\Program Files (x86)\Java\jdk1.7.0_01\jre\bin\zip.dll
+0x66c50000 - 0x66c58000 	C:\Program Files (x86)\Java\jdk1.7.0_01\jre\bin\dt_socket.dll
+0x72b30000 - 0x72b6c000 	C:\Windows\system32\mswsock.dll
+0x72b20000 - 0x72b25000 	C:\Windows\System32\wshtcpip.dll
+
+VM Arguments:
+jvm_args: -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:52320,suspend=y,server=n -Xmx1200m -Dfile.encoding=UTF-8 
+java_command: programs.Optimize commands T0388.Zhang-Server_TS1.pdb T0388.Zhang-Server_TS1.pdb T0388.Zhang-Server_TS1.out.1.pdb 1
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=C:\Program Files (x86)\JetBrains\IntelliJ IDEA 10.5.2\bin\..\.\bin;D:\eclipse;C:\Program Files (x86)\MiKTeX 2.9\miktex\bin;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\MATLAB\R2010b\runtime\win64;C:\Program Files\MATLAB\R2010b\bin;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files (x86)\NTRU Cryptosystems\NTRU TCG Software Stack\bin\;C:\Program Files\NTRU Cryptosystems\NTRU TCG Software Stack\bin\;c:\program files (x86)\jetbrains\intellij idea 10.5.2\jre\jre\bin
+USERNAME=chen
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 23 Stepping 10, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 , 64 bit Build 7601 Service Pack 1
+
+CPU:total 2 (2 cores per cpu, 1 threads per core) family 6 model 23 stepping 10, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1
+
+Memory: 4k page, physical 4116388k(1775316k free), swap 8230924k(4648652k free)
+
+vm_info: Java HotSpot(TM) Client VM (21.1-b02) for windows-x86 JRE (1.7.0_01-b08), built on Oct  3 2011 02:11:36 by "java_re" with unknown MS VC++:1600
+
+time: Sun May 06 18:09:51 2012
+elapsed time: 34 seconds
+

@@ -1,0 +1,354 @@
+package meshi.util;
+import meshi.util.string.*;
+import meshi.util.formats.*;
+import java.util.*;
+import java.io.*;
+import java.lang.reflect.*;
+/**
+ * The (suggested) superclass of programs using the meshi package.
+ * It includes a bunch of usefull static methods and global variables.
+ * <p>
+ * The execution of any Meshi program starts with some initialization stage. 
+ * During this stage the program acquires all the parameters required for execution. 
+ * In the current version of Meshi this is done by command line parsing. 
+ * Future versions may also use GUI. The Core object is intended to hide this stage and 
+ * thus make the program shorter and hopefully more readable. 
+ * 
+ *
+ */
+public class MeshiProgram {
+    /**
+     * After program initiation, stores all the information needed for program execution.
+     **/
+    private static GlobalElementList globalTable = null; 
+    /**
+     * Program name.
+     **/
+    protected static String name = "MeshiProgram";
+    /**
+     * The command line with which the program was called.
+     **/
+    protected static String commandLine = "";
+    /**
+     * The single random number generator used by the program.
+     **/
+    private static Random randomNumberGenerator = null;
+    
+    //------------------------------------- init -------------------------------------------------
+    /**
+     * Initializes the program ignoring the command line. 
+     * Mainly used for small test programs.
+     **/
+    protected static void init() {
+	String[] args = {""};
+	init(args,"verbose debug seed usageString"); // The parameters set by default.
+    }
+
+    /**
+     * Parses the commaned line (the Strings in the <b> args</b> parameter) and initializes the program.
+     * The second argument is a String of keywords separated by spaces. Each keyword stands for a parameter 
+     * needed by the program for execution. 
+     * After command line parsing each of these keywords is expected to be associated with some value.
+     * <p>
+     * The method returns <b>null</b> when <b>succeeded</b> and a string with a detailed error message when it fails to 
+     * associate each keyword with a value.
+     *</p><p>
+     * Four types of parameters are handled in the following order.
+     * <ol>
+     *     <li> Default values, not depending on the command line.
+     *     <li> Boolean flags (e.g. -debug). 
+     *          That is the keyword is associated with true if it is found in the command line 
+     *          and with false otherwise. The keywords are removed from the command line.
+     *     <li> Flagged arguments(e.g. -g zvl.dat)  that is keywords followed by their associated 
+     *          value. Both the keywords and values are removed from the command line.
+     *     <li> All the remaining words in the command line are considered "ordered arguments". 
+     *          That is values associated with keywords according to their position in the command line.
+     * </ol>
+     **/
+    protected static String init(String[] args, String neededParameters) {
+	if (globalTable != null) throw new RuntimeException("init may be called only once during program"+
+							    "execution");
+	globalTable = new GlobalElementList();
+	setDefaultValues();                // initialize it with default values
+	getCommandLine(args);              // get command line
+	getFlags(args);                    // parse boolean flags (e.g. -debug)
+	getFlagedArguments(args);          // parse arguments preceded by flags (e.g. -f zvl.dat)
+	getOrderedArguments(args);         // try to make sense of the remaining words
+	initRandom();                      // initialize the random number generator.
+	return checkParameters(neededParameters); // make sure the initialization succeeded 
+    }
+
+    //----------------------------- set default values -------------------------------------------
+    //
+    /**
+     * Assign Default Values To Four Keywords.
+     * False => Verbose
+     * False => Debug
+     * 0     => Seed
+     * Default Usage String Should Be Replaced. => Usagestring
+     **/
+    protected static void setDefaultValues() {
+	tableSet("verbose",new Boolean(false));
+	tableSet("debug",new Boolean(false));
+	tableSet("seed",new Integer(0));
+	tableSet("usageString","Default usage string should be replaced.");
+    }
+
+    // -------------------------------------- boolean flags --------------------------------------
+    /**
+     * Gets boolean flags.
+     **/
+    protected static void getFlags(String[] args)  {
+	if (getFlag("-v",args)) 
+	    tableSet("verbose",new Boolean(true));
+	if (getFlag("-debug",args)) 
+	    tableSet("debug",new Boolean(true));
+    }
+    /**
+     * Searcheds for a the keyword <b>key</b> in <b>args</b>. 
+     * If the keyword is found returns true and removed from <b>args</b>.
+     * If the keyword is not found in <b> args</b> returns false.
+     **/
+    protected static boolean getFlag(String key,String[] args) {
+	for (int i = 0; i <  args.length; i++) {
+	    if (args[i].equals(key))
+		{
+		    args[i] = "";
+		    if (getFlag(key,args)) {
+			throw new MeshiException("Flag "+key+" appear more then onece in command line:\n"+
+				       commandLine+"\n");
+		    }
+		    return true;
+		}
+	}
+	return false;
+    }
+
+    // --------------------------------------- flaged arguments -------------------------------------
+    /**
+     * Gets flagged arguments
+     **/
+    private static void getFlagedArguments(String[] args){
+	String arg;
+	if ((arg = getFlagedArgument("-f",args)) != null) 
+	    tableSet("inputFile",arg);
+	if ((arg = getFlagedArgument("-o",args)) != null) 
+	    tableSet("outputFile",arg);
+	if ((arg = getFlagedArgument("-seed",args)) != null) 
+	    tableSet("seed",new Integer(arg));
+    }
+    /**
+     * Searcheds for a the keyword <b>key</b> in <b>args</b>. 
+     * If the keyword is found, it is removed from <b>args</b>. The folloing word (the associated value) 
+     * is also removed and  returned. 
+     * If the keyword is not found in <b> args</b>null is returned.
+     **/
+    protected static String getFlagedArgument(String key,String[] args) {
+	String temp;
+	for (int i = 0; i <  args.length - 1; i++) {
+	    if (args[i].equals(key))
+		{
+		    args[i] = "";
+		    temp = args[i+1];
+		    args[i+1] = "";
+		    if (getFlag(key,args)) {
+			throw new MeshiException("Flag "+key+" appear more then onece in command line:\n"+
+				       commandLine+"\n");
+		    }
+		    return temp;
+		}
+	}
+	return null;
+    }
+
+    // ------------------------------------- ordered arguments ---------------------------------------
+    private static void getOrderedArguments(String[] args) {
+    }
+    protected static String getOrderedArgument(String[] args) {
+	String temp;
+	for (int i = 0; i <  args.length; i++) {
+	    if (!((temp = args[i]).equals("")))
+		{
+		    args[i] = "";
+		    return temp;
+		}
+	}
+	return null;
+    }
+
+    // ------------------------------------ initialization checking ---------------------------------
+    protected static String checkParameters(String neededParameters) {
+	StringList neededParametersList = StringParser.standard(neededParameters);
+	if (globalTable.size() != neededParametersList.size())
+	    return ("Parameters table Error:\n"+
+		    "globalTable size = "+globalTable.size()+" \n"+
+		    "different than neededParametersList size = "+
+		    neededParametersList.size()+"\n\n"+
+		    "command line:\n" +
+		    commandLine+"\n\n"+
+		    "neededParameters:\n"+
+		    neededParameters+"\n"+
+		    "\n"+globalTable);
+	Iterator parameters = neededParametersList.iterator();
+	String parameter;
+	while ((parameter = (String) parameters.next()) != null)
+	    if (globalTable.get(parameter) == null) 
+		return ("Parameters table Error:\n"+
+			"parameter "+parameter+" \n"+
+			"not initialized\n\n"+
+			"command line:\n" +
+			commandLine+"\n\n"+
+			"neededParameters:\n"+
+			neededParameters+"\n"+
+			"\n"+globalTable);
+	return null; 
+    }
+    //-------------------------------------- setting parameters -----------------------------------
+    protected static Object tableSet(String key, Object value) {
+	return(globalTable.set(key,value).value());
+    }
+
+    //-------------------------------------- getting parameters -----------------------------------
+
+    protected static Object tableGet(String key) {
+	GlobalElement element;
+	element = globalTable.get(key);
+	if (element == null) 
+	    {
+		throw new MeshiException("Global table error:\n"+
+				"No element with key = \""+  
+				key+"\"\n"); 
+	    }
+	return(element.value());
+    }
+
+    public static Double  getD(String key) { 
+	try {
+	    return (Double) tableGet(key);
+	}
+	catch (Exception e) {
+	    throw new RuntimeException("Error in getD("+key+")\n"+e);
+	}
+    }
+    public static Integer getI(String key) { 
+	try {
+	    return (Integer) tableGet(key);
+	}
+	catch (Exception e) {
+	    throw new RuntimeException("Error in getI("+key+")\n"+e);
+	}
+    }
+    public static Boolean getB(String key) { 
+	try {
+	    return (Boolean) tableGet(key);
+	}
+	catch (Exception e) {
+	    throw new RuntimeException("Error in getB("+key+")\n"+e);
+	}
+    }
+    public static String  getS(String key) {  
+	try {
+	    return (String) tableGet(key);
+	}
+	catch (Exception e) {
+	    throw new RuntimeException("Error in getS("+key+")\n"+e);
+	}
+    }
+    public static double  getd(String key) { return  getD(key).doubleValue();}
+    public static int     geti(String key) { return  getI(key).intValue();}
+    public static boolean getb(String key) { return  getB(key).booleanValue();}
+    public static boolean verbose() { return  getb("verbose");}
+    public static boolean debug()   { return  getb("debug");}
+    public static Random randomNumberGenerator() {return randomNumberGenerator;}
+    //------------------------------------- helper methods ----------------------------------------
+    public String toString() {
+	Iterator iter = globalTable.iterator();
+	GlobalElement element;
+	String out = name+"\n"+"parameters:\n";
+	while ((element = (GlobalElement) iter.next()) != null)
+	    out += element.key()+"\t"+ element.value()+"\n";
+	return out;
+    }
+    public static String commandLine() {return commandLine;}
+    
+    private static void initRandom() {
+	if (randomNumberGenerator == null)
+	    randomNumberGenerator = new Random((geti("seed")));
+	else throw new RuntimeException("The random number generatore may be initialized only once");
+    }
+
+    public static  String about() {
+	return ""+
+	    "The meshi package is developed in Chen Keasars Lab \n"+
+	    "at the departments of Computer Science and Life Siences,\n"+
+	    "Ben-Gurion University of the Negev, Be'er-Sheva, Israel\n\n"+
+	    "Contributors (in alphabetical order):\n"+
+	    "Arik David\n"+
+	    "Ohad Givati\n"+
+	    "Chen Keasar\n"+
+	    "Danny Klein\n"+
+	    "Diana Lavie\n"+
+	    "Lena Margolis\n"+
+	    "Ofer Meisles\n"+
+	    "Yael Pinchasov\n"+
+	    "Elior Siebert\n"+
+	    "Sharon Zafriri\n"+
+	    "Ziv Zeira\n"+
+	    "Tal-Sarit Zobakov";
+    }
+    public static String usageString() {return getS("usageString");}
+    private static void getCommandLine(String[] args) {
+	for (int i = 0; i <  args.length; i++)
+	    commandLine = commandLine+" "+args[i];
+	
+    }	
+    public static void printGlobalTable() {
+	globalTable.print();
+    }
+    //----------------------------------------- helper classes ---------------------------------------
+    private static class GlobalElement {
+	String key;
+	Object value;
+	public GlobalElement(String key,Object value) {
+	    this.key = key;
+	    this.value = value;
+	}
+	public String key() {return key;}
+	public Object value() {return value;}
+	public void setValue(Object value) {this.value = value;}
+    }
+
+    private static class GlobalElementList extends MeshiList {
+	private GlobalElement add(String key, Object value) {
+	    GlobalElement newElement = new GlobalElement(key,value);
+	    add(newElement);
+	    return newElement;
+	}
+	public GlobalElement  get(String key) {
+	    Iterator iter = iterator();
+	    GlobalElement element;
+	    while ((element = (GlobalElement) iter.next()) != null)
+		if (element.key().equals(key)) return element;
+	    return null;
+	}
+	public GlobalElement set(String key, Object value) {
+	    GlobalElement element = get(key);
+	    if (element == null) return add(key,value);
+	    else element.setValue(value);
+	    return element;
+	}
+	public String toString() {
+	    Format sformat = Format.STANDARD;
+	    Iterator elements = iterator();
+	    GlobalElement element;
+	    String out = "Global elements table:\n";
+	    while ((element = (GlobalElement) elements.next()) != null)
+		out += sformat.f(element.key())+" "+element.value()+"\n";
+	    return out;
+	}
+	    
+	public void print() {
+	    System.out.println(toString());
+	}
+    }
+}

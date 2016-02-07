@@ -1,0 +1,156 @@
+setSS 9999=E
+residueTether 9999
+distanceConstraints weight 10
+
+conserved 9999
+
+parameters ..\..\parameters
+
+verbose
+refreshBeta
+beta weight 1000
+
+# Weights for the energy terms
+bondEnergy weight 100
+angleEnergy weight 400
+planeEnergy weight 1000.0
+flatRamachEnergy weight 0.01
+propensityTorsionEnergy weight 0.0
+outOfPlaneEnergy weight 1000.0
+hydrogenBonds weight 2
+hydrogenBondsPairs weight 10
+hydrogenBonds width 10
+hydrogenBondsPlane weight 2
+hydrogenBondsAnglesHOC weight 10
+hydrogenBondsAnglesOHN weight 10
+excludedVolume weight 0.1
+cAlphaHydrogenBonds weight 0.0
+cAlphaHOtorsins weight 0.0
+secondaryStructureFraction weight 1
+
+#dummy term
+constant1 weight 1
+
+#TETHER BB
+tetherEnergy weight 10
+#TETHER all atoms
+tetherAll weight 1.0
+#
+templateEnergy weight 10.0
+electrostatics weight 0.1
+electrostatics dielectricConstant 4
+
+rg weight 0.00001
+rg rgLogaritmicWeight 1
+rg rgRatioWeight 1
+rg rgPolarWeight -0.1
+rg rgNonPolarWeight 10
+rg rgBackboneWeight 10
+
+
+ramachandran weight 1
+#
+# RAMACHANDRAN
+ramachandranSidechain weight 3
+#
+#
+cooperativeZRamachandranSidechain weight 0.00001
+cooperativeZRamachandranSidechainFile zScoresRamachOfResidueTypes.dat
+cooperativeZstdRamachandranSidechain weight 0.00001
+
+atomicPairwisePMFSumma weight 1
+cooperativeZSumma weight 2000
+cooperativeZSumma     cooperativeZSummaNonPolar 1
+cooperativeZSumma     cooperativeZSummaPolar 1
+cooperativeZSumma     cooperativeZSummaNeutral 1
+cooperativeZSumma     cooperativeZSummaBackboneNNOO 1
+cooperativeZSumma     cooperativeZSummaBackbone 0.01
+#cooperativeZSummaFile zScoresSummaMeanPerTypeNonPolarNewArrangedbefore.txt
+cooperativeZSummaFile zScoresMixModSummaMeanPerType_3picks_ResNum3before.txt
+cooperativeZstdSumma weight 200
+
+
+compositePropensity weight 0.01
+cooperativeZPropensity weight 0.01
+cooperativeZPropensityFile zScoresPropenOfResidueTypes.dat
+cooperativeZstdPropensity  weight 0.01
+
+solvateEnergy weight 20.0
+solvateEnergy solvationSCpolar   1
+solvateEnergy solvationSCcarbon   0.5
+solvateEnergy solvationBBpolar      0
+solvateEnergy solvationHB      0
+cooperativeZSolvate weight 0
+cooperativeZSolvateFile  zScoresSolvateOfAtomTypes.dat
+
+# scoring function weights
+#not found: CONSTANT	0.355778
+
+# Minimization parameters - full minimization
+minimize maxSteps 10000
+minimize tolerance 0.2
+minimize reportEvery 500
+
+# Minimization parameters - short relaxation
+relax tolerance 0.2
+relax maxSteps 6000
+relax reportEvery 500
+
+# MCM parameters
+mcmPerturbation tolerance 0.05
+mcmPerturbation maxSteps 20000
+mcmPerturbation reportEvery 500
+MCM initialTemperature 10.0001
+MCM finalTemperature 0.00001
+MCM maxSteps 2
+# Inflate parameters
+inflateEnergy weight 10
+inflateEnergy RmsTarget 3
+
+#disulfide 2 24
+#disulfide 14 26
+#disulfide 20 32
+
+
+
+# This command tels the program to use our approximated arcCosinus which is ~4 times 
+# faster than the one in the StrictMath library.
+#useFastArcCos
+dresserFragments fragments5.txt
+rotamerLibrary bbdep02.May.sortlib
+
+#Misc.
+seed 4
+corpusFileName parameters\finalCorpus.txt
+maxRunTime 10000
+
+samudralaEnergy weight 1
+rapdfoutputfile  ..\..\parameters\meshiPotential\SamudralaParametersAstralNotWeighted.dat
+samudralaEnergy1  weight 1
+rapdfoutputfile2 ..\..\parameters\meshiPotential\SamudralaParametersAstralNotWeighted.dat
+conservationContacts weight 1
+conservationContactsHr weight 1
+
+scoreWeight energy                                          -1  NOT_NORMALIZED
+
+selectionScoreWeight    angleEnergy                              0.0000001642  NOT_NORMALIZED
+selectionScoreWeight    planeEnergy                              0.0000594752  NOT_NORMALIZED
+selectionScoreWeight    ramachandranSidechain                    0.0000200646  NOT_NORMALIZED
+selectionScoreWeight    cooperativeZstdRamachandranSidechain     10606.5570718212  NOT_NORMALIZED
+selectionScoreWeight    compositePropensity                      -0.0005673147  NOT_NORMALIZED
+selectionScoreWeight    atomicPairwisePMFSumma                   -0.0001851266  NOT_NORMALIZED
+selectionScoreWeight    excludedVolume                           -0.0000610211  NOT_NORMALIZED
+selectionScoreWeight    cooperativeSummaPolar                    -0.0026818162  NOT_NORMALIZED
+selectionScoreWeight    cooperativeStdSummaPolar                 -0.0022094795  NOT_NORMALIZED
+selectionScoreWeight    cooperativeStdSummaPolarBb               -0.0548335770  NOT_NORMALIZED
+selectionScoreWeight    solvationSCpolar                         0.0000388610  NOT_NORMALIZED
+selectionScoreWeight    hydrogenBonds                            -0.0002025899  NOT_NORMALIZED
+selectionScoreWeight    hydrogenBondsPairs                       -0.0001347609  NOT_NORMALIZED
+selectionScoreWeight    hydrogenBondsAnglesHOC                   0.0011638316  NOT_NORMALIZED
+selectionScoreWeight    hSS                                      -16.1022467728  NOT_NORMALIZED
+selectionScoreWeight    hSShCoil                                 -0.0056244894  NOT_NORMALIZED
+selectionScoreWeight    hSScSS                                   0.1431843613  NOT_NORMALIZED
+selectionScoreWeight    hSScCoil                                 0.1102069532  NOT_NORMALIZED
+selectionScoreWeight    contactsHr                               0.0174961375  NOT_NORMALIZED
+selectionScoreWeight    flatRamachEnergy                         -0.0183632355  NOT_NORMALIZED
+#selectionScoreWeight    one                                      -0.0535266759  NOT_NORMALIZED
