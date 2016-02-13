@@ -1,6 +1,5 @@
 package programs;
 
-import meshi.energy.AbstractEnergy;
 import meshi.energy.EnergyCreator;
 import meshi.energy.EvaluationException;
 import meshi.energy.TotalEnergy;
@@ -32,21 +31,27 @@ import java.io.*;
 /**
  * Created by chen on 11/12/2014.
  */
+
+
 public class HBondAnalyzer {
+    public static final int NUMBER_OF_PAIR_TYPES = 750;
+
     public static void main(String[] args) throws UpdateableException, EvaluationException, AlignmentException, FileNotFoundException, UnsupportedEncodingException, RuntimeException {
         MeshiProgram.initRandom(0);
-        long time = System.currentTimeMillis();
+        long time    = System.currentTimeMillis();
         File dsspDir = new File("nativeStructures/dssp");
-        File pdbDir = new File("nativeStructures/pdb");
+        File pdbDir  = new File("nativeStructures/pdb");
         File[] dsspDirectoryListing = dsspDir.listFiles();
-        File[] pdbDirectoryListing = pdbDir.listFiles();
+        File[] pdbDirectoryListing  = pdbDir.listFiles();
 
         System.out.println(dsspDir);
-
-        int[][] patternMatrix = new int[750][750];
-        String[][] stringMatrix = new String[750][750];
+// more descriptive names
+        int[][] weightsMatrix    = new int[NUMBER_OF_PAIR_TYPES][NUMBER_OF_PAIR_TYPES];
+        String[][] locationsMatrix  = new String[NUMBER_OF_PAIR_TYPES][NUMBER_OF_PAIR_TYPES];
         String[] pairsInProteins = new String[pdbDirectoryListing.length];
         String[] pairsLine = {""};
+        //When changing delimiter, also change keyDelimiter in updateEdgeLine if they are the same
+        String delimiter = " ";
 
         for (int i=0; i<dsspDirectoryListing.length; i++){
             System.out.println("pdb "+pdbDirectoryListing[i].getName());
@@ -56,40 +61,37 @@ public class HBondAnalyzer {
 
         if (dsspDirectoryListing != null && pdbDirectoryListing != null && dsspDirectoryListing.length==pdbDirectoryListing.length) {
             int numberOfProteins = dsspDirectoryListing.length;
-            for (int i=0; i< numberOfProteins; i++) {
-                String pdbFileName = pdbDirectoryListing[i].getName();
-                if (!pdbFileName.startsWith(".")) {
-                    String dsspFileName = dsspDir + "/" + pdbFileName + ".dssp";
-                    pdbFileName = pdbDir + "/" + pdbFileName;
-                    String[] arguments = {pdbFileName, dsspFileName, "commands.MCM"};
+            for (int iProtein = 0; iProtein < numberOfProteins; iProtein++) {
+                String pdbFileName = pdbDirectoryListing[iProtein].getName();
+                if (pdbFileName.startsWith("."))
+                    continue;
+                String dsspFileName = dsspDir + "/" + pdbFileName + ".dssp";
+                pdbFileName = pdbDir + "/" + pdbFileName;
+                String[] arguments = {pdbFileName, dsspFileName, "commands.MCM"};
 
-                    System.out.println("Analyzing "+i+" "+pdbFileName) ;
-                    run(arguments, patternMatrix, stringMatrix, pairsLine);
-                    pairsInProteins[i]=pairsLine[0];
-                    pairsLine[0]="";
-                    System.out.println("Done with "+i+" "+pdbFileName) ;
-                }
+                System.out.println("Analyzing "+ iProtein +" "+pdbFileName) ;
+                run(arguments, weightsMatrix, locationsMatrix, pairsLine, delimiter);
+                pairsInProteins[iProtein]=pairsLine[0];
+                pairsLine[0]="";
+                System.out.println("Done with "+ iProtein +" "+pdbFileName) ;
+
             }
         }
-        else if (dsspDirectoryListing == null || pdbDirectoryListing == null) {
-            throw new FileNotFoundException("Problem with protein folders : null listFiles");
-        }
-        else {
-            throw new FileNotFoundException("Problem with protein folders : listFiles of different length");
-        }
 
 
-        String[] patternNames = patternNamesArrayMaker();
-        graphMaker(patternNames, patternMatrix, stringMatrix);
-        patternMatrixToFile (patternMatrix);
-        graphMakerNoLocations(patternNames, patternMatrix, stringMatrix);
-        locationGraphMaker(patternMatrix, stringMatrix);
-        pairsInProteinsMaker(pairsInProteins);
+        // delete redundant.
+        // some text files should be csv
+        String[] namesOfPairs = namesOfPairsArrayMaker();
+        graphMaker(namesOfPairs, weightsMatrix, locationsMatrix, delimiter);
+        //weightsMatrixToFile (weightsMatrix);
+        //graphMakerNoLocations(namesOfPairs, weightsMatrix, locationsMatrix);
+        locationGraphMaker(weightsMatrix, locationsMatrix, delimiter);
+        pairsInProteinsMaker(pairsInProteins, delimiter);
         System.out.println("Done!");
         System.out.println("This took: "+((System.currentTimeMillis()-time)/1000)+" seconds");
     }
 
-    public static void run (String[] args, int[][] patternMatrix, String[][] stringMatrix, String[] pairsLine) throws UpdateableException, EvaluationException, AlignmentException, FileNotFoundException, UnsupportedEncodingException{
+    public static void run (String[] args, int[][] weightsMatrix, String[][] locationsMatrix, String[] pairsLine, String delimiter) throws UpdateableException, EvaluationException, AlignmentException, FileNotFoundException, UnsupportedEncodingException{
         Protein model = new Protein(new AtomList(args[0]), ResidueExtendedAtoms.creator);
 
         System.out.println("new model " + model);
@@ -149,8 +151,8 @@ public class HBondAnalyzer {
             }
         }
         PairsOfHBEElementsList pairsOfHBEElementsList = ((HydrogenBondsPairsEnergy) hydrogenBondsPairsCreator.term()).getPairsOfHBEElementsList();
-        String pdbName = model.toString().substring(0, 5);
-        patternStringMatrixPairsUpdater(pairsOfHBEElementsList, patternMatrix, stringMatrix, pdbName, pairsLine);
+        String pdbName = model.toString().substring(0, model.toString().length()-4);
+        weightsLocationsMatrixPairsUpdater(pairsOfHBEElementsList, weightsMatrix, locationsMatrix, pdbName, pairsLine, delimiter);
         System.out.println(pairsLine[0]);
         //patterMatrix[0][0]++;
         //exportPairOfHydrogenBondsElements(hydrogenBondsPairsCreator, model);
@@ -277,11 +279,11 @@ public class HBondAnalyzer {
         System.out.println("Is the matrix symmetric : "+ isSymmetric);
     }
 
-    private static void patternStringMatrixPairsUpdater (PairsOfHBEElementsList pairsOfHBEElementsList, int[][] patternMatrix, String[][] stringMatrix, String pdbName, String[] pairsLine)
+    private static void weightsLocationsMatrixPairsUpdater (PairsOfHBEElementsList pairsOfHBEElementsList, int[][] weightsMatrix, String[][] locationsMatrix, String pdbName, String[] pairsLine, String delimiter)
             throws FileNotFoundException, UnsupportedEncodingException, RuntimeException {
 
         int i = 0;
-        int [][] currentPatternMatrix = new int[750][750];
+        int [][] currentweightsMatrix = new int[NUMBER_OF_PAIR_TYPES][NUMBER_OF_PAIR_TYPES];
         for (PairOfHydrogenBondsElements elementI : pairsOfHBEElementsList) {
             Distance hb1i = elementI.HOelement1();
             Distance hb2i = elementI.HOelement2();
@@ -294,55 +296,55 @@ public class HBondAnalyzer {
                         int matrixI = findPattern(elementI);
                         int matrixJ = findPattern(elementJ);
                         if (matrixI != -1 && matrixJ != -1) {
-                            patternMatrix[matrixI][matrixJ]++;
-                            currentPatternMatrix[matrixI][matrixJ]++;
-                            if (stringMatrix[matrixI][matrixJ] == null) {
-                                stringMatrix[matrixI][matrixJ] = "";
+                            weightsMatrix[matrixI][matrixJ]++;
+                            currentweightsMatrix[matrixI][matrixJ]++;
+                            if (locationsMatrix[matrixI][matrixJ] == null) {
+                                locationsMatrix[matrixI][matrixJ] = "";
                             }
                             //*********************
                             String toWrite=pdbName+".";
-                            if (hb1i.atom1.atom.name=="H" && hb1i.atom2.atom.name =="O"){
+                            if (hb1i.atom1.atom.name.equals("H") && hb1i.atom2.atom.name.equals("O")){
                                 toWrite=toWrite+hb1i.atom1().pdbLine().residueNumber() + "." + hb1i.atom2().pdbLine().residueNumber() + ".";
                             }
-                            else if (hb1i.atom2.atom.name=="H" && hb1i.atom1.atom.name =="O"){
+                            else if (hb1i.atom2.atom.name.equals("H") && hb1i.atom1.atom.name.equals("O")){
                                 toWrite=toWrite+hb1i.atom2().pdbLine().residueNumber() + "." + hb1i.atom1().pdbLine().residueNumber() + ".";
                             }
                             else{
                                 throw new RuntimeException("Weird atoms in the HBondPairs");
                             }
                             //****
-                            if (hb2i.atom1.atom.name=="H" && hb2i.atom2.atom.name =="O"){
+                            if (hb2i.atom1.atom.name.equals("H") && hb2i.atom2.atom.name.equals("O")){
                                 toWrite=toWrite+hb2i.atom1().pdbLine().residueNumber() + "." + hb2i.atom2().pdbLine().residueNumber() + ".";
                             }
-                            else if (hb2i.atom2.atom.name=="H" && hb2i.atom1.atom.name =="O"){
+                            else if (hb2i.atom2.atom.name.equals("H") && hb2i.atom1.atom.name.equals("O")){
                                 toWrite=toWrite+hb2i.atom2().pdbLine().residueNumber() + "." + hb2i.atom1().pdbLine().residueNumber() + ".";
                             }
                             else{
                                 throw new RuntimeException("Weird atoms in the HBondPairs");
                             }
                             //****
-                            if (hb1j.atom1.atom.name!="H" && hb1j.atom2.atom.name !="O"){
+                            if (!hb1j.atom1.atom.name.equals("H") && !hb1j.atom2.atom.name.equals("O")){
                                 toWrite=toWrite+hb1j.atom1().pdbLine().residueNumber() + "." + hb1j.atom2().pdbLine().residueNumber() + ".";
                             }
-                            else if (hb1j.atom2.atom.name!="H" && hb1j.atom1.atom.name !="O"){
+                            else if (!hb1j.atom2.atom.name.equals("H") && !hb1j.atom1.atom.name.equals("O")){
                                 toWrite=toWrite+hb1j.atom2().pdbLine().residueNumber() + "." + hb1j.atom1().pdbLine().residueNumber() + ".";
                             }
                             else {
                                 throw new RuntimeException("Weird atoms in the HBondPairs");
                             }
                             //****
-                            if (hb2j.atom1.atom.name!="H" && hb2j.atom2.atom.name !="O"){
+                            if (!hb2j.atom1.atom.name.equals("H") && !hb2j.atom2.atom.name.equals("O")){
                                 toWrite=toWrite+hb2j.atom1().pdbLine().residueNumber() + "." + hb2j.atom2().pdbLine().residueNumber() + "|";
                             }
-                            else if (hb2j.atom2.atom.name!="H" && hb2j.atom1.atom.name !="O"){
+                            else if (!hb2j.atom2.atom.name.equals("H") && !hb2j.atom1.atom.name.equals("O")){
                                 toWrite=toWrite+hb2j.atom2().pdbLine().residueNumber() + "." + hb2j.atom1().pdbLine().residueNumber() + "|";
                             }
                             else {
                                 throw new RuntimeException("Weird atoms in the HBondPairs");
                             }
-                            stringMatrix[matrixI][matrixJ] = stringMatrix[matrixI][matrixJ] + toWrite;
+                            locationsMatrix[matrixI][matrixJ] = locationsMatrix[matrixI][matrixJ] + toWrite;
                             //***********************
-                            /*stringMatrix[matrixI][matrixJ] = stringMatrix[matrixI][matrixJ] + pdbName +
+                            /*locationsMatrix[matrixI][matrixJ] = locationsMatrix[matrixI][matrixJ] + pdbName +
                                     hb1i.atom1().pdbLine().residueNumber() + "." + hb1i.atom2().pdbLine().residueNumber() + "." +
                                     hb2i.atom1().pdbLine().residueNumber() + "." + hb2i.atom2().pdbLine().residueNumber() + "." +
                                     hb1j.atom1().pdbLine().residueNumber() + "." + hb1j.atom2().pdbLine().residueNumber() + "." +
@@ -354,17 +356,18 @@ public class HBondAnalyzer {
             }
             i++;
         }
-        updateEdgeLine(pairsLine, currentPatternMatrix, pdbName);
+        updateEdgeLine(pairsLine, currentweightsMatrix, pdbName, delimiter);
     }
 
-    private static void updateEdgeLine (String[] pairsLine, int[][] currentPatternMatrix, String pdbName){
-        pairsLine[0] = pdbName+" ";
-        for (int i=0; i<currentPatternMatrix.length; i++){
-            for (int j=i+1; j<currentPatternMatrix[i].length; j++){
-                if (currentPatternMatrix[i][j]>0){
-                    // when changing edgeNumber, also change it in graphMaker, graphMakerNoLocations, graphMakerNoLocations
-                    int edgeNumber=(i*currentPatternMatrix[i].length)+j;
-                    pairsLine[0]=pairsLine[0]+edgeNumber+",";
+    private static void updateEdgeLine (String[] pairsLine, int[][] currentweightsMatrix, String pdbName, String delimiter){
+        pairsLine[0] = pdbName+delimiter;
+        String keyDelimiter = ",";
+        for (int i=0; i<currentweightsMatrix.length; i++){
+            for (int j=i+1; j<currentweightsMatrix[i].length; j++){
+                if (currentweightsMatrix[i][j]>0){
+                    // when changing pairKey, also change it in graphMaker
+                    int pairKey =(i*currentweightsMatrix[i].length)+j;
+                    pairsLine[0]=pairsLine[0]+pairKey+keyDelimiter;
                 }
             }
         }
@@ -399,13 +402,13 @@ public class HBondAnalyzer {
         return matrixI;
     }
 
-    private static void patternMatrixToFile (int[][] patternMatrix) throws FileNotFoundException, UnsupportedEncodingException {
-        String fileName="nativeStructures/patternMatrix.txt";
+    private static void weightsMatrixToFile (int[][] weightsMatrix) throws FileNotFoundException, UnsupportedEncodingException {
+        String fileName="nativeStructures/weightsMatrix.txt";
 
         try (PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
 
             int i=0;
-            for (int[] elementRow : patternMatrix) {
+            for (int[] elementRow : weightsMatrix) {
                 int j=0;
                 for (int element : elementRow){
                     writer.print(" "+element);
@@ -418,16 +421,16 @@ public class HBondAnalyzer {
         }
     }
 
-    private static String[] patternNamesArrayMaker () {
+    private static String[] namesOfPairsArrayMaker () {
 
-        String[] patternNames = new String[750];
+        String[] namesOfPairs = new String[NUMBER_OF_PAIR_TYPES];
         try {
             BufferedReader br = new BufferedReader(new FileReader("HBBetaHelixParametersSmall.txt"));
             String line = br.readLine();
             int lineNum=0;
 
             while (line != null) {
-                patternNames[lineNum] = patternNameMaker(line, lineNum);
+                namesOfPairs[lineNum] = patternNameMaker(line, lineNum);
                 line = br.readLine();
 
                 lineNum++;
@@ -436,7 +439,7 @@ public class HBondAnalyzer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return patternNames;
+        return namesOfPairs;
     }
 
     private static String patternNameMaker (String line, int lineNum) {
@@ -470,16 +473,19 @@ public class HBondAnalyzer {
         return line;
     }
 
-    public static void graphMaker (String[] patternNames, int[][] patternMatrix, String[][] stringMatrix) throws FileNotFoundException, UnsupportedEncodingException {
+    public static void graphMaker (String[] namesOfPairs, int[][] weightsMatrix, String[][] locationsMatrix, String delimiter) throws FileNotFoundException, UnsupportedEncodingException {
         String fileName="nativeStructures/graph.txt";
+        int[] columns = {1,1,1,1};
+        writeToFile(fileName, columns, namesOfPairs, weightsMatrix, locationsMatrix, delimiter);
+    }
 
+    public static void writeToFile (String fileName, int[] columns, String[] namesOfPairs, int[][] weightsMatrix, String[][] locationsMatrix, String delimiter) throws FileNotFoundException, UnsupportedEncodingException{
         try (PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
-            writer.println("key HBPattern1 HBPattern2 Weight Locations");
-            for (int i=0; i<patternMatrix.length; i++) {
-                for (int j=i+1 ; j<patternMatrix[i].length; j++){
-                    if (patternMatrix[i][j]>0 && stringMatrix[i][j]!=null){
-                        int edgeNumber=(i*patternMatrix[i].length)+j;
-                        writer.println(edgeNumber+" "+patternNames[i]+" "+patternNames[j]+" "+patternMatrix[i][j]+" "+stringMatrix[i][j]);
+            writer.println(columnsNamer(columns, delimiter));
+            for (int i=0; i<weightsMatrix.length; i++) {
+                for (int j=i+1 ; j<weightsMatrix[i].length; j++){
+                    if (weightsMatrix[i][j]>0 && locationsMatrix[i][j]!=null){
+                        writer.println(rowMaker(columns, delimiter, i, j, namesOfPairs, weightsMatrix, locationsMatrix));
                     }
                 }
             }
@@ -487,50 +493,60 @@ public class HBondAnalyzer {
         }
     }
 
-    public static void graphMakerNoLocations (String[] patternNames, int[][] patternMatrix, String[][] stringMatrix) throws FileNotFoundException, UnsupportedEncodingException {
+    public static String columnsNamer (int[] columns, String delimiter){
+        String columnNames = "";
+        if (columns[0] == 1){
+            columnNames = columnNames +"key";
+        }
+        if (columns[1] == 1){
+            columnNames = columnNames +delimiter+"HBPattern1"+delimiter+"HBPattern2";
+        }
+        if (columns[2] == 1){
+            columnNames = columnNames +delimiter+"Weight";
+        }
+        if (columns[3] == 1){
+            columnNames = columnNames +delimiter+"Locations";
+        }
+        return columnNames;
+    }
+
+    public static String rowMaker (int[] columns, String delimiter, int i, int j, String[] namesOfPairs, int[][] weightsMatrix, String[][] locationsMatrix){
+        String row = "";
+        if (columns[0] == 1){
+            int key=(i*weightsMatrix[i].length)+j;
+            row=row+key;
+        }
+        if (columns[1] == 1){
+            row=row+delimiter+namesOfPairs[i]+delimiter+namesOfPairs[j];
+        }
+        if (columns[2] == 1){
+            row=row+delimiter+weightsMatrix[i][j];
+        }
+        if (columns[3] == 1){
+            row=row+delimiter+locationsMatrix[i][j];
+        }
+        return row;
+    }
+
+    public static void graphMakerNoLocations (String[] namesOfPairs, int[][] weightsMatrix, String[][] locationsMatrix, String delimiter) throws FileNotFoundException, UnsupportedEncodingException {
         String fileName="nativeStructures/graphNoLocations.txt";
-
-        try (PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
-            writer.println("key HBPattern1 HBPattern2 Weight");
-            int i=0;
-            for (int[] elementRow : patternMatrix) {
-                for (int j=i+1 ; j<elementRow.length; j++){
-                    if (elementRow[j]>0 && stringMatrix[i][j]!=null){
-                        int edgeNumber=(i*patternMatrix[i].length)+j;
-                        writer.println(edgeNumber+" "+patternNames[i]+" "+patternNames[j]+" "+elementRow[j]);
-                    }
-                }
-                i++;
-            }
-            writer.close();
-        }
+        int[] columns = {1,1,1,0};
+        writeToFile(fileName, columns, namesOfPairs, weightsMatrix, locationsMatrix, delimiter);
     }
 
-    public static void locationGraphMaker (int[][] patternMatrix, String[][] stringMatrix) throws FileNotFoundException, UnsupportedEncodingException {
+    public static void locationGraphMaker (int[][] weightsMatrix, String[][] locationsMatrix, String delimiter) throws FileNotFoundException, UnsupportedEncodingException {
         String fileName="nativeStructures/LocationGraph.txt";
-
-        try (PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
-            writer.println("key Locations");
-            int i=0;
-            for (int[] elementRow : patternMatrix) {
-                for (int j=i+1 ; j<elementRow.length; j++){
-                    if (elementRow[j]>0 && stringMatrix[i][j]!=null){
-                        int edgeNumber=(i*patternMatrix[i].length)+j;
-                        writer.println(edgeNumber+" "+stringMatrix[i][j]);
-                    }
-                }
-                i++;
-            }
-            writer.close();
-        }
+        int[] columns = {1,0,0,1};
+        String[] emptynamesOfPairs = {""};
+        writeToFile(fileName, columns, emptynamesOfPairs, weightsMatrix, locationsMatrix, delimiter);
     }
 
-    public static void pairsInProteinsMaker (String[] pairsInProteins) throws FileNotFoundException, UnsupportedEncodingException {
+    public static void pairsInProteinsMaker (String[] pairsInProteins, String delimiter) throws FileNotFoundException, UnsupportedEncodingException {
         String fileName="nativeStructures/pairsInProteins.txt";
 
         try (PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
-            writer.println("pdbName pairNumbers");
-            int lineNumber=1;
+            writer.println("pdbName"+delimiter+"pairNumbers");
+            //int lineNumber=1;
             for (String pairsLine : pairsInProteins) {
                 if (pairsLine!=null) {
                     writer.println(pairsLine);
