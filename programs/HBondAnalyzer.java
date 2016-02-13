@@ -51,6 +51,8 @@ public class HBondAnalyzer {
         String[] pairsInProteins = new String[pdbDirectoryListing.length];
         String[] pairsLine = {""};
         //When changing delimiter, also change keyDelimiter in updateEdgeLine if they are the same
+        //Also change in files: pisa3.yaml, pymol subgraph.pml and other protein
+        //Also the keyDelimiter in the pml files.
         String delimiter = " ";
 
         for (int i=0; i<dsspDirectoryListing.length; i++){
