@@ -5,6 +5,7 @@
 package meshi.util;
 
 import meshi.applications.prediction.OriginalAtom;
+import meshi.energy.pairwiseNonBondedTerms.atomicPairwisePMFSumma.AtomicPairwisePMFSumma;
 import meshi.energy.simpleEnergyTerms.GoodBonds;
 import meshi.energy.simpleEnergyTerms.ParametersList;
 import meshi.energy.simpleEnergyTerms.compositeTorsions.ramachandran.RamachandranEnergy;
@@ -286,6 +287,8 @@ public class Utils implements MeshiPotential, KeyWords {
 
         TotalEnergy energy = new TotalEnergy(protein, energyCreators, distanceMatrixType, commands,"generic energy (relax)");
         Optimizer optimizer = Utils.getLBFGS(energy, commands, key);
+        AtomicPairwisePMFSumma summaTerm = (AtomicPairwisePMFSumma) energy.getEnergyTerm(new AtomicPairwisePMFSumma());
+       // if ((summaTerm != null) && (summaTerm.weight() > 1)) summaTerm.setWeight(1);
         try {
             optimizer.run();
         }
@@ -443,7 +446,7 @@ public class Utils implements MeshiPotential, KeyWords {
             if (origRefeenceAlignment.size() > 3)
                 gdtOrig = Rms.gdt(origRefeenceAlignment, refLength);
             if (gdtOrig[0] > 0) {
-                header += String.format("%6s %6s %5s %5s  %5s  %5s  %5s  %5s ", "RMS_O", "RMS", "GDT_O", "GDT_TS", "GDT1", "GDT2", "GDT3", "GDT4");
+                header += String.format("%6s %6s %5s %5s  %5s  %5s  %5s  %5s ", "RMS_O", "RMS", "GDT_O", "GDT_TS", "GDT1", "GDT`2", "GDT3", "GDT4");
                 values += String.format(" %6.3f %6.3f %5.3f %5.3f  %5.3f  %5.3f  %5.3f  %5.3f ",
                         rmsOrig, rms, gdtOrig[0], gdt[0], gdt[1], gdt[2], gdt[3], gdt[4]);
             } else {
@@ -1979,8 +1982,12 @@ public class Utils implements MeshiPotential, KeyWords {
     public static void println(String s) {
         if (verbose) System.out.println(s);
     }
-    public static void printDebug(Object obj,String s) {
-        System.out.println("Debug: "+obj+" ("+s+")");
+     public static void throwException(Object obj,Exception ex, String comment) {
+        System.out.println("******************** ERROR in "+obj+" *************************");
+        System.out.println(ex.getMessage());
+        System.out.println(comment);
+        ex.printStackTrace();
+        throw new RuntimeException("Quiting");
     }
 
     public static void println() {
@@ -1991,6 +1998,21 @@ public class Utils implements MeshiPotential, KeyWords {
         if (verbose) System.out.print(s);
     }
 
+
+    public static void printDebug(Object obj,String s) {
+        System.out.println("Debug: "+obj+" ("+s+")");
+    }
+    public static void printDebug(Object obj,Protein protein, String fileName) {
+        Utils.printDebug(obj, "******** debug ********** Printing debug file " + fileName);
+        try {
+            MeshiWriter writer = new MeshiWriter("debug." + fileName + ".pdb");
+            protein.atoms().print(writer);
+            writer.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        Utils.printDebug(obj, "******** closing debug **********");
+    }
     //-----------------------------------------------------------------------------------
 
     public static ArrayList<RamachandranEnergyElement> ramachEnergyPerResidue(RamachandranEnergy ramach) {

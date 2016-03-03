@@ -21,10 +21,8 @@ import meshi.molecularElements.atoms.Atom;
 import meshi.molecularElements.atoms.AtomList;
 import meshi.molecularElements.extendedAtoms.ResidueExtendedAtoms;
 import meshi.sequences.AlignmentException;
-import meshi.util.CommandList;
-import meshi.util.MeshiProgram;
-import meshi.util.UpdateableException;
-import meshi.util.Utils;
+import meshi.sequences.ResidueAlignmentMethod;
+import meshi.util.*;
 
 import java.io.*;
 
@@ -33,18 +31,20 @@ import java.io.*;
  * Created by chen on 11/12/2014.
  */
 public class HBondAnalyzer {
+    public final static int NUMBRER_OF_PAIR_TYPES = 750;
+    private static Protein nativeStructure = null;
     public static void main(String[] args) throws UpdateableException, EvaluationException, AlignmentException, FileNotFoundException, UnsupportedEncodingException, RuntimeException {
         MeshiProgram.initRandom(0);
-        long time = System.currentTimeMillis();
+        long time    = System.currentTimeMillis();
         File dsspDir = new File("nativeStructures/dssp");
-        File pdbDir = new File("nativeStructures/pdb");
+        File pdbDir  = new File("nativeStructures/pdb");
         File[] dsspDirectoryListing = dsspDir.listFiles();
-        File[] pdbDirectoryListing = pdbDir.listFiles();
+        File[] pdbDirectoryListing  = pdbDir.listFiles();
 
         System.out.println(dsspDir);
-
-        int[][] patternMatrix = new int[750][750];
-        String[][] stringMatrix = new String[750][750];
+        //These matrices represent the Graph with each row/column representing a node and a non zero cell represent an edge.
+        int[][] patternMatrix = new int[NUMBRER_OF_PAIR_TYPES][NUMBRER_OF_PAIR_TYPES];
+        String[][] stringMatrix = new String[NUMBRER_OF_PAIR_TYPES][NUMBRER_OF_PAIR_TYPES];
         String[] pairsInProteins = new String[pdbDirectoryListing.length];
         String[] pairsLine = {""};
 
@@ -56,18 +56,18 @@ public class HBondAnalyzer {
 
         if (dsspDirectoryListing != null && pdbDirectoryListing != null && dsspDirectoryListing.length==pdbDirectoryListing.length) {
             int numberOfProteins = dsspDirectoryListing.length;
-            for (int i=0; i< numberOfProteins; i++) {
-                String pdbFileName = pdbDirectoryListing[i].getName();
+            for (int iProtein=0; iProtein< numberOfProteins; iProtein++) {
+                String pdbFileName = pdbDirectoryListing[iProtein].getName();
                 if (!pdbFileName.startsWith(".")) {
                     String dsspFileName = dsspDir + "/" + pdbFileName + ".dssp";
                     pdbFileName = pdbDir + "/" + pdbFileName;
                     String[] arguments = {pdbFileName, dsspFileName, "commands.MCM"};
 
-                    System.out.println("Analyzing "+i+" "+pdbFileName) ;
+                    System.out.println("Analyzing "+iProtein+" "+pdbFileName) ;
                     run(arguments, patternMatrix, stringMatrix, pairsLine);
-                    pairsInProteins[i]=pairsLine[0];
+                    pairsInProteins[iProtein]=pairsLine[0];
                     pairsLine[0]="";
-                    System.out.println("Done with "+i+" "+pdbFileName) ;
+                    System.out.println("Done with "+iProtein+" "+pdbFileName) ;
                 }
             }
         }
@@ -91,6 +91,19 @@ public class HBondAnalyzer {
 
     public static void run (String[] args, int[][] patternMatrix, String[][] stringMatrix, String[] pairsLine) throws UpdateableException, EvaluationException, AlignmentException, FileNotFoundException, UnsupportedEncodingException{
         Protein model = new Protein(new AtomList(args[0]), ResidueExtendedAtoms.creator);
+        if (nativeStructure == null) {
+            String nativeStructureName = model.name().substring(0, 8) + ".N.pdb";
+            File nativeStructureFile = new File(nativeStructureName);
+            if (nativeStructureFile.exists()) {
+                nativeStructure = new Protein(new AtomList(nativeStructureName), ResidueExtendedAtoms.creator);
+            }
+        }
+        if (nativeStructure != null) {
+            Utils.printDebug("run ", "xxxxxxxxxxxxx " + nativeStructure);
+            ModelAnalyzer analyzer = new ModelAnalyzer(model, nativeStructure, model, null, ResidueAlignmentMethod.IDENTITY);
+            double[] gdt = Rms.gdt(nativeStructure,model);
+            Utils.printDebug("run ", "xxxxxxxxxxxxx " + nativeStructure + " " + gdt[0]);
+        }
 
         System.out.println("new model " + model);
         Utils.AssignDSSP(model, args[1]);

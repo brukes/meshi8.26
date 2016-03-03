@@ -5,6 +5,9 @@
 package meshi.util;
 
 import meshi.energy.rg.filters.HeavyAtoms;
+import meshi.sequences.aligner.AlignmentScheme;
+import meshi.sequences.aligner.IdentityMatrix;
+import meshi.sequences.aligner.SubstitutionMatrix;
 import meshi.util.overlap.*;
 import meshi.util.filters.*;
 import meshi.sequences.*;
@@ -212,27 +215,64 @@ public class Rms implements KeyWords {
         return rms(filteredAlignment,RmsType.CA);
     }
 
-    public static double[] gdt(Protein protein0, Protein protein1) throws AlignmentException{
-        return gdt(protein0,protein1,GDTcalculator.Type.TS);
+
+
+
+
+    //modified constructors Added by Tommer 1.9.14:
+
+    public static double[] gdt(Protein protein0, Protein protein1){
+        return  gdt(protein0, protein1, new IdentityMatrix());
     }
-    public static double[] gdt(Protein protein0,
+    public static double[] gdt(Protein protein0, Protein protein1,//added
+    		                   SubstitutionMatrix substitutionMatrix) {
+        return gdt(protein0,protein1,GDTcalculator.Type.TS, substitutionMatrix);//modified
+    }
+
+    public static double[] gdt(Protein protein0,//added
                                Protein protein1, GDTcalculator.Type type) throws AlignmentException{
-        return gdt(protein0,protein1,type,ResidueAlignmentMethod.IDENTITY);
+        return gdt(protein0, protein1, type, ResidueAlignmentMethod.IDENTITY, new IdentityMatrix());
     }
-    public static double[] gdt(Protein protein0,
-                               Protein protein1, GDTcalculator.Type type, ResidueAlignmentMethod method) throws AlignmentException{
-            ResidueAlignment residueAlignment = new ResidueAlignment(protein0.chain(), protein0.name(),
-                                                                     protein1.chain(), protein1.name(),
-                                                                     method);
- /*           System.out.println((protein0.chain().size()-protein0.chain().firstNonDummyResidue().number())+
-                             " "+(protein1.chain().size()-protein1.chain().firstNonDummyResidue().number())+
-                             " "+residueAlignment.size());
+    public static double[] gdt(Protein protein0,//added
+                               Protein protein1, GDTcalculator.Type type,
+                               SubstitutionMatrix substitutionMatrix){
+        return gdt(protein0,protein1,type,ResidueAlignmentMethod.IDENTITY, substitutionMatrix);
+        //changed to identity Chen 18.8, arguments added by Tommer
+    }
+
+
+    public static double[] gdt(Protein protein0, Protein protein1, //Added By Tommer 1.9.14
+			GDTcalculator.Type type, ResidueAlignmentMethod method, SubstitutionMatrix substitutionMatrix){
+    	//long startTime = System.currentTimeMillis();
+        ResidueAlignment residueAlignment = null;
+        try {
+              residueAlignment = new ResidueAlignment(
+              protein0.chain(), protein0.name(), protein1.chain(),
+              protein1.name(), method, substitutionMatrix);//modified
+        }
+        catch (AlignmentException ex) {
+            Utils.throwException("Static function Rms.gdt",ex,"Failed to align "+protein0+" and "+protein1);
+        }
+		//long estimatedTime = System.currentTimeMillis() - startTime;
+		//System.out.println("\nestimated time: "+estimatedTime);
+
+		/*
+		 * System.out.println((protein0.chain().size()-protein0.chain().
+		 * firstNonDummyResidue().number())+
+		 * " "+(protein1.chain().size()-protein1
+		 * .chain().firstNonDummyResidue().number())+
+		 * " "+residueAlignment.size());
 */
         if (residueAlignment.size() < 5)
-            throw new RuntimeException("Cannot calculate GDT_TS for " +
-                    protein0.name() + " and " + protein1.name() + " using alignment method " + ResidueAlignmentMethod.IDENTITY);
+			throw new RuntimeException("Cannot calculate GDT_TS for "
+					+ protein0.name() + " and " + protein1.name()
+					+ " using alignment method "
+					+ ResidueAlignmentMethod.BY_RESIDUE_NUMBER + "\n"
+					+ "residueAlignment.size() < 5 " + residueAlignment.size());
         return gdt(residueAlignment, protein0.atoms().CAFilter().size(), type);
     }
+
+  //END OF modified constructors Added by Tommer 1.9.14
 
     public static double[] gdt(Protein protein0, Protein protein1, Filter filter)throws AlignmentException {
         return gdt(protein0, protein1,filter,GDTcalculator.Type.TS);
@@ -242,7 +282,7 @@ public class Rms implements KeyWords {
                                Filter filter, GDTcalculator.Type type) throws AlignmentException{
             ResidueAlignment residueAlignment = new ResidueAlignment(protein0.chain(), protein0.name(),
                 protein1.chain(), protein1.name(),
-                ResidueAlignmentMethod.IDENTITY);
+                ResidueAlignmentMethod.BY_RESIDUE_NUMBER);
         ResidueAlignment filteredAlignment = new ResidueAlignment();
         for (ResidueAlignmentColumn column : residueAlignment) {
             if (filter.accept(column)) filteredAlignment.add(column);
